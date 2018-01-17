@@ -1,0 +1,23 @@
+{
+  "name": "gallery-x",
+  "version": "1.0.0",
+  "description": "The 'X' makes it sound cool~",
+  "main": "index.ts",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VenDream/Gallery-X.git"
+  },
+  "keywords": [
+    "Pixiv",
+    "Gallery"
+  ],
+  "author": "VenDream",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VenDream/Gallery-X/issues"
+  },
+  "homepage": "https://github.com/VenDream/Gallery-X#readme"
+}
