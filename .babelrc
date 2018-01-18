@@ -1,0 +1,18 @@
+{
+  "presets": ["env"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "actions": "./scr/actions",
+          "components": "./src/components",
+          "constants": "./scr/constants",
+          "store": "./src/store",
+          "utils": "./utils"
+        }
+      }
+    ]
+  ]
+}

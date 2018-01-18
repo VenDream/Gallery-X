@@ -1,9 +1,20 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "target": "es5",
-    "module": "es2015",
-    "strict": true,
-    "moduleResolution": "node"
-  }
+    "allowJs": true,
+    "baseUrl": ".",
+    "target": "ES5",
+    "sourceMap": false,
+    "pretty": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "locale": "zh-CN",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es2015", "es2016", "es2017", "esnext"],
+    "paths": {
+      "*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exlucde": ["node_modules/**/*"]
 }
