@@ -7,12 +7,17 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import 'normalize.css';
 import './app.less';
 
-import test from 'components/test/test';
+import store from '../../store';
+import App from '../../components/app';
 
-console.log(test);
-
-ReactDOM.render(<a>Halo, PP Shrink</a>, document.querySelector('.gallery-x'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('.gallery-x')
+);
