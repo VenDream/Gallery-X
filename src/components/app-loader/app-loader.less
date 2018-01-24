@@ -13,4 +13,23 @@
 
   color: #999;
   background-color: #121212;
+
+  .loader-icon {
+    margin-bottom: .1rem;
+
+    animation: loader-icon-rotate 2.2s linear infinite;
+
+    .icon-loading {
+      font-size: .2rem;
+    }
+  }
+}
+
+@keyframes loader-icon-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
