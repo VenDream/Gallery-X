@@ -6,23 +6,16 @@
 
 import { AnyAction } from 'redux';
 import ACTIONS from '../constants/actions';
+import UserModelClass from '../models/user';
 
 export type UserState = UserModel;
 
-const initState: UserState = {
-  id: '',
-  account: '',
-  name: '游客',
-  xRestrict: -1,
-  mailAddress: '',
-  isPremium: false,
-  isMailAuthorized: false,
-  profileImageUrls: null,
-};
+const initState: UserState = UserModelClass.create();
 
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ACTIONS.TO_LOGIN: {
+      console.log('to login');
       return state;
     }
     default:

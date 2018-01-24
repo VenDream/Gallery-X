@@ -1,7 +1,7 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "应用顶级组件",
+  "description": "应用顶级容器组件",
   "main": "./app.tsx",
   "typings": "./app.tsx"
 }
