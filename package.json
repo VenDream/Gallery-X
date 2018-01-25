@@ -7,12 +7,16 @@
     "start": "parcel index.html",
     "build": "npm run build && parcel build index.html --public-url /",
     "clean": "rm -rf .cache & rm -rf dist",
-    "tslint": "tslint -c tslint.json --fix src/*",
+    "tslint": "tslint -c tslint.json -p . --fix",
+    "precommit": "lint-staged",
     "test": "npm test"
   },
-  "pre-commit": [
-    "tslint"
-  ],
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "tslint",
+      "git add"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VenDream/Gallery-X.git"
@@ -31,9 +35,9 @@
     "autoprefixer": "^7.2.5",
     "babel-preset-env": "^1.6.1",
     "less": "^3.0.0-alpha.3",
+    "lint-staged": "^6.0.1",
     "parcel-bundler": "^1.4.1",
     "postcss-modules": "^1.1.0",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.10.2",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.6.0",
