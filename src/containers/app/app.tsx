@@ -10,7 +10,7 @@ import { Dispatch, AnyAction } from 'redux';
 
 import Layout from '../layout';
 
-const App: SFC = function() {
+const App: SFC = () => {
   return <Layout />;
 };
 

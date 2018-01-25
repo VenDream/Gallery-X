@@ -10,12 +10,17 @@
     "tslint": "tslint -c tslint.json --fix src/*",
     "test": "npm test"
   },
-  "pre-commit": ["tslint"],
+  "pre-commit": [
+    "tslint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VenDream/Gallery-X.git"
   },
-  "keywords": ["Pixiv", "Gallery"],
+  "keywords": [
+    "Pixiv",
+    "Gallery"
+  ],
   "author": "VenDream",
   "license": "MIT",
   "bugs": {

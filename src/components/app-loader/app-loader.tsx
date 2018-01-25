@@ -10,13 +10,13 @@ import classnames from 'classnames';
 import './app-loader.less';
 
 interface AppLoaderProps {
-  initLoadingVisible: boolean;
+  visible: boolean;
 }
 
 export default class AppLoader extends Component<AppLoaderProps> {
   render() {
     const loaderCls = classnames('app-loader', {
-      inited: !this.props.initLoadingVisible,
+      inited: !this.props.visible,
     });
 
     return (

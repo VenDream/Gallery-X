@@ -1,20 +1,26 @@
 /**
  * 布局视图组件
  * @author VenDream
- * @since 2018-1-24
+ * @since 2018-1-25
  */
 
-import React, { Component } from 'react';
+import React, { SFC } from 'react';
 import AppLoader from '../app-loader';
+
+import './layout.less';
 
 interface LayoutProps {
   initLoadingVisible: boolean;
 }
 
-export default class Layout extends Component<LayoutProps> {
-  render() {
-    const { initLoadingVisible } = this.props;
+const Layout: SFC<LayoutProps> = props => {
+  const { initLoadingVisible } = props;
 
-    return <AppLoader initLoadingVisible={initLoadingVisible} />;
-  }
-}
+  return (
+    <div className="g-layout">
+      <AppLoader visible={initLoadingVisible} />
+    </div>
+  );
+};
+
+export default Layout;
