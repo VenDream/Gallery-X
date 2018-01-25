@@ -15,7 +15,6 @@ const initState: UserState = UserModelClass.create();
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ACTIONS.TO_LOGIN: {
-      console.log('to login');
       return state;
     }
     default:
