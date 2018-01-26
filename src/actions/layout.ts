@@ -1,7 +1,7 @@
 /**
  * 布局相关ACTION定义
  * @author VenDream
- * @since 2018-1-24
+ * @since 2018-1-26
  */
 
 import ACTIONS from '../constants/actions';

@@ -1,0 +1,7 @@
+{
+  "name": "app-content",
+  "version": "1.0.0",
+  "description": "应用内容视图组件",
+  "main": "./app-content.tsx",
+  "typings": "./app-content.tsx"
+}
