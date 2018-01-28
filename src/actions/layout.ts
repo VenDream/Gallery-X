@@ -1,9 +1,10 @@
 /**
  * 布局相关ACTION定义
  * @author VenDream
- * @since 2018-1-26
+ * @since 2018-1-28
  */
 
+import { AnyAction, Dispatch } from 'redux';
 import ACTIONS from '../constants/actions';
 
 /**
@@ -14,10 +15,12 @@ import ACTIONS from '../constants/actions';
  * @returns
  */
 export function setInitLoadingVisible(visible: boolean) {
-  return {
-    type: ACTIONS.SET_VISIBLE,
-    data: {
-      initLoadingVisible: visible,
-    },
+  return (dispatch: Dispatch<AnyAction>, getState: any) => {
+    dispatch({
+      type: ACTIONS.SET_VISIBLE,
+      data: {
+        initLoadingVisible: visible,
+      },
+    });
   };
 }
