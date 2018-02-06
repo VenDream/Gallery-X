@@ -4,7 +4,7 @@
     "allowJs": true,
     "baseUrl": ".",
     "target": "ES5",
-    "sourceMap": false, // parcel的sourcemap功能还不完善，暂时不生成
+    "sourceMap": true,
     "pretty": true,
     "module": "ESNext",
     "moduleResolution": "Node",
