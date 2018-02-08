@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "应用布局视图组件",
   "main": "./layout.tsx",
-  "typings": "./layout.tsx"
+  "types": "./layout.tsx"
 }

@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "应用内容容器组件",
   "main": "./app-content.tsx",
-  "typings": "./app-content.tsx"
+  "types": "./app-content.tsx"
 }

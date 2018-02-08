@@ -1,3 +1,9 @@
+/**
+ * 全局ajax组件
+ * @author VenDream
+ * @since 2018-2-8
+ */
+
 import 'whatwg-fetch';
 import deepExtend from 'deep-extend';
 import camelcaseKeys from 'camelcase-keys';
@@ -14,7 +20,7 @@ interface FetchOption {
   /**
    * 请求数据
    */
-  body?: string | null;
+  body?: Record<string, any> | null;
   /**
    * 请求头
    */
@@ -50,6 +56,9 @@ const DEFAULT_OPTIONS: FetchOption = {
  */
 export function request(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, DEFAULT_OPTIONS, options);
+  if (opt.body) {
+    opt.body = JSON.stringify(opt.body);
+  }
 
   return fetch(url, opt).then(
     async response => {

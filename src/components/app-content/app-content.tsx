@@ -6,6 +6,8 @@
 
 import React, { Component } from 'react';
 
+import LoginBox from '../../containers/login-box';
+import BottomBar from '../bottom-bar';
 import './app-content.less';
 
 interface AppContentProps {
@@ -28,6 +30,12 @@ export default class AppContent extends Component<AppContentProps> {
   }
 
   render() {
-    return <div className="app-content">APP 内容</div>;
+    const user = this.props.user;
+
+    return (
+      <div className="app-content">
+        {user.id ? <BottomBar /> : <LoginBox />}
+      </div>
+    );
   }
 }

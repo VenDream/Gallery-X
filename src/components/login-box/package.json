@@ -1,0 +1,7 @@
+{
+  "name": "login-box",
+  "version": "1.0.0",
+  "description": "登陆组件",
+  "main": "./login-box.tsx",
+  "types": "./login-box.tsx"
+}

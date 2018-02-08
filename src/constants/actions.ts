@@ -1,14 +1,10 @@
 /**
  * ACTION常量定义
  * @author VenDream
- * @since 2018-1-28
+ * @since 2018-2-8
  */
 
 export default {
-  // 登录
-  TO_LOGIN: 'TO_LOGIN',
-  // 登出
-  TO_LOGOUT: 'TO_LOGOUT',
   // 获取用户信息
   SET_USER_INFO: 'SET_USER_INFO',
 
