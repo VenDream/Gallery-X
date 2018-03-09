@@ -10,45 +10,49 @@
   height: 100%;
 
   h2 {
-    margin-top: -40%;
+    margin-bottom: .4rem;
 
-    font-weight: normal;
+    font-weight: bold;
   }
 
-  .pixiv-account,
-  .pixiv-password {
-    width: 60%;
-    max-width: 3rem;
-    margin-bottom: .2rem;
-    padding: .1rem .15rem;
+  .login-form {
+    text-align: center;
 
-    transition: all .2s ease;
+    .account,
+    .password {
+      width: 60%;
+      max-width: 3rem;
+      margin-bottom: .2rem;
+      padding: .1rem .15rem;
 
-    border: .01rem solid transparent;
-    border-radius: .2rem;
-    outline: none;
-  }
+      transition: all .2s ease;
 
-  .submit-btn {
-    width: 40%;
-    max-width: 2rem;
-    padding: .1rem;
+      border: .01rem solid transparent;
+      border-radius: .2rem;
+      outline: none;
+    }
 
-    cursor: pointer;
-    transition: all .2s ease;
+    .submit {
+      width: 40%;
+      max-width: 2rem;
+      padding: .1rem;
 
-    color: @font-color;
-    border: .01rem solid #999;
-    border-radius: .2rem;
-    outline: none;
-    background-color: transparent;
+      cursor: pointer;
+      transition: all .2s ease;
 
-    -webkit-tap-highlight-color: transparent;
+      color: @font-color;
+      border: .01rem solid #999;
+      border-radius: .2rem;
+      outline: none;
+      background-color: transparent;
 
-    &:hover {
-      color: #FFF;
-      border-color: @theme-blue;
-      background-color: @theme-blue;
+      -webkit-tap-highlight-color: transparent;
+
+      &:hover {
+        color: #FFF;
+        border-color: @theme-blue;
+        background-color: @theme-blue;
+      }
     }
   }
 }

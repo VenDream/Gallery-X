@@ -68,7 +68,7 @@ export function login(data: LoginParams) {
         body: { username: data.account, password: data.password },
       });
 
-      if (!user || user.id) {
+      if (!user || !user.id) {
         console.log('登陆失败');
         return;
       }

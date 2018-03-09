@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "jsx": "react",
     "allowJs": true,
     "target": "ES5",
     "sourceMap": true,
     "pretty": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "moduleResolution": "node",
     "locale": "zh-CN",
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "es2015", "es2016", "es2017", "esnext"]
   },
   "include": ["src/**/*"],

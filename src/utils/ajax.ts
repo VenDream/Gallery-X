@@ -1,10 +1,11 @@
 /**
  * 全局ajax组件
  * @author VenDream
- * @since 2018-2-8
+ * @since 2018-3-9
  */
 
 import 'whatwg-fetch';
+import qs from 'qs';
 import deepExtend from 'deep-extend';
 import camelcaseKeys from 'camelcase-keys';
 
@@ -20,7 +21,7 @@ interface FetchOption {
   /**
    * 请求数据
    */
-  body?: Record<string, any> | null;
+  body?: Record<string, any> | string;
   /**
    * 请求头
    */
@@ -42,7 +43,9 @@ interface FetchOption {
 const DEFAULT_OPTIONS: FetchOption = {
   method: 'GET',
   body: null,
-  headers: {},
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+  },
   credentials: 'include',
   dataType: 'json',
 };
@@ -57,10 +60,10 @@ const DEFAULT_OPTIONS: FetchOption = {
 export function request(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, DEFAULT_OPTIONS, options);
   if (opt.body) {
-    opt.body = JSON.stringify(opt.body);
+    opt.body = qs.stringify(opt.body);
   }
 
-  return fetch(url, opt).then(
+  return (window as any).fetch(url, opt).then(
     async response => {
       if (response.ok) {
         if (opt.dataType === 'text') {
@@ -107,5 +110,5 @@ export function get(url, options?: FetchOption) {
  */
 export function post(url, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, options, { method: 'POST' });
-  return request(url, options);
+  return request(url, opt);
 }

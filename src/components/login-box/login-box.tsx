@@ -1,23 +1,56 @@
 /**
- * 登陆容器组件
+ * 登陆组件
  * @author VenDream
  * @since 2018-2-8
  */
 
-import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
+import React, { Component } from 'react';
+import { LoginParams } from '../../actions/user';
+import './login-box.less';
 
-import LoginBox from '../../components/login-box';
-import { login, LoginParams } from '../../actions/user';
-
-function mapStateToProps() {
-  return {};
+interface LoginBoxProps {
+  login: (data: LoginParams) => Promise<void>;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
-  return {
-    login: (data: LoginParams) => dispatch(login(data)),
+export default class LoginBox extends Component<LoginBoxProps> {
+  accountInput: HTMLInputElement | null = null;
+  passwordInput: HTMLInputElement | null = null;
+
+  handleLogin = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const account = this.accountInput.value;
+    const password = this.passwordInput.value;
+
+    if (!account || !password) {
+      alert('请填写完整信息');
+    } else {
+      this.props.login({ account, password });
+    }
   };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginBox);
+  render() {
+    return (
+      <div className="login-box">
+        <h2>Pixiv&nbsp;登陆</h2>
+        <form className="login-form">
+          <input
+            type="text"
+            className="account"
+            placeholder="PixivID/邮箱"
+            ref={node => (this.accountInput = node)}
+          />
+          <input
+            type="password"
+            className="password"
+            placeholder="密码"
+            ref={node => (this.passwordInput = node)}
+          />
+          <button className="submit" onClick={this.handleLogin}>
+            登陆
+          </button>
+        </form>
+      </div>
+    );
+  }
+}

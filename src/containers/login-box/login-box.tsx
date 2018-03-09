@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction } from 'redux';
 
-import LoginBox from '../../components/login-box';
+import LoginBox from '../../components/login-box/login-box';
 import { login, LoginParams } from '../../actions/user';
 
 function mapStateToProps() {
