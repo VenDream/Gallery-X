@@ -15,6 +15,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-search:before {
+  content: '\e64a';
+}
+
+.icon-home:before {
+  content: '\e609';
+}
+
+.icon-ranking:before {
+  content: '\e68b';
+}
+
+.icon-user:before {
+  content: '\e659';
+}
+
 .icon-loading:before {
   content: '\e668';
 }

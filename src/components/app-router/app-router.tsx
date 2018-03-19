@@ -19,6 +19,10 @@ interface Router {
    * 名称
    */
   name: string;
+  /**
+   * 图标
+   */
+  icon: string;
 }
 
 /**
@@ -28,18 +32,22 @@ export const RouterMap: Record<string, Router> = {
   index: {
     path: '/',
     name: '首页',
+    icon: 'home',
   },
   ranking: {
     path: '/ranking',
     name: '排行',
+    icon: 'ranking',
   },
   search: {
     path: '/search',
     name: '搜索',
+    icon: 'search',
   },
   profile: {
     path: '/profile',
     name: '我的',
+    icon: 'user',
   },
 };
 
