@@ -1,13 +1,15 @@
 /**
  * 应用内容视图组件
  * @author VenDream
- * @since 2018-1-28
+ * @since 2018-3-19
  */
 
 import React, { Component } from 'react';
 
 import LoginBox from '../../containers/login-box';
-import BottomBar from '../bottom-bar';
+import AppRouter from '../app-router';
+import BottomBar from '../../containers/bottom-bar/bottom-bar';
+
 import './app-content.less';
 
 interface AppContentProps {
@@ -32,10 +34,13 @@ export default class AppContent extends Component<AppContentProps> {
   render() {
     const user = this.props.user;
 
-    return (
+    return user.id ? (
       <div className="app-content">
-        {user.id ? <BottomBar /> : <LoginBox />}
+        <AppRouter />
+        <BottomBar />
       </div>
+    ) : (
+      <LoginBox />
     );
   }
 }
