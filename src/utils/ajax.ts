@@ -1,7 +1,7 @@
 /**
  * 全局ajax组件
  * @author VenDream
- * @since 2018-3-9
+ * @since 2018-3-19
  */
 
 import 'whatwg-fetch';
@@ -37,6 +37,10 @@ interface FetchOption {
    * 返回的数据类型
    */
   dataType?: DATA_TYPE;
+  /**
+   * 是否返回原始数据
+   */
+  raw?: boolean;
 }
 
 // 默认的请求参数
@@ -48,6 +52,7 @@ const DEFAULT_OPTIONS: FetchOption = {
   },
   credentials: 'include',
   dataType: 'json',
+  raw: false,
 };
 
 /**
@@ -70,11 +75,15 @@ export function request(url: string, options?: FetchOption) {
           return response.text();
         } else if (opt.dataType === 'json') {
           const jsonRes: Record<string, any> = await response.json();
-          // 预处理返回结果，如果检测到code为200，则返回data值
-          if (jsonRes.code === 200) {
-            return typeof jsonRes.data === 'string'
-              ? jsonRes.data
-              : camelcaseKeys(jsonRes.data || {});
+          if (opt.raw) {
+            return jsonRes;
+          } else {
+            // 预处理返回结果，如果检测到code为200，则返回data值
+            if (jsonRes.code === 200) {
+              return typeof jsonRes.data === 'string'
+                ? jsonRes.data
+                : camelcaseKeys(jsonRes.data || {});
+            }
           }
         }
       } else {

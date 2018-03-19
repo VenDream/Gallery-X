@@ -1,7 +1,7 @@
 /**
  * 用户状态同步
  * @author VenDream
- * @since 2018-1-26
+ * @since 2018-3-19
  */
 
 import { AnyAction } from 'redux';
@@ -11,7 +11,10 @@ import UserModelClass from '../models/user';
 
 export type UserState = UserModel;
 
-const initState: UserState = UserModelClass.create();
+const initState: UserState = {
+  ...UserModelClass.create(),
+  isLoading: false,
+};
 
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {

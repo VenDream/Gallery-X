@@ -1,4 +1,5 @@
 @import '../../assets/styles/variable.less';
+@ban-color: rgba(255, 255, 255, .1);
 
 .login-box {
   display: flex;
@@ -11,12 +12,21 @@
 
   h2 {
     margin-bottom: .4rem;
-
-    font-weight: bold;
   }
 
   .login-form {
     text-align: center;
+
+    &.loading {
+      .account,
+      .password {
+        background-color: @ban-color;
+      }
+      .submit {
+        color: @ban-color;
+        border-color: @ban-color;
+      }
+    }
 
     .account,
     .password {
@@ -30,6 +40,7 @@
       border: .01rem solid transparent;
       border-radius: .2rem;
       outline: none;
+      background-color: #FFF;
     }
 
     .submit {
@@ -47,12 +58,6 @@
       background-color: transparent;
 
       -webkit-tap-highlight-color: transparent;
-
-      &:hover {
-        color: #FFF;
-        border-color: @theme-blue;
-        background-color: @theme-blue;
-      }
     }
   }
 }

@@ -1,7 +1,7 @@
 /**
  * 应用数据模型声明
  * @author VenDream
- * @since 2018-1-19
+ * @since 2018-3-19
  */
 
 interface UserModel {
@@ -50,4 +50,8 @@ interface UserModel {
      */
     px_170x170: string;
   } | null;
+  /**
+   * 其他属性
+   */
+  [key: string]: any;
 }
