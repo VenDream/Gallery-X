@@ -1,14 +1,14 @@
 /**
  * 底部导航栏
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-4-23
  */
 
 import React, { Component, MouseEventHandler } from 'react';
 import { RouterAction } from 'react-router-redux';
 import classnames from 'classnames';
 
-import { RouterMap } from '../app-router';
+import RouterMap from '../../constants/routers';
 import './bottom-bar.less';
 
 interface BottomBarProps {
@@ -28,7 +28,9 @@ export default class BottomBar extends Component<BottomBarProps> {
           {Object.entries(RouterMap).map((r, idx) => {
             const key = r[0];
             const router = r[1];
-            const classname = classnames('router-item', { active: router.path === this.props.path });
+            const classname = classnames('router-item', {
+              active: router.path === this.props.path,
+            });
             const iconClass = `g-icon icon-${router.icon}`;
 
             return (
@@ -37,7 +39,7 @@ export default class BottomBar extends Component<BottomBarProps> {
                 className={classname}
                 onClick={this.handleRoute.bind(this, router.path)}
               >
-                <i className={iconClass}></i>
+                <i className={iconClass} />
                 {router.name}
               </li>
             );
