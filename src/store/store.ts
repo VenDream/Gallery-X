@@ -1,7 +1,10 @@
 /**
  * 应用redux store
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-4-25
+ *
+ * @note 这里需要注入react-router-redux的一些必要东西，
+ *       参考官方example：https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux
  */
 
 import { compose, combineReducers, createStore, applyMiddleware } from 'redux';

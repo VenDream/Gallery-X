@@ -1,7 +1,7 @@
 /**
  * 布局容器组件
  * @author VenDream
- * @since 2018-1-25
+ * @since 2018-4-25
  */
 
 import { connect } from 'react-redux';
@@ -9,6 +9,8 @@ import { Dispatch, AnyAction } from 'redux';
 
 import Layout from '../../components/layout';
 import { LayoutState } from '../../reducers/layout';
+
+import { withRouter } from 'react-router-dom';
 
 interface OwnProps {}
 
@@ -22,4 +24,5 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+// withRouter传递路由状态
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

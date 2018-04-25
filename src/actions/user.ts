@@ -1,7 +1,7 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-4-24
+ * @since 2018-4-25
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -92,6 +92,31 @@ export function login(data: LoginParams) {
     } catch (e) {
       console.error(e);
       Message.show({ type: 3, message: MESSAGE.LOGIN_FAILED });
+    }
+  };
+}
+
+/**
+ * 用户登出
+ *
+ * @export
+ * @returns
+ */
+export function logout() {
+  return async (dispatch: Dispatch<AnyAction, {}>, getState: any) => {
+    try {
+      const api = API.get('LOGOUT');
+      const res = await ajax.post(api, { raw: true });
+      if (res.code === 200) {
+        const guest = UserModelClass.create();
+        dispatch({
+          type: ACTIONS.SET_USER_INFO,
+          data: guest,
+        });
+      }
+    } catch (e) {
+      console.error(e);
+      Message.show({ type: 3, message: MESSAGE.LOGOUT_FAILED });
     }
   };
 }

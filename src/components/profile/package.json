@@ -1,0 +1,7 @@
+{
+  "name": "profile",
+  "version": "1.0.0",
+  "description": "我的资料组件",
+  "main": "./profile.tsx",
+  "types": "./profile.tsx"
+}

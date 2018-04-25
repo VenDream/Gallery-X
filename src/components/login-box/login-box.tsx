@@ -45,10 +45,6 @@ export default class LoginBox extends Component<LoginBoxProps> {
     }
   }
 
-  componentWillUnmount() {
-    showTips('登陆成功', 2);
-  }
-
   handleLogin = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const account = this.accountInput.value;
