@@ -17,7 +17,7 @@ function mapStateToProps(state: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {
     login: (data: LoginParams) => dispatch(login(data)),
   };

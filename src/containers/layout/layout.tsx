@@ -18,7 +18,7 @@ function mapStateToProps(state: Record<string, any>, ownProps: OwnProps) {
   return state.layout as LayoutState;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {};
 }
 

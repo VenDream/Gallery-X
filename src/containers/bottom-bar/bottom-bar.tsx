@@ -17,7 +17,7 @@ function mapStateToProps(state: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {
     redirectTo: (path: string) => dispatch(push(path)),
   };

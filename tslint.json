@@ -13,6 +13,8 @@
     "ordered-imports": false,
     "no-empty-interface": false,
     "object-literal-sort-keys": false,
-    "no-implicit-dependencies": false
+    "no-implicit-dependencies": false,
+    "curly": [true, "ignore-same-line"],
+    "no-unused-expression": [true, "allow-fast-null-checks"]
   }
 }

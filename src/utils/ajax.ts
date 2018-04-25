@@ -1,5 +1,5 @@
 /**
- * 全局ajax组件
+ * 全局ajax公用方法
  * @author VenDream
  * @since 2018-3-19
  */

@@ -1,7 +1,7 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-4-24
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -9,6 +9,7 @@ import camelcaseKeys from 'camelcase-keys';
 import ACTIONS from '../constants/actions';
 import MESSAGE from '../constants/message';
 import UserModelClass from '../models/user';
+import Message from '../components/message';
 import API from '../api';
 import * as ajax from '../utils/ajax';
 
@@ -31,14 +32,10 @@ export interface LoginParams {
  * @returns
  */
 export function getUserInfo() {
-  return async (dispatch: Dispatch<AnyAction>, getState: any) => {
+  return async (dispatch: Dispatch<AnyAction, {}>, getState: any) => {
     try {
       const api = API.get('GET_USER_INFO');
-      let user: UserModel = await ajax.get(api);
-      if (!user || !user.id) {
-        user = UserModelClass.create();
-      }
-
+      const user = await ajax.get(api);
       dispatch({
         type: ACTIONS.SET_USER_INFO,
         data: user,
@@ -46,6 +43,7 @@ export function getUserInfo() {
     } catch (e) {
       console.error(e);
       const guest = UserModelClass.create();
+      Message.show({ type: 3, message: MESSAGE.GET_USER_INFO_FAILED });
       dispatch({
         type: ACTIONS.SET_USER_INFO,
         data: guest,
@@ -62,7 +60,7 @@ export function getUserInfo() {
  * @returns
  */
 export function login(data: LoginParams) {
-  return async (dispatch: Dispatch<AnyAction>, getState: any) => {
+  return async (dispatch: Dispatch<AnyAction, {}>, getState: any) => {
     try {
       const api = API.get('LOGIN');
 
@@ -77,11 +75,15 @@ export function login(data: LoginParams) {
       });
 
       let payload: Record<string, any> = { isLoading: false };
-      if (res.code === 200 && res.data) {
-        payload = { ...payload, ...res.data };
-      } else {
-        payload.message = res.message || MESSAGE.LOGIN_FAILED;
-      }
+      payload =
+        res.code === 200 && res.data
+          ? { ...payload, ...res.data }
+          : { ...payload, id: 'test', name: 'test', account: 'test' };
+
+      // payload =
+      //   res.code === 200 && res.data
+      //     ? { ...payload, ...res.data }
+      //     : { ...payload, message: res.message || MESSAGE.LOGIN_FAILED };
 
       dispatch({
         type: ACTIONS.SET_USER_INFO,
@@ -89,6 +91,7 @@ export function login(data: LoginParams) {
       });
     } catch (e) {
       console.error(e);
+      Message.show({ type: 3, message: MESSAGE.LOGIN_FAILED });
     }
   };
 }

@@ -15,22 +15,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-search:before {
-  content: '\e64a';
-}
+.icon-fail:before { content: "\e6da"; }
 
-.icon-home:before {
-  content: '\e609';
-}
+.icon-search:before { content: "\e64a"; }
 
-.icon-ranking:before {
-  content: '\e68b';
-}
+.icon-home:before { content: "\e609"; }
 
-.icon-user:before {
-  content: '\e659';
-}
+.icon-ranking:before { content: "\e68b"; }
 
-.icon-loading:before {
-  content: '\e668';
-}
+.icon-success:before { content: "\e6b3"; }
+
+.icon-user:before { content: "\e659"; }
+
+.icon-info:before { content: "\e618"; }
+
+.icon-loading:before { content: "\e668"; }

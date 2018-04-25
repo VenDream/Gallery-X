@@ -21,7 +21,7 @@ function mapStateToProps(state: Record<string, any>, ownProps: OwnProps) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {
     getUserInfo: () => dispatch(getUserInfo()),
     hideAppLoader: () => {

@@ -11,24 +11,17 @@
   height: 100%;
 
   color: @font-color;
+  background-color: #FFF;
 
   h2 {
-    margin-bottom: .4rem;
+    margin-bottom: .3rem;
+
+    font-size: .32rem;
+    font-weight: lighter;
   }
 
   .login-form {
     text-align: center;
-
-    &.loading {
-      .account,
-      .password {
-        background-color: @ban-color;
-      }
-      .submit {
-        color: @ban-color;
-        border-color: @ban-color;
-      }
-    }
 
     .account,
     .password {
@@ -39,10 +32,12 @@
 
       transition: all .2s ease;
 
-      border: .01rem solid transparent;
+      border: .01rem solid @font-color;
       border-radius: .2rem;
       outline: none;
       background-color: #FFF;
+
+      -webkit-tap-highlight-color: transparent;
     }
 
     .submit {

@@ -1,0 +1,66 @@
+@import '../../assets/styles/variable.less';
+
+.g-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &.zoom-in {
+    animation: zoom-in .3s ease;
+
+    animation-fill-mode: forwards;
+  }
+
+  &.mask {
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      content: '';
+
+      background-color: rgba(0, 0, 0, .9);
+    }
+  }
+
+  .msg-box {
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+
+    min-width: 2rem;
+    max-width: 80%;
+    min-height: 1rem;
+    max-height: 80%;
+    padding: 0 .2rem;
+
+    color: @font-color;
+    border-radius: .04rem;
+    background-color: rgba(0, 0, 0, .85);
+
+    .g-icon {
+      font-size: .24rem;
+    }
+    .icon-loading {
+      animation: loader-icon-rotate 2.2s linear infinite;
+    }
+    p {
+      margin: .1rem auto;
+    }
+  }
+}
