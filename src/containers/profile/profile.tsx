@@ -7,7 +7,7 @@
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction } from 'redux';
 
-import Profile from '../../components/profile';
+import Profile from '../../components/profile/profile';
 import { logout } from '../../actions/user';
 
 function mapStateToProps(state: Record<string, any>) {

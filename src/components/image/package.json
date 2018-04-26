@@ -1,0 +1,7 @@
+{
+  "name": "image",
+  "version": "1.0.0",
+  "description": "增强图片组件",
+  "main": "./image.tsx",
+  "types": "./image.tsx"
+}

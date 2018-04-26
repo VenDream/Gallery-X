@@ -1,7 +1,7 @@
 /**
  * 全局ajax公用方法
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-4-26
  */
 
 import 'whatwg-fetch';
@@ -74,17 +74,16 @@ export function request(url: string, options?: FetchOption) {
         if (opt.dataType === 'text') {
           return response.text();
         } else if (opt.dataType === 'json') {
-          const jsonRes: Record<string, any> = await response.json();
-          if (opt.raw) {
-            return jsonRes;
-          } else {
-            // 预处理返回结果，如果检测到code为200，则返回data值
-            if (jsonRes.code === 200) {
-              return typeof jsonRes.data === 'string'
-                ? jsonRes.data
-                : camelcaseKeys(jsonRes.data || {});
-            }
+          let jsonRes: Record<string, any> = await response.json();
+
+          // 非raw模式下，判断code为200后直接返回data
+          if (!opt.raw && jsonRes.code === 200) {
+            jsonRes = jsonRes.data || {};
           }
+
+          return typeof jsonRes === 'string'
+            ? jsonRes
+            : camelcaseKeys(jsonRes, { deep: true, exclude: [/_\d+/] });
         }
       } else {
         const error: Record<string, any> = new Error(response.statusText);

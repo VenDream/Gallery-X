@@ -44,7 +44,7 @@ export default function popUpFactory<WrappedComponentProps>(
   return class ComponentWithPopUp extends Component<PopUpProps> {
     static defaultProps: PopUpProps = {
       container: document.body,
-      transitionClass: 'zoom-in',
+      transitionClass: 'zoom-out',
     };
 
     // 实例映射表

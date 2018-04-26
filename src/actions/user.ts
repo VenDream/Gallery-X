@@ -1,13 +1,16 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-4-25
+ * @since 2018-4-26
  */
 
 import { AnyAction, Dispatch } from 'redux';
+import { push } from 'react-router-redux';
 import camelcaseKeys from 'camelcase-keys';
+
 import ACTIONS from '../constants/actions';
 import MESSAGE from '../constants/message';
+import RouterMap from '../constants/routers';
 import UserModelClass from '../models/user';
 import Message from '../components/message';
 import API from '../api';
@@ -78,12 +81,7 @@ export function login(data: LoginParams) {
       payload =
         res.code === 200 && res.data
           ? { ...payload, ...res.data }
-          : { ...payload, id: 'test', name: 'test', account: 'test' };
-
-      // payload =
-      //   res.code === 200 && res.data
-      //     ? { ...payload, ...res.data }
-      //     : { ...payload, message: res.message || MESSAGE.LOGIN_FAILED };
+          : { ...payload, message: res.message || MESSAGE.LOGIN_FAILED };
 
       dispatch({
         type: ACTIONS.SET_USER_INFO,
@@ -109,6 +107,9 @@ export function logout() {
       const res = await ajax.post(api, { raw: true });
       if (res.code === 200) {
         const guest = UserModelClass.create();
+
+        // 退出登陆，回到首页
+        dispatch(push(RouterMap.index.path));
         dispatch({
           type: ACTIONS.SET_USER_INFO,
           data: guest,

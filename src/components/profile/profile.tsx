@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+import Image from '../image';
 import './profile.less';
 
 interface ProfileProps {
@@ -14,8 +15,44 @@ interface ProfileProps {
   logout: () => Promise<void>;
 }
 
+function LabelItem(props: { label: string; value: string }) {
+  return (
+    <div className="label-item">
+      <span className="label">{props.label}: </span>
+      <span className="label-value">{props.value}</span>
+    </div>
+  );
+}
+
 export default class Profile extends Component<ProfileProps> {
+  handleLogout = () => {
+    this.props.logout();
+  };
+
   render() {
-    return <div className="profile">我的资料</div>;
+    const { user } = this.props;
+    const { profileImageUrls } = user;
+
+    return (
+      <div className="profile">
+        <div className="profile-header">
+          <Image
+            src={profileImageUrls.px_170x170}
+            alt="PROFILE"
+            className="avatar"
+          />
+          <div className="account-info">
+            <LabelItem label="PixivID" value={user.id} />
+            <LabelItem label="Pixiv帐号" value={user.account} />
+            <LabelItem label="昵称" value={user.name} />
+          </div>
+        </div>
+        <div className="profile-body">
+          <span className="logout-btn" onClick={this.handleLogout}>
+            登出
+          </span>
+        </div>
+      </div>
+    );
   }
 }
