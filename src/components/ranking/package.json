@@ -1,0 +1,7 @@
+{
+  "name": "ranking",
+  "version": "1.0.0",
+  "description": "排行榜页面组件",
+  "main": "./ranking.tsx",
+  "types": "./ranking.tsx"
+}
