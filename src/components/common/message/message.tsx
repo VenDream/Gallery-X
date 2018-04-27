@@ -1,12 +1,12 @@
 /**
  * 消息提示组件
  * @author VenDream
- * @since 2018-4-24
+ * @since 2018-4-27
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import popUpFactory from '../../components/hoc/popup';
+import popUpFactory from '../../../components/hoc/popup';
 
 import './message.less';
 

@@ -1,14 +1,14 @@
 /**
  * 底部导航栏
  * @author VenDream
- * @since 2018-4-26
+ * @since 2018-4-27
  */
 
 import React, { Component, MouseEventHandler } from 'react';
 import { RouterAction } from 'react-router-redux';
 import classnames from 'classnames';
 
-import Message from './../message';
+import Message from './../common/message';
 import RouterMap from '../../constants/routers';
 import './bottom-bar.less';
 

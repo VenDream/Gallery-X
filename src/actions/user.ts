@@ -1,7 +1,7 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-4-26
+ * @since 2018-4-27
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -12,7 +12,7 @@ import ACTIONS from '../constants/actions';
 import MESSAGE from '../constants/message';
 import RouterMap from '../constants/routers';
 import UserModelClass from '../models/user';
-import Message from '../components/message';
+import Message from '../components/common/message';
 import API from '../api';
 import * as ajax from '../utils/ajax';
 

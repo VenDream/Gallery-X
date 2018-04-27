@@ -1,7 +1,7 @@
 /**
  * 登陆组件
  * @author VenDream
- * @since 2018-4-24
+ * @since 2018-4-27
  */
 
 import React, { Component } from 'react';
@@ -9,7 +9,7 @@ import classnames from 'classnames';
 
 import { LoginParams } from '../../actions/user';
 import { UserState } from '../../reducers/user';
-import Message from '../message';
+import Message from '../common/message';
 import './login-box.less';
 
 interface LoginBoxProps {
