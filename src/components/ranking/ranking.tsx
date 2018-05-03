@@ -7,12 +7,17 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+import IllustWaterfall from '../../containers/illust-waterfall/illust-waterfall';
 import './ranking.less';
 
 interface RankingProps {}
 
 export default class Ranking extends Component<RankingProps> {
+  renderIllustWaterfall() {
+    return <IllustWaterfall />;
+  }
+
   render() {
-    return <div className="ranking">排行</div>;
+    return <div className="ranking">{this.renderIllustWaterfall()}</div>;
   }
 }

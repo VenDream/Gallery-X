@@ -1,14 +1,14 @@
 /**
- * 底部导航栏器组件
+ * 底部导航栏组件
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-4-27
  */
 
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction } from 'redux';
-import { push } from 'react-router-redux';
 
 import BottomBar from '../../components/bottom-bar';
+import { redirectTo } from '../../actions/router';
 
 function mapStateToProps(state: Record<string, any>) {
   const router = state.router;
@@ -19,7 +19,7 @@ function mapStateToProps(state: Record<string, any>) {
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   return {
-    redirectTo: (path: string) => dispatch(push(path)),
+    redirectTo: (path: string) => dispatch(redirectTo(path)),
   };
 }
 

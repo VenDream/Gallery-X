@@ -1,0 +1,7 @@
+{
+  "name": "waterfall",
+  "version": "1.0.0",
+  "description": "瀑布流布局组件",
+  "main": "./waterfall.tsx",
+  "types": "./waterfall.tsx"
+}

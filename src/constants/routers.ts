@@ -1,5 +1,13 @@
+/**
+ * 应用路由定义
+ * @author VenDream
+ * @since 2018-4-27
+ */
+
+import PAGE from './page';
+
 // 路由对象定义
-interface Router {
+export interface Router {
   /**
    * 路径
    */
@@ -14,26 +22,23 @@ interface Router {
   icon?: string;
 }
 
-/**
- * 应用全局路由表
- */
 const RouterMap: Record<string, Router> = {
-  index: {
+  [PAGE.INDEX]: {
     path: '/',
     name: '首页',
     icon: 'home',
   },
-  ranking: {
+  [PAGE.RANKING]: {
     path: '/ranking',
     name: '排行',
     icon: 'ranking',
   },
-  search: {
+  [PAGE.SEARCH]: {
     path: '/search',
     name: '搜索',
     icon: 'search',
   },
-  profile: {
+  [PAGE.PROFILE]: {
     path: '/profile',
     name: '我的',
     icon: 'user',
