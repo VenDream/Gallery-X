@@ -1,7 +1,7 @@
 /**
  * 全局ajax公用方法
  * @author VenDream
- * @since 2018-4-26
+ * @since 2018-5-8
  */
 
 import 'whatwg-fetch';
@@ -21,7 +21,7 @@ interface FetchOption {
   /**
    * 请求数据
    */
-  body?: Record<string, any> | string;
+  body?: Record<string, any> | string | null;
   /**
    * 请求头
    */
@@ -66,6 +66,7 @@ export function request(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, DEFAULT_OPTIONS, options);
   if (opt.body) {
     opt.body = qs.stringify(opt.body);
+    !opt.body && (opt.body = null);
   }
 
   return (window as any).fetch(url, opt).then(

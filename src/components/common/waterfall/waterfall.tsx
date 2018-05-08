@@ -1,7 +1,7 @@
 /**
  * 瀑布流组件（绝对定位实现)
  * @author VenDream
- * @since 2018-5-3
+ * @since 2018-5-8
  */
 
 import React, { Component } from 'react';
@@ -64,7 +64,7 @@ interface WaterfallObj {
   /**
    * 元素的父节点集合
    */
-  wrappers: Element[];
+  wrappers: Array<React.RefObject<HTMLDivElement>>;
 }
 
 export default class Waterfall extends Component<WaterfallProps> {
@@ -124,7 +124,7 @@ export default class Waterfall extends Component<WaterfallProps> {
 
     for (const [i, item] of Object.entries(items)) {
       const shortestCol = this.findColumnOf(0);
-      const wrapper = this.waterfall.wrappers[+i] as HTMLElement;
+      const wrapper = this.waterfall.wrappers[+i].current as HTMLElement;
 
       // 计算每一个元素的大小，位置
       const w = itemWidth;
@@ -201,7 +201,7 @@ export default class Waterfall extends Component<WaterfallProps> {
       );
 
       waterfallItems.push(waterfallItem);
-      this.waterfall.wrappers.push(wrapperRef.current);
+      this.waterfall.wrappers.push(wrapperRef);
     }
 
     return (

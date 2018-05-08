@@ -1,7 +1,7 @@
 /**
  * 排行榜页面组件
  * @author VenDream
- * @since 2018-4-26
+ * @since 2018-5-8
  */
 
 import React, { Component } from 'react';
@@ -14,7 +14,7 @@ interface RankingProps {}
 
 export default class Ranking extends Component<RankingProps> {
   renderIllustWaterfall() {
-    return <IllustWaterfall />;
+    return <IllustWaterfall column={3} gutter={20} />;
   }
 
   render() {
