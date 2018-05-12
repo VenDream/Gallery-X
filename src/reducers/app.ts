@@ -1,17 +1,35 @@
 /**
  * App状态同步
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-5-11
  */
 
+import moment from 'moment';
 import { AnyAction } from 'redux';
 import deepExtend from 'deep-extend';
 import PAGE from '../constants/page';
 import ACTIONS from '../constants/actions';
 import CATEGORY from '../constants/category';
 import RouterMap from '../constants/routers';
+import { RankingIllustParams } from '../actions/illust';
 
-const initState = {
+interface AppState {
+  page: string;
+  filter: RankingIllustParams | {};
+  category: string;
+}
+
+// 排行榜默认参数
+const defaultRankingFilter: RankingIllustParams = {
+  mode: 'day',
+  date: moment()
+    .subtract(1, 'days')
+    .format('YYYY-MM-DD'),
+  start: 0,
+  step: 30,
+};
+
+const initState: AppState = {
   // 当前页面
   page: PAGE.INDEX,
   // 当前筛选条件
@@ -38,10 +56,11 @@ export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ACTIONS.LOCATION_CHANGE: {
       const page = getTargetRoutePage(action.payload.pathname);
+      const filter = page === PAGE.RANKING ? defaultRankingFilter : {};
       const category =
         page === PAGE.RANKING || page === PAGE.SEARCH ? page : '';
 
-      return { ...state, filter: {}, page, category };
+      return { ...state, page, filter, category };
     }
     default:
       return state;

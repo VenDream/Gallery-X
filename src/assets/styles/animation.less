@@ -27,6 +27,25 @@
   }
 }
 
+/* 缩小渐现动画 */
+.zoom-in {
+  animation: zoom-in .3s ease;
+
+  animation-fill-mode: forwards;
+}
+@keyframes zoom-in {
+  0% {
+    transform: scale(.8);
+
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+
+    opacity: 1;
+  }
+}
+
 /* 渐显动画 */
 .fade-in {
   animation: fade-in .2s ease;

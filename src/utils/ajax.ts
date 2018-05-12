@@ -1,7 +1,7 @@
 /**
  * 全局ajax公用方法
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-5-11
  */
 
 import 'whatwg-fetch';
@@ -65,8 +65,11 @@ const DEFAULT_OPTIONS: FetchOption = {
 export function request(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, DEFAULT_OPTIONS, options);
   if (opt.body) {
-    opt.body = qs.stringify(opt.body);
-    !opt.body && (opt.body = null);
+    const qsOpt = qs.stringify(opt.body);
+    // 传递参数
+    opt.method === 'POST' ? (opt.body = qsOpt) : (url += '?' + qsOpt);
+  } else {
+    opt.body = null;
   }
 
   return (window as any).fetch(url, opt).then(

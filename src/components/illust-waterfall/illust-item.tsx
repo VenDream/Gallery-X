@@ -28,7 +28,7 @@ interface IllustItemProps {
 export default class IllustItem extends Component<IllustItemProps> {
   render() {
     return (
-      <div className="illust-item" data-id={this.props.id}>
+      <div className="illust-item zoom-in" data-id={this.props.id}>
         <Image src={this.props.thumb} className="thumb" />
         <div className="total">{this.props.total}</div>
       </div>

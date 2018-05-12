@@ -143,7 +143,7 @@ export default class Waterfall extends Component<WaterfallProps> {
 
       // 更新列元素及高度
       shortestCol.items.push(item);
-      shortestCol.h += h + gutter;
+      shortestCol.h += h + g;
     }
 
     // 更新grid总高度
