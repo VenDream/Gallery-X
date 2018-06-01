@@ -20,9 +20,14 @@ function mapStateToProps(state: Record<string, any>, ownProps: OwnProps) {
   return state.layout as LayoutState;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
+function mapDispatchToProps(dispatch: Dispatch<any>) {
   return {};
 }
 
 // withRouter传递路由状态
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Layout)
+);

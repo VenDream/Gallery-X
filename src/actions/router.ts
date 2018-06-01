@@ -17,7 +17,7 @@ import ACTIONS from '../constants/actions';
  * @param {string} path 页面路径
  */
 export function redirectTo(path: string) {
-  return (dispatch: Dispatch<AnyAction, {}>, getState: any) => {
+  return (dispatch: Dispatch<AnyAction>, getState: any) => {
     // 触发react-router的重定向action
     dispatch(push(path));
   };

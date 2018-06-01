@@ -37,7 +37,7 @@ export interface RankingIllustParams {
  * @param {RankingIllustParams} opts 查询参数
  */
 export function getRankingIllusts(opts?: RankingIllustParams) {
-  return async (dispatch: Dispatch<AnyAction, {}>, getState: any) => {
+  return async (dispatch: Dispatch<AnyAction>, getState: any) => {
     try {
       // 请求数据中
       dispatch({ type: ACTIONS.GET_RANKING_ILLUST_ING });

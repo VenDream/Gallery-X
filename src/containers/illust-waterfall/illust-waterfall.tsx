@@ -24,7 +24,7 @@ function mapStateToProps(state: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
+function mapDispatchToProps(dispatch: any) {
   return {
     // 获取插画数据（排行榜or搜索结果）
     fetchIllustData: (category: string, filter: RankingIllustParams) => {
@@ -42,4 +42,7 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IllustWaterfall);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IllustWaterfall);

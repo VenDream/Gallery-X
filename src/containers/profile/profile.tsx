@@ -16,10 +16,13 @@ function mapStateToProps(state: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
+function mapDispatchToProps(dispatch: any) {
   return {
     logout: () => dispatch(logout()),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

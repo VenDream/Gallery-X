@@ -22,7 +22,7 @@ function mapStateToProps(state: Record<string, any>, ownProps: OwnProps) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
+function mapDispatchToProps(dispatch: any) {
   return {
     getUserInfo: () => dispatch(getUserInfo()),
     hideAppLoader: () => {
@@ -35,5 +35,8 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
 
 // withRouter传递路由状态
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AppContent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AppContent)
 );

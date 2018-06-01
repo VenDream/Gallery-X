@@ -17,10 +17,13 @@ function mapStateToProps(state: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<AnyAction, {}>) {
+function mapDispatchToProps(dispatch: any) {
   return {
     login: (data: LoginParams) => dispatch(login(data)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginBox);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginBox);
