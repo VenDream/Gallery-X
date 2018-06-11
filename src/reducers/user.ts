@@ -9,8 +9,6 @@ import deepExtend from 'deep-extend';
 import ACTIONS from '../constants/actions';
 import UserModelClass from '../models/user';
 
-export type UserState = UserModel;
-
 const initState: UserState = {
   ...UserModelClass.create(),
   isLoading: false,

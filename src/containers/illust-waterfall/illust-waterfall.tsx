@@ -9,9 +9,9 @@ import { Dispatch, AnyAction } from 'redux';
 
 import CATEGORY from '../../constants/category';
 import IllustWaterfall from '../../components/illust-waterfall';
-import { RankingIllustParams, getRankingIllusts } from '../../actions/illust';
+import { getRankingIllusts } from '../../actions/illust';
 
-function mapStateToProps(state: Record<string, any>) {
+function mapStateToProps(state: StoreState) {
   const app = state.app;
   const illust = state.illust;
   const illusts = illust.ids.map(id => illust.byId[id]);

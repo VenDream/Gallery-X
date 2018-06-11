@@ -1,8 +1,11 @@
 /**
- * 应用数据模型声明
+ * 应用全局类型声明
  * @author VenDream
- * @since 2018-5-3
+ * @since 2018-6-7
  */
+
+/// <reference path="./actions/actions.d.ts" />
+/// <reference path="./reducers/reducer.d.ts" />
 
 //  Pixiv用户模型
 interface UserModel {

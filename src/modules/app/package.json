@@ -1,0 +1,7 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "应用入口模块",
+  "main": "./app.tsx",
+  "types": "./app.tsx"
+}

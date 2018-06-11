@@ -8,14 +8,10 @@ import { AnyAction } from 'redux';
 import ACTIONS from '../constants/actions';
 
 // 扁平化的illust状态
-const initState = {
-  // 具体的illust对象
+const initState: IllustState = {
   byId: {},
-  // illust引用集合
   ids: [],
-  // 激活的illust
   activeId: '',
-  // 状态 0: 就绪，1: 加载中，2: 加载失败 3: 加载完毕
   status: 0,
 };
 

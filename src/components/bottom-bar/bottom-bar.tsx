@@ -8,7 +8,7 @@ import React, { Component, MouseEventHandler } from 'react';
 import { RouterAction } from 'react-router-redux';
 import classnames from 'classnames';
 
-import Message from './../common/message';
+import Message from '../../components/common/message';
 import RouterMap from '../../constants/routers';
 import './bottom-bar.less';
 

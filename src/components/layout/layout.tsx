@@ -5,7 +5,7 @@
  */
 
 import React, { SFC } from 'react';
-import AppLoader from '../app-loader';
+import AppLoader from '../../components/app-loader';
 import AppContent from '../../containers/app-content';
 
 import './layout.less';

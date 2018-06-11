@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    },
     "jsx": "react",
     "allowJs": true,
-    "target": "ES5",
+    "target": "es5",
     "sourceMap": true,
     "pretty": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "locale": "zh-CN",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "es2015", "es2016", "es2017", "esnext"]

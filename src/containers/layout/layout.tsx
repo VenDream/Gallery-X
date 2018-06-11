@@ -6,15 +6,13 @@
 
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import Layout from '../../components/layout';
-import { LayoutState } from '../../reducers/layout';
-
-import { withRouter } from 'react-router-dom';
 
 interface OwnProps {}
 
-function mapStateToProps(state: Record<string, any>, ownProps: OwnProps) {
+function mapStateToProps(state: StoreState, ownProps: OwnProps) {
   const layout = state.layout as LayoutState;
 
   return state.layout as LayoutState;

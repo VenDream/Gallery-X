@@ -11,13 +11,6 @@ import PAGE from '../constants/page';
 import ACTIONS from '../constants/actions';
 import CATEGORY from '../constants/category';
 import RouterMap from '../constants/routers';
-import { RankingIllustParams } from '../actions/illust';
-
-interface AppState {
-  page: string;
-  filter: RankingIllustParams | {};
-  category: string;
-}
 
 // 排行榜默认参数
 const defaultRankingFilter: RankingIllustParams = {
@@ -30,11 +23,8 @@ const defaultRankingFilter: RankingIllustParams = {
 };
 
 const initState: AppState = {
-  // 当前页面
   page: PAGE.INDEX,
-  // 当前筛选条件
   filter: {},
-  // 当前插画分类
   category: '',
 };
 

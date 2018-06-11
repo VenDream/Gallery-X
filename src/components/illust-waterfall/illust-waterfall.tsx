@@ -7,11 +7,10 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { RankingIllustParams } from '../../actions/illust';
 import { checkInViewport } from '../../utils/common';
 import throttle from '../../utils/throttle';
 import CATEGORY from '../../constants/category';
-import Waterfall from '../common/waterfall';
+import Waterfall from '../../components/common/waterfall';
 import IllustItem from './illust-item';
 import './illust-waterfall.less';
 

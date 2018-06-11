@@ -15,7 +15,7 @@ import ACTIONS from '../constants/actions';
  * @returns
  */
 export function setInitLoadingVisible(visible: boolean) {
-  return (dispatch: Dispatch<AnyAction>, getState: any) => {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     dispatch({
       type: ACTIONS.SET_VISIBLE,
       data: {

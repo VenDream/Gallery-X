@@ -7,9 +7,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { LoginParams } from '../../actions/user';
-import { UserState } from '../../reducers/user';
-import Message from '../common/message';
+import Message from '../../components/common/message';
 import './login-box.less';
 
 interface LoginBoxProps {

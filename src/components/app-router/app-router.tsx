@@ -6,13 +6,12 @@
 
 import React from 'react';
 import { Route } from 'react-router';
-import { push } from 'react-router-redux';
 
 import PAGE from '../../constants/page';
 import RouterMap from '../../constants/routers';
-import Home from '../home';
-import Ranking from '../ranking';
-import Search from '../search';
+import Home from '../../components/home';
+import Ranking from '../../components/ranking';
+import Search from '../../components/search';
 import Profile from '../../containers/profile';
 
 export default () => (

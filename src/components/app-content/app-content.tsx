@@ -6,8 +6,8 @@
 
 import React, { Component } from 'react';
 
+import AppRouter from '../../components/app-router';
 import LoginBox from '../../containers/login-box';
-import AppRouter from '../app-router';
 import BottomBar from '../../containers/bottom-bar/bottom-bar';
 
 import './app-content.less';

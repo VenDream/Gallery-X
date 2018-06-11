@@ -4,31 +4,12 @@
  * @since 2018-5-8
  */
 
+import { AnyAction, Dispatch } from 'redux';
 import API from '../api';
 import * as ajax from '../utils/ajax';
-import { AnyAction, Dispatch } from 'redux';
 import ACTIONS from '../constants/actions';
 import MESSAGE from '../constants/message';
 import Message from '../components/common/message';
-
-export interface RankingIllustParams {
-  /**
-   * 分类
-   */
-  mode?: string;
-  /**
-   * 日期
-   */
-  date?: string;
-  /**
-   * 开始位置
-   */
-  start?: number;
-  /**
-   * 步长
-   */
-  step?: number;
-}
 
 /**
  * 获取插画排行榜
@@ -37,7 +18,7 @@ export interface RankingIllustParams {
  * @param {RankingIllustParams} opts 查询参数
  */
 export function getRankingIllusts(opts?: RankingIllustParams) {
-  return async (dispatch: Dispatch<AnyAction>, getState: any) => {
+  return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     try {
       // 请求数据中
       dispatch({ type: ACTIONS.GET_RANKING_ILLUST_ING });

@@ -7,17 +7,6 @@
 import { AnyAction } from 'redux';
 import ACTIONS from '../constants/actions';
 
-export interface LayoutState {
-  /**
-   * 应用是否已初始化
-   */
-  inited: boolean;
-  /**
-   * 是否显示应用初始化的loading蒙层
-   */
-  initLoadingVisible: boolean;
-}
-
 const initState: LayoutState = {
   inited: false,
   initLoadingVisible: true,

@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import Image from '../common/image';
+import Image from '../../components/common/image';
 import './profile.less';
 
 interface ProfileProps {

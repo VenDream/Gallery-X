@@ -9,8 +9,9 @@ import { Dispatch, AnyAction } from 'redux';
 
 import BottomBar from '../../components/bottom-bar';
 import { redirectTo } from '../../actions/router';
+import { RouterState } from 'react-router-redux';
 
-function mapStateToProps(state: Record<string, any>) {
+function mapStateToProps(state: StoreState & { router: RouterState }) {
   const router = state.router;
   return {
     path: router.location.pathname,
