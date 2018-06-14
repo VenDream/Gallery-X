@@ -1,3 +1,5 @@
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
 /**
  * LESS加载规则
  *
@@ -10,14 +12,19 @@ export default function loader(isDev: boolean) {
     test: /\.less$/,
     use: [
       {
-        loader: 'style-loader',
+        loader: isDev ? MiniCssExtractPlugin.loader : 'style-loader',
       },
       {
         loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+        },
+      },
+      {
+        loader: 'postcss-loader',
       },
       {
         loader: 'less-loader',
-        options: {},
       },
     ],
   };

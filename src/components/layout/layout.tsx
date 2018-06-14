@@ -1,12 +1,12 @@
 /**
  * 布局视图组件
  * @author VenDream
- * @since 2018-1-26
+ * @since 2018-6-14
  */
 
 import React, { SFC } from 'react';
-import AppLoader from '../../components/app-loader';
-import AppContent from '../../containers/app-content';
+import AppLoader from 'components/app-loader';
+import AppContent from 'containers/app-content';
 
 import './layout.less';
 

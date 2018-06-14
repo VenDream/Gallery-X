@@ -1,14 +1,14 @@
 /**
  * 布局容器组件
  * @author VenDream
- * @since 2018-4-25
+ * @since 2018-6-14
  */
 
 import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
+import { Dispatch } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-import Layout from '../../components/layout';
+import Layout from 'components/layout';
 
 interface OwnProps {}
 

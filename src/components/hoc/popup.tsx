@@ -1,14 +1,14 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-4-24
+ * @since 2018-6-14
  */
 
 import React, { Component, Children, cloneElement } from 'react';
 import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 import classnames from 'classnames';
 
-import { getUniqueId } from '../../utils/common';
+import { getUniqueId } from 'utils/common';
 
 export interface PopUpProps {
   /**

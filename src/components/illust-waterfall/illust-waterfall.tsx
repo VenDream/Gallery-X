@@ -1,16 +1,15 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-5-11
+ * @since 2018-6-14
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { checkInViewport } from '../../utils/common';
-import throttle from '../../utils/throttle';
-import CATEGORY from '../../constants/category';
-import Waterfall from '../../components/common/waterfall';
+import { checkInViewport } from 'utils/common';
+import throttle from 'utils/throttle';
+import Waterfall from 'components/common/waterfall';
 import IllustItem from './illust-item';
 import './illust-waterfall.less';
 
@@ -67,9 +66,10 @@ export default class IllustWaterfall extends Component<
       start: +filter.start + this.loaderStep,
       step: this.loaderStep,
     };
+
     // 判断是否满足加载条件
-    const isCanLoad = status === 0 && checkInViewport(loader, scroller);
-    isCanLoad && this.props.fetchIllustData(category, newFilter);
+    const shouldLoad = status === 0 && checkInViewport(loader, scroller);
+    shouldLoad && this.props.fetchIllustData(category, newFilter);
   }
 
   // 渲染瀑布流

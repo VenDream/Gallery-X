@@ -1,15 +1,15 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-6-14
  */
 
 import { AnyAction, Dispatch } from 'redux';
-import API from '../api';
-import * as ajax from '../utils/ajax';
-import ACTIONS from '../constants/actions';
-import MESSAGE from '../constants/message';
-import Message from '../components/common/message';
+import API from 'api';
+import * as ajax from 'utils/ajax';
+import ACTIONS from 'constants/actions';
+import MESSAGE from 'constants/message';
+import Message from 'components/common/message';
 
 /**
  * 获取插画排行榜

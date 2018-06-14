@@ -1,14 +1,14 @@
 /**
  * 应用内容视图组件
  * @author VenDream
- * @since 2018-3-19
+ * @since 2018-6-14
  */
 
 import React, { Component } from 'react';
 
-import AppRouter from '../../components/app-router';
-import LoginBox from '../../containers/login-box';
-import BottomBar from '../../containers/bottom-bar/bottom-bar';
+import AppRouter from 'components/app-router';
+import LoginBox from 'containers/login-box';
+import BottomBar from 'containers/bottom-bar/bottom-bar';
 
 import './app-content.less';
 

@@ -1,5 +1,5 @@
 /**
- * ts加载规则
+ * 全局js加载规则
  *
  * @export
  * @param {boolean} isDev 是否开发模式
@@ -7,22 +7,13 @@
  */
 export default function loader(isDev: boolean) {
   return {
-    test: /\.tsx?$/,
+    test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [
       {
         loader: 'babel-loader',
         options: {
           cacheDirectory: isDev ? '.cache' : false,
-        },
-      },
-      {
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          compilerOptions: {
-            module: 'es2015',
-          },
         },
       },
     ],

@@ -1,17 +1,17 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-6-7
+ * @since 2018-6-12
  */
 
 import path from 'path';
 import webpack from 'webpack';
 import generateDefaultRules from './loaders';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
- * Webpack自定义构建配置
+ * 自定义Webpack配置声明
  */
-
 interface WebpackConfig {
   /**
    * 源码目录
@@ -62,7 +62,7 @@ export default (
       /**
        * 调试工具，开发模式下输出sourcemap
        */
-      devtool: isDev ? 'source-map' : false,
+      devtool: isDev ? 'eval-source-map' : false,
       /**
        * 本地开发调试
        */
@@ -99,20 +99,16 @@ export default (
           path.resolve(configs.srcDir),
         ].concat(userResolve.modules || []),
         // 默认解析js模块与ts模块
-        extensions: [].concat(userResolve.extensions || [], [
-          '.ts',
-          '.tsx',
-          '.js',
-          '.jsx',
-          '.json',
-        ]),
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'].concat(
+          userResolve.extensions || []
+        ),
       },
       /**
        * 模块解析规则
        */
       module: {
         noParse: userModule.noParse,
-        rules: [].concat(generateDefaultRules(isDev), userModule.rules),
+        rules: generateDefaultRules(isDev).concat(userModule.rules),
       },
       /**
        * 打包优化选项
@@ -124,7 +120,19 @@ export default (
        * 插件
        */
       plugins: [
-        ...(isDev ? [new webpack.HotModuleReplacementPlugin()] : []),
+        ...(isDev
+          ? [
+              new webpack.NamedModulesPlugin(),
+              new webpack.HotModuleReplacementPlugin(),
+              new MiniCssExtractPlugin({
+                filename: '[name].css',
+              }),
+            ]
+          : [
+              new MiniCssExtractPlugin({
+                filename: '[name].[contenthash:10].css',
+              }),
+            ]),
       ].concat(configs.plugins || []),
     };
   };

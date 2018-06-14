@@ -1,26 +1,29 @@
 /**
  * App状态同步
  * @author VenDream
- * @since 2018-5-11
+ * @since 2018-6-14
  */
 
 import moment from 'moment';
 import { AnyAction } from 'redux';
-import deepExtend from 'deep-extend';
-import PAGE from '../constants/page';
-import ACTIONS from '../constants/actions';
-import CATEGORY from '../constants/category';
-import RouterMap from '../constants/routers';
+import PAGE from 'constants/page';
+import ACTIONS from 'constants/actions';
+import RouterMap from 'constants/routers';
 
 // 排行榜默认参数
-const defaultRankingFilter: RankingIllustParams = {
-  mode: 'day',
-  date: moment()
-    .subtract(1, 'days')
-    .format('YYYY-MM-DD'),
-  start: 0,
-  step: 30,
-};
+const defaultRankingFilter: RankingIllustParams = (() => {
+  const now = moment();
+  const hours = moment().hours();
+  // @NOTE：对于Pixiv来说，若当前时间处于早上11之前，取两天前数据，否则取一天前的数据
+  const date = now.subtract(hours < 11 ? 2 : 1, 'days');
+
+  return {
+    mode: 'day',
+    date: date.format('YYYY-MM-DD'),
+    start: 0,
+    step: 30,
+  };
+})();
 
 const initState: AppState = {
   page: PAGE.INDEX,

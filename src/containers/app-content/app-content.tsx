@@ -1,16 +1,15 @@
 /**
  * 应用内容容器组件
  * @author VenDream
- * @since 2018-4-25
+ * @since 2018-6-14
  */
 
 import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-import { getUserInfo } from '../../actions/user';
-import { setInitLoadingVisible } from '../../actions/layout';
-import AppContent from '../../components/app-content';
+import { getUserInfo } from 'actions/user';
+import { setInitLoadingVisible } from 'actions/layout';
+import AppContent from 'components/app-content';
 
 interface OwnProps {}
 

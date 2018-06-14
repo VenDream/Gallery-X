@@ -1,13 +1,12 @@
 /**
  * 我的资料组件
  * @author VenDream
- * @since 2018-4-27
+ * @since 2018-6-14
  */
 
 import React, { Component } from 'react';
-import classnames from 'classnames';
 
-import Image from '../../components/common/image';
+import Image from 'components/common/image';
 import './profile.less';
 
 interface ProfileProps {

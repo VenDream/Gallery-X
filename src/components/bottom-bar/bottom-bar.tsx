@@ -1,15 +1,15 @@
 /**
  * 底部导航栏
  * @author VenDream
- * @since 2018-4-27
+ * @since 2018-6-14
  */
 
 import React, { Component, MouseEventHandler } from 'react';
 import { RouterAction } from 'react-router-redux';
 import classnames from 'classnames';
 
-import Message from '../../components/common/message';
-import RouterMap from '../../constants/routers';
+import Message from 'components/common/message';
+import RouterMap from 'constants/routers';
 import './bottom-bar.less';
 
 interface BottomBarProps {

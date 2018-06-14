@@ -1,11 +1,11 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-6-14
  */
 
 import { AnyAction } from 'redux';
-import ACTIONS from '../constants/actions';
+import ACTIONS from 'constants/actions';
 
 // 扁平化的illust状态
 const initState: IllustState = {

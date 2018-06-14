@@ -1,12 +1,12 @@
 /**
  * 瀑布流组件（绝对定位实现)
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-6-14
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import debounce from '../../../utils/debounce';
+import debounce from 'utils/debounce';
 
 import './waterfall.less';
 

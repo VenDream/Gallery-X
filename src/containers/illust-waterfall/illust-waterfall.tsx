@@ -1,15 +1,14 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-6-14
  */
 
 import { connect } from 'react-redux';
-import { Dispatch, AnyAction } from 'redux';
 
-import CATEGORY from '../../constants/category';
-import IllustWaterfall from '../../components/illust-waterfall';
-import { getRankingIllusts } from '../../actions/illust';
+import CATEGORY from 'constants/category';
+import IllustWaterfall from 'components/illust-waterfall';
+import { getRankingIllusts } from 'actions/illust';
 
 function mapStateToProps(state: StoreState) {
   const app = state.app;
