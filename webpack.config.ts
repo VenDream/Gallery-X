@@ -1,7 +1,7 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2018-6-9
+ * @since 2018-6-23
  */
 
 import path from 'path';
@@ -31,7 +31,7 @@ export default WebpackConfig(() => {
       // 导出html
       new HtmlWebpackPlugin({
         template: getPath('./index.pug'),
-        chunks: ['manifest', 'vendor', 'index'],
+        chunks: ['vendor', 'index'],
         path: getPath('./dist'),
       }),
     ],

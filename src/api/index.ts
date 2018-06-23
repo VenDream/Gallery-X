@@ -4,8 +4,8 @@
  * @since 2018-5-8
  */
 
-// const API_HOST = 'http://43.239.159.171:8080';
-const API_HOST = 'http://172.16.13.11:5000';
+const API_HOST = 'http://43.239.159.171:8080';
+// const API_HOST = 'http://192.168.2.107:5000';
 const API_MAP = {
   LOGIN: 'login',
   LOGOUT: 'logout',

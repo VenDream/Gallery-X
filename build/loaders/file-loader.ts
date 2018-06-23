@@ -12,7 +12,7 @@ export default function loader(isDev: boolean) {
       {
         loader: 'file-loader',
         options: {
-          name: '[name].[hash].[ext]',
+          name: `[name]${isDev ? '' : '.[hash:10]'}.[ext]`,
           outputPath: 'fonts/',
         },
       },

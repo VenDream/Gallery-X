@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-6-12
+ * @since 2018-6-23
  */
 
 import path from 'path';
@@ -62,7 +62,7 @@ export default (
       /**
        * 调试工具，开发模式下输出sourcemap
        */
-      devtool: isDev ? 'eval-source-map' : false,
+      devtool: isDev ? 'source-map' : false,
       /**
        * 本地开发调试
        */
@@ -115,6 +115,15 @@ export default (
        */
       optimization: {
         minimize: !isDev,
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              name: 'vendor',
+              test: /[\\/]node_modules[\\/]/,
+              chunks: 'all',
+            },
+          },
+        },
       },
       /**
        * 插件
