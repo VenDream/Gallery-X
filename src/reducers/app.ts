@@ -1,7 +1,7 @@
 /**
  * App状态同步
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-23
  */
 
 import moment from 'moment';
@@ -47,6 +47,9 @@ export function getTargetRoutePage(pathname: string) {
 
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
+    /**
+     * 切换路由
+     */
     case ACTIONS.LOCATION_CHANGE: {
       const page = getTargetRoutePage(action.payload.pathname);
       const filter = page === PAGE.RANKING ? defaultRankingFilter : {};
@@ -55,6 +58,22 @@ export default function reducer(state = initState, action: AnyAction) {
 
       return { ...state, page, filter, category };
     }
+
+    /**
+     * 更新filter
+     */
+    case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
+    case ACTIONS.GET_RANKING_ILLUST_END: {
+      const illusts: IllustModel[] = action.data;
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          start: state.filter.start + illusts.length,
+        },
+      };
+    }
+
     default:
       return state;
   }

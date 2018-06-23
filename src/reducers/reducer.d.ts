@@ -9,7 +9,7 @@ interface AppState {
   /**
    * 当前筛选条件
    */
-  filter: RankingIllustParams | {};
+  filter: RankingIllustParams;
   /**
    * 当前插画分类
    */

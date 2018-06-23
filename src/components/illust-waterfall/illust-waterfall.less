@@ -4,4 +4,23 @@
 
   height: ~'calc(100% - 0.2rem)';
   padding: .1rem;
+
+  .waterfall-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: .2rem;
+    margin: .2rem auto;
+
+    color: #121212;
+
+    .g-icon {
+      margin-right: .1rem;
+
+      &.icon-loading {
+        animation: loader-icon-rotate 2.2s linear infinite;
+      }
+    }
+  }
 }

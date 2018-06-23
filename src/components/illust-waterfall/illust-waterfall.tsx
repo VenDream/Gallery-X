@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-23
  */
 
 import React, { Component } from 'react';
@@ -25,8 +25,26 @@ interface IllustWaterfallProps {
     filter: RankingIllustParams
   ) => Promise<void>;
 }
-
 interface IllustWaterfallState {}
+
+const LOADERS = [
+  {},
+  {
+    text: '数据加载中...',
+    className: 'loading',
+    iconClass: 'icon-loading',
+  },
+  {
+    text: '加载失败',
+    className: 'fail',
+    iconClass: 'icon-fail',
+  },
+  {
+    text: '数据加载完毕',
+    className: 'end',
+    iconClass: 'icon-info',
+  },
+];
 
 export default class IllustWaterfall extends Component<
   IllustWaterfallProps,
@@ -58,12 +76,10 @@ export default class IllustWaterfall extends Component<
     const scroller = this.scrollerRef.current;
     if (!scroller || !loader) return;
 
-    console.log(filter);
-
     // 更新筛选条件
     const newFilter = {
       ...filter,
-      start: +filter.start + this.loaderStep,
+      start: filter.start,
       step: this.loaderStep,
     };
 
@@ -92,16 +108,18 @@ export default class IllustWaterfall extends Component<
   // 渲染底部加载状态
   renderLoader() {
     const { status } = this.props;
-    const classNames = ['', 'loading', 'fail', 'end'];
-    const contents = ['', '加载中...', '加载失败', '没有更多的数据了'];
-
-    const statusClass = classNames[status] || '';
-    const loaderClass = classnames('waterfall-loader', statusClass);
-    const statusContent = contents[status] || '';
+    const loader = LOADERS[status];
+    const iconClass = classnames('g-icon', loader.iconClass);
+    const loaderClass = classnames('waterfall-loader', loader.className);
 
     return (
       <div className={loaderClass} ref={this.loaderRef}>
-        {statusContent}
+        {loader.text ? (
+          <React.Fragment>
+            <i className={iconClass} />
+            <span className="loader-text">{loader.text}</span>
+          </React.Fragment>
+        ) : null}
       </div>
     );
   }
