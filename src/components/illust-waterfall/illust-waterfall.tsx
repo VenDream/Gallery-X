@@ -79,7 +79,6 @@ export default class IllustWaterfall extends Component<
     // 更新筛选条件
     const newFilter = {
       ...filter,
-      start: filter.start,
       step: this.loaderStep,
     };
 
