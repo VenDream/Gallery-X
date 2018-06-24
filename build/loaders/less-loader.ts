@@ -12,7 +12,7 @@ export default function loader(isDev: boolean) {
     test: /\.less$/,
     use: [
       {
-        loader: isDev ? MiniCssExtractPlugin.loader : 'style-loader',
+        loader: MiniCssExtractPlugin.loader,
       },
       {
         loader: 'css-loader',

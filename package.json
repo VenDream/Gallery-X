@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "npm run build && parcel build index.html --public-url /",
+    "build": "cross-env NODE_ENV=production webpack",
     "clean": "rm -rf .cache & rm -rf dist",
     "tslint": "tslint -c tslint.json -p . --fix",
     "precommit": "lint-staged",
@@ -47,6 +47,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-1": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",

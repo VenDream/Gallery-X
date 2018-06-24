@@ -1,12 +1,13 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-6-23
+ * @since 2018-6-24
  */
 
 import path from 'path';
 import webpack from 'webpack';
 import generateDefaultRules from './loaders';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /**
@@ -74,7 +75,7 @@ export default (
             historyApiFallback: true,
             ...configs.devServer,
           }
-        : false,
+        : {},
       /**
        * 入口模块
        */
@@ -84,7 +85,7 @@ export default (
        */
       output: {
         path: configs.distDir,
-        filename: `[name]${isDev ? '' : '.[chunkhash]'}.js`,
+        filename: `[name]${isDev ? '' : '.[chunkhash:10]'}.js`,
         publicPath: configs.publicPath || '/',
         sourceMapFilename: '[name].map',
       },
@@ -138,6 +139,9 @@ export default (
               }),
             ]
           : [
+              new CleanWebpackPlugin([configs.distDir], {
+                root: configs.context,
+              }),
               new MiniCssExtractPlugin({
                 filename: '[name].[contenthash:10].css',
               }),

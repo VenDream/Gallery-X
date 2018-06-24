@@ -1,7 +1,7 @@
 /**
  * 底部导航栏
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-24
  */
 
 import React, { Component, MouseEventHandler } from 'react';
@@ -21,11 +21,6 @@ export default class BottomBar extends Component<BottomBarProps> {
   componentDidMount() {
     // 全局底部栏加载时，隐藏所有消息提示
     Message.hide();
-  }
-
-  componentWillUnmount() {
-    // 全局底部栏卸载时，提示退出登录
-    Message.show({ type: 2, message: '你已退出登陆' });
   }
 
   handleRoute = (path: string) => {
