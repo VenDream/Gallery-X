@@ -1,7 +1,7 @@
 /**
  * 我的资料组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-26
  */
 
 import React, { Component } from 'react';
@@ -33,7 +33,7 @@ export default class Profile extends Component<ProfileProps> {
     const { profileImageUrls } = user;
 
     return (
-      <div className="profile">
+      <div className="page profile">
         <div className="profile-header">
           <Image
             src={profileImageUrls.px_170x170}

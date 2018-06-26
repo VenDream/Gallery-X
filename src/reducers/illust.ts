@@ -1,29 +1,51 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-26
  */
 
 import { AnyAction } from 'redux';
 import ACTIONS from 'constants/actions';
+import CATEGORY from 'constants/category';
+import { defaultRankingFilter, defaultSearchFilter } from './filter';
 
-// 扁平化的illust状态
 const initState: IllustState = {
   byId: {},
   ids: [],
   activeId: '',
   status: 0,
+  rankingFilter: defaultRankingFilter,
+  searchFilter: defaultSearchFilter,
 };
 
 /**
- * 获取扩展后的插画数据对象
+ * 获取更新后的filter
  *
- * @param {IllustModel[]} illusts 插画数据集
+ * @param {string} category 当前插画分类
+ * @param {IllustState} state 插画state
+ * @param {number} offset 偏移量
  */
-function getExtendedIllusts(
-  illusts: IllustModel[],
-  state: Record<string, any>
+function getUpdatedFilter(
+  category: string,
+  state: IllustState,
+  offset: number
 ) {
+  const filter =
+    category === CATEGORY.RANKING ? state.rankingFilter : state.searchFilter;
+  return {
+    ...filter,
+    start: filter.start + offset,
+  };
+}
+
+/**
+ * 获取更新后的illusts
+ *
+ * @param {IllustModel[]} illusts 传入的illusts
+ * @param {IllustState} state 插画state
+ * @returns
+ */
+function getUpdatedIllusts(illusts: IllustModel[], state: IllustState) {
   const ids = [];
   const byId = {};
   for (const illust of illusts) {
@@ -38,19 +60,45 @@ export default function reducer(state = initState, action: AnyAction) {
     case ACTIONS.LOCATION_CHANGE: {
       return initState;
     }
-    case ACTIONS.GET_RANKING_ILLUST_ING: {
+
+    // 正在获取
+    case ACTIONS.GET_RANKING_ILLUST_ING:
+    case ACTIONS.GET_SEARCH_ILLUST_ING: {
       return { ...state, status: 1 };
     }
-    case ACTIONS.GET_RANKING_ILLUST_FAIL: {
+
+    // 获取失败
+    case ACTIONS.GET_RANKING_ILLUST_FAIL:
+    case ACTIONS.GET_SEARCH_ILLUST_FAIL: {
       return { ...state, status: 2 };
     }
-    case ACTIONS.GET_RANKING_ILLUST_SUCCESS: {
-      const extendedIllusts = getExtendedIllusts(action.data, state);
-      return { ...state, ...extendedIllusts, status: 0 };
+
+    // 获取成功
+    case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
+    case ACTIONS.GET_SEARCH_ILLUST_SUCCESS: {
+      const { category, illusts } = action.data;
+      const updatedFilter = getUpdatedFilter(category, state, illusts.length);
+      const updatedIllusts = getUpdatedIllusts(illusts, state);
+      return {
+        ...state,
+        ...updatedIllusts,
+        rankingFilter: updatedFilter,
+        status: 0,
+      };
     }
-    case ACTIONS.GET_RANKING_ILLUST_END: {
-      const extendedIllusts = getExtendedIllusts(action.data, state);
-      return { ...state, ...extendedIllusts, status: 3 };
+
+    // 获取完毕
+    case ACTIONS.GET_RANKING_ILLUST_END:
+    case ACTIONS.GET_SEARCH_ILLUST_END: {
+      const { category, illusts } = action.data;
+      const updatedFilter = getUpdatedFilter(category, state, illusts.length);
+      const updatedIllusts = getUpdatedIllusts(illusts, state);
+      return {
+        ...state,
+        ...updatedIllusts,
+        searchFilter: updatedFilter,
+        status: 3,
+      };
     }
     default:
       return state;

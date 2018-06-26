@@ -1,7 +1,7 @@
 /**
  * 提示消息定义
  * @author VenDream
- * @since 2018-5-8
+ * @since 2018-6-26
  */
 
 export default {
@@ -13,4 +13,6 @@ export default {
   LOGOUT_FAILED: '登出失败，请重试',
   // 获取插画排行榜
   GET_RANKING_ILLUSTS_FAILED: '获取排行榜数据失败，请重试',
+  // 获取插画搜索结果
+  GET_SEARCH_ILLUSTS_FAILED: '获取搜索结果失败，请重试',
 };

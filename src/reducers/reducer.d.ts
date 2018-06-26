@@ -7,10 +7,6 @@ interface AppState {
    */
   page: string;
   /**
-   * 当前筛选条件
-   */
-  filter: RankingIllustParams;
-  /**
    * 当前插画分类
    */
   category: string;
@@ -55,6 +51,14 @@ interface IllustState {
    * 状态 0: 就绪，1: 加载中，2: 加载失败 3: 加载完毕
    */
   status: number;
+  /**
+   * 排行榜筛选参数
+   */
+  rankingFilter: RankingFilter;
+  /**
+   * 搜索参数
+   */
+  searchFilter: SearchFilter;
 }
 
 /**

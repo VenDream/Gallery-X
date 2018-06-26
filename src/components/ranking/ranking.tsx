@@ -1,7 +1,7 @@
 /**
  * 排行榜页面组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-26
  */
 
 import React, { Component } from 'react';
@@ -17,6 +17,6 @@ export default class Ranking extends Component<RankingProps> {
   }
 
   render() {
-    return <div className="ranking">{this.renderIllustWaterfall()}</div>;
+    return <div className="page ranking">{this.renderIllustWaterfall()}</div>;
   }
 }

@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-23
+ * @since 2018-6-26
  */
 
 import React, { Component } from 'react';
@@ -14,7 +14,7 @@ import IllustItem from './illust-item';
 import './illust-waterfall.less';
 
 interface IllustWaterfallProps {
-  filter: RankingIllustParams;
+  filter: RankingFilter | SearchFilter;
   category: string;
   status: number;
   illusts: IllustModel[];
@@ -22,7 +22,7 @@ interface IllustWaterfallProps {
   gutter?: number;
   fetchIllustData: (
     category: string,
-    filter: RankingIllustParams
+    filter: RankingFilter | SearchFilter
   ) => Promise<void>;
 }
 interface IllustWaterfallState {}
@@ -35,7 +35,7 @@ const LOADERS = [
     iconClass: 'icon-loading',
   },
   {
-    text: '加载失败',
+    text: '加载失败，请重试',
     className: 'fail',
     iconClass: 'icon-fail',
   },

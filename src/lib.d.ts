@@ -1,7 +1,7 @@
 /**
  * 应用全局类型声明
  * @author VenDream
- * @since 2018-6-7
+ * @since 2018-6-26
  */
 
 /// <reference path="./actions/actions.d.ts" />
@@ -144,4 +144,74 @@ interface IllustModel {
      */
     original: string;
   }>;
+}
+
+// Pixiv排行榜筛选参数
+interface RankingFilter {
+  /**
+   * 模式，按照日期，性取向和类型进行组合
+   */
+  mode:
+    | 'day'
+    | 'week'
+    | 'month'
+    | 'day_male'
+    | 'day_female'
+    | 'week_original'
+    | 'week_rookie'
+    | 'day_r18'
+    | 'day_male_r18'
+    | 'day_female_r18'
+    | 'week_r18'
+    | 'week_r18g'
+    | 'day_manga'
+    | 'week_manga'
+    | 'month_manga'
+    | 'week_rookie_manga'
+    | 'day_r18_manga'
+    | 'week_r18_manga'
+    | 'week_r18g_manga';
+  /**
+   * 日期，当模式组合为day前缀时生效
+   */
+  date: string;
+  /**
+   * 开始位置
+   */
+  start?: number;
+  /**
+   * 分页大小
+   */
+  step?: number;
+}
+
+// Pixiv搜索筛选参数
+interface SearchFilter {
+  /**
+   * 搜索关键词
+   */
+  word: string;
+  /**
+   * 结果排序，从新到旧或从旧到新
+   */
+  sort?: 'date_desc' | 'date_asc';
+  /**
+   * 匹配规则，分为模糊匹配，精确匹配和标题描述
+   */
+  target?:
+    | 'partial_match_for_tags'
+    | 'exact_match_for_tags'
+    | 'title_and_caption';
+  /**
+   * 搜索日期范围，日周月
+   */
+  duration?: 'within_last_day' | 'within_last_week' | 'within_last_month';
+  /**
+   * 开始位置
+   */
+  start?: number;
+  /**
+   * 分页大小
+   */
+  step?: number;
 }
