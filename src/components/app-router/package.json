@@ -1,5 +1,5 @@
 {
-  "name": "app-router",
+  "name": "cmp-app-router",
   "version": "1.0.0",
   "description": "应用路由控制器",
   "main": "./app-router.tsx",

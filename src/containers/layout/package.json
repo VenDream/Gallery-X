@@ -1,5 +1,5 @@
 {
-  "name": "layout",
+  "name": "container-layout",
   "version": "1.0.0",
   "description": "应用布局容器组件",
   "main": "./layout.tsx",

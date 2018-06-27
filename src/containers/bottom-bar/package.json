@@ -1,5 +1,5 @@
 {
-  "name": "bottom-bar",
+  "name": "container-bottom-bar",
   "version": "1.0.0",
   "description": "底部导航栏容器组件",
   "main": "./bottom-bar.tsx",

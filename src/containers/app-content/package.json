@@ -1,5 +1,5 @@
 {
-  "name": "app-content",
+  "name": "container-app-content",
   "version": "1.0.0",
   "description": "应用内容容器组件",
   "main": "./app-content.tsx",

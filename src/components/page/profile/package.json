@@ -1,5 +1,5 @@
 {
-  "name": "profile",
+  "name": "cmp-profile",
   "version": "1.0.0",
   "description": "我的资料组件",
   "main": "./profile.tsx",

@@ -1,5 +1,5 @@
 {
-  "name": "ranking",
+  "name": "cmp-ranking",
   "version": "1.0.0",
   "description": "排行榜页面组件",
   "main": "./ranking.tsx",

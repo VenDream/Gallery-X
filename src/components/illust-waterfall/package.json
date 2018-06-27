@@ -1,5 +1,5 @@
 {
-  "name": "illust-waterfall",
+  "name": "cmp-illust-waterfall",
   "version": "1.0.0",
   "description": "插画瀑布流组件",
   "main": "./illust-waterfall.tsx",

@@ -1,5 +1,5 @@
 {
-  "name": "layout",
+  "name": "cmp-layout",
   "version": "1.0.0",
   "description": "应用布局视图组件",
   "main": "./layout.tsx",

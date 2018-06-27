@@ -1,5 +1,5 @@
 {
-  "name": "home",
+  "name": "cmp-home",
   "version": "1.0.0",
   "description": "应用首页",
   "main": "./home.tsx",

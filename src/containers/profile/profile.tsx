@@ -6,7 +6,7 @@
 
 import { connect } from 'react-redux';
 
-import Profile from 'components/profile/profile';
+import Profile from 'components/page/profile';
 import { logout } from 'actions/user';
 
 function mapStateToProps(state: StoreState) {

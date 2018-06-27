@@ -1,5 +1,5 @@
 {
-  "name": "app-loader",
+  "name": "cmp-app-loader",
   "version": "1.0.0",
   "description": "应用初始化加载蒙层",
   "main": "./app-loader.tsx",

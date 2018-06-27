@@ -6,7 +6,7 @@
 
 import { connect } from 'react-redux';
 
-import LoginBox from 'components/login-box/login-box';
+import LoginBox from 'components/login-box';
 import { login } from 'actions/user';
 
 function mapStateToProps(state: StoreState) {

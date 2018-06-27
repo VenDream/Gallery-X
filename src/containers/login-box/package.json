@@ -1,5 +1,5 @@
 {
-  "name": "login-box",
+  "name": "container-login-box",
   "version": "1.0.0",
   "description": "登陆容器组件",
   "main": "./login-box.tsx",

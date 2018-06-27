@@ -1,5 +1,5 @@
 {
-  "name": "profile",
+  "name": "container-profile",
   "version": "1.0.0",
   "description": "profile容器组件",
   "main": "./profile.tsx",
