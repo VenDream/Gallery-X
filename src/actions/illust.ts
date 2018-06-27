@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-27
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -11,6 +11,18 @@ import ACTIONS from 'constants/actions';
 import MESSAGE from 'constants/message';
 import CATEGORY from 'constants/category';
 import Message from 'components/common/message';
+
+/**
+ * 更新排行榜筛选条件
+ *
+ * @export
+ * @param {Record<string, any>} patch 更新项
+ */
+export function updateRankingFilter(patch: Record<string, any>) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.UPDATE_RANKING_FILTER, data: { filter: patch } });
+  };
+}
 
 /**
  * 获取插画排行榜
@@ -47,14 +59,28 @@ export function getRankingIllusts(opts?: RankingFilter) {
 }
 
 /**
+ * 更新搜索参数
+ *
+ * @export
+ * @param {Record<string, any>} patch 更新项
+ * @returns
+ */
+export function updateSearchFilter(patch: Record<string, any>) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.UPDATE_SEARCH_FILTER, data: { filter: patch } });
+  };
+}
+
+/**
  * 获取插画搜索结果
  *
  * @export
- * @param {SearchFilter} [opts] 查询参数
+ * @param {SearchFilter} opts 查询参数
  * @returns
  */
-export function getSearchIllusts(opts?: SearchFilter) {
+export function getSearchIllusts(opts: SearchFilter) {
   return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    if (!opts.word) return;
     try {
       // 请求数据中
       dispatch({ type: ACTIONS.GET_SEARCH_ILLUST_ING });

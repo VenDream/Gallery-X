@@ -1,12 +1,12 @@
 /**
  * 排行榜页面组件
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-27
  */
 
 import React, { Component } from 'react';
 
-import IllustWaterfall from 'containers/illust-waterfall/illust-waterfall';
+import IllustWaterfall from 'containers/illust-waterfall';
 import './ranking.less';
 
 interface RankingProps {}

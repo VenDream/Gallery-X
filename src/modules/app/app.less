@@ -2,6 +2,8 @@
 @import '~assets/styles/animation.less';
 
 :root {
+  box-sizing: border-box;
+
   text-shadow: @g-text-shadow;
 
   font-family: @font-family;
@@ -24,4 +26,16 @@ html, body {
 
     -webkit-tap-highlight-color: transparent;
   }
+
+  &, & *, & *:before, & *:after {
+    box-sizing: inherit;
+  }
+}
+
+input, button {
+  border: 0.01rem solid #aaa;
+  border-radius: 0;
+  outline: none;
+
+  appearance: none;
 }

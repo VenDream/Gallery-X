@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import isEqual from 'lodash.isequal';
 
 import { checkInViewport } from 'utils/common';
 import throttle from 'utils/throttle';
@@ -53,9 +54,9 @@ export default class IllustWaterfall extends Component<
   // 每次加载数据的数量
   loaderStep: number = 30;
   // 滚动容器的ref
-  scrollerRef: React.RefObject<HTMLDivElement> | null = React.createRef();
+  scrollerRef: React.RefObject<HTMLDivElement> = React.createRef();
   // 加载器的ref
-  loaderRef: React.RefObject<HTMLDivElement> | null = React.createRef();
+  loaderRef: React.RefObject<HTMLDivElement> = React.createRef();
   // throttle化的滚动加载处理
   handleScrollLoading: () => void = throttle(
     this.loadMoreIllusts.bind(this),
@@ -63,9 +64,21 @@ export default class IllustWaterfall extends Component<
   );
 
   componentDidMount() {
-    // 加载第一页数据
+    // 获取第一页数据
     const { filter, category, fetchIllustData } = this.props;
     fetchIllustData(category, filter);
+  }
+
+  componentWillReceiveProps(nextProps: IllustWaterfallProps) {
+    const { start: nextStart, ...nextFilter } = nextProps.filter;
+    const { category, filter } = this.props;
+    const { start: thisStart, ...thisFilter } = filter;
+
+    // 筛选条件变更时，重新请求数据
+    if (!isEqual(nextFilter, thisFilter)) {
+      console.log('筛选条件变更，重新请求数据');
+      this.props.fetchIllustData(category, nextFilter);
+    }
   }
 
   // 加载更多插画数据
@@ -115,7 +128,7 @@ export default class IllustWaterfall extends Component<
       <div className={loaderClass} ref={this.loaderRef}>
         {loader.text ? (
           <React.Fragment>
-            <span className="loader-icon rotate">
+            <span className={`loader-icon ${status === 1 ? 'rotate' : ''}`}>
               <i className={iconClass} />
             </span>
             <span className="loader-text">{loader.text}</span>

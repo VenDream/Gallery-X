@@ -1,0 +1,39 @@
+@import '~assets/styles/color.less';
+@import '~assets/styles/variable.less';
+
+.search-box {
+  z-index: 9;
+
+  width: 100%;
+  padding: 0.15rem 0.2rem;
+
+  text-align: center;
+
+  background-color: @theme-blue;
+  box-shadow: 0 0 0.01rem @theme-blue;
+
+  .search-input {
+    position: relative;
+
+    width: 100%;
+    margin: 0 auto;
+
+    text-align: center;
+
+    .icon-search {
+      position: absolute;
+      top: 0.05rem;
+      left: 0.1rem;
+
+      font-size: 0.2rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.06rem 0.1rem 0.06rem 0.36rem;
+
+      border: 0.01rem solid @white;
+      border-radius: 0.2rem;
+    }
+  }
+}

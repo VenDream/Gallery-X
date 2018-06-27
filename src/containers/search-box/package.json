@@ -1,0 +1,7 @@
+{
+  "name": "container-search-box",
+  "version": "1.0.0",
+  "description": "搜索框容器组件",
+  "main": "./search-box.tsx",
+  "types": "./search-box.tsx"
+}

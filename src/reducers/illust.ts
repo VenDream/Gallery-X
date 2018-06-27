@@ -1,7 +1,7 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-27
  */
 
 import { AnyAction } from 'redux';
@@ -98,6 +98,28 @@ export default function reducer(state = initState, action: AnyAction) {
         ...updatedIllusts,
         searchFilter: updatedFilter,
         status: 3,
+      };
+    }
+
+    // 更新筛选条件
+    case ACTIONS.UPDATE_RANKING_FILTER: {
+      const { filter } = action.data;
+      return {
+        ...initState,
+        rankingFilter: {
+          ...state.rankingFilter,
+          ...filter,
+        },
+      };
+    }
+    case ACTIONS.UPDATE_SEARCH_FILTER: {
+      const { filter } = action.data;
+      return {
+        ...initState,
+        searchFilter: {
+          ...state.searchFilter,
+          ...filter,
+        },
       };
     }
     default:

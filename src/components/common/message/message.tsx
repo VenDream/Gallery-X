@@ -1,7 +1,7 @@
 /**
  * 消息提示组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-27
  */
 
 import React, { Component } from 'react';
@@ -112,7 +112,9 @@ export class Message extends Component<MessageProps> {
         onClick={this.destroy}
       >
         <div className="msg-box" style={style}>
-          {showIcon && <i className={classnames('g-icon', icon)} />}
+          {showIcon && (
+            <i className={classnames('g-icon', icon, { rotate: type === 0 })} />
+          )}
           {message && <p className="msg-content">{message}</p>}
         </div>
       </div>

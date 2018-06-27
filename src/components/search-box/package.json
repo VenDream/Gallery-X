@@ -1,0 +1,7 @@
+{
+  "name": "cmp-search-box",
+  "version": "1.0.0",
+  "description": "搜索框组件",
+  "main": "./search-box.tsx",
+  "types": "./search-box.tsx"
+}

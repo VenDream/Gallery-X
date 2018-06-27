@@ -1,7 +1,7 @@
 /**
  * 瀑布流组件（绝对定位实现)
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-6-27
  */
 
 import React, { Component } from 'react';
@@ -75,9 +75,9 @@ export default class Waterfall extends Component<WaterfallProps> {
   };
 
   // 根节点
-  root: React.RefObject<HTMLDivElement> | null = React.createRef();
+  root: React.RefObject<HTMLDivElement> = React.createRef();
   // grid节点
-  grid: React.RefObject<HTMLDivElement> | null = React.createRef();
+  grid: React.RefObject<HTMLDivElement> = React.createRef();
   // grid节点宽度
   gridWidth: number = 0;
   // 瀑布流对象

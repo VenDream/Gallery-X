@@ -11,8 +11,8 @@ import PAGE from 'constants/page';
 import RouterMap from 'constants/routers';
 import Home from 'components/page/home';
 import Ranking from 'components/page/ranking';
-import Search from 'components/page/search';
-import Profile from 'containers/profile';
+import Search from 'containers/page/search';
+import Profile from 'containers/page/profile';
 
 export default () => (
   <div className="app-router">
