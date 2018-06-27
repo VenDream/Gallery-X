@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-27
  */
 
 import React, { Component } from 'react';
@@ -115,7 +115,9 @@ export default class IllustWaterfall extends Component<
       <div className={loaderClass} ref={this.loaderRef}>
         {loader.text ? (
           <React.Fragment>
-            <i className={iconClass} />
+            <span className="loader-icon rotate">
+              <i className={iconClass} />
+            </span>
             <span className="loader-text">{loader.text}</span>
           </React.Fragment>
         ) : null}
