@@ -1,3 +1,6 @@
+import path from 'path';
+const tscConfig = require(path.resolve(__dirname, '../../', 'tsconfig.json'));
+
 /**
  * ts加载规则
  *
@@ -21,6 +24,7 @@ export default function loader(isDev: boolean) {
         options: {
           transpileOnly: true,
           compilerOptions: {
+            ...tscConfig.compilerOptions,
             module: 'es2015',
           },
         },

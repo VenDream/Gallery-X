@@ -1,7 +1,7 @@
 /**
  * 应用全局类型声明
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-28
  */
 
 /// <reference path="./actions/actions.d.ts" />
@@ -206,6 +206,14 @@ interface SearchFilter {
    * 搜索日期范围，日周月
    */
   duration?: 'within_last_day' | 'within_last_week' | 'within_last_month';
+  /**
+   * 起始日期(YYYY-MM-DD)
+   */
+  startDate?: string;
+  /**
+   * 终止日期(YYYY-MM-DD)
+   */
+  endDate?: string;
   /**
    * 开始位置
    */

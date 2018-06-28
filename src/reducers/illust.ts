@@ -1,7 +1,7 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-6-28
  */
 
 import { AnyAction } from 'redux';
@@ -21,17 +21,17 @@ const initState: IllustState = {
 /**
  * 获取更新后的filter
  *
- * @param {string} category 当前插画分类
- * @param {IllustState} state 插画state
+ * @param {('rankingFilter' | 'searchFilter')} filterName filter名称
+ * @param {IllustState} state state
  * @param {number} offset 偏移量
+ * @returns
  */
 function getUpdatedFilter(
-  category: string,
+  filterName: 'rankingFilter' | 'searchFilter',
   state: IllustState,
   offset: number
 ) {
-  const filter =
-    category === CATEGORY.RANKING ? state.rankingFilter : state.searchFilter;
+  const filter = state[filterName];
   return {
     ...filter,
     start: filter.start + offset,
@@ -77,12 +77,14 @@ export default function reducer(state = initState, action: AnyAction) {
     case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
     case ACTIONS.GET_SEARCH_ILLUST_SUCCESS: {
       const { category, illusts } = action.data;
-      const updatedFilter = getUpdatedFilter(category, state, illusts.length);
+      const filterName =
+        category === CATEGORY.RANKING ? 'rankingFilter' : 'searchFilter';
+      const updatedFilter = getUpdatedFilter(filterName, state, illusts.length);
       const updatedIllusts = getUpdatedIllusts(illusts, state);
       return {
         ...state,
         ...updatedIllusts,
-        rankingFilter: updatedFilter,
+        [filterName]: updatedFilter,
         status: 0,
       };
     }
@@ -91,12 +93,14 @@ export default function reducer(state = initState, action: AnyAction) {
     case ACTIONS.GET_RANKING_ILLUST_END:
     case ACTIONS.GET_SEARCH_ILLUST_END: {
       const { category, illusts } = action.data;
-      const updatedFilter = getUpdatedFilter(category, state, illusts.length);
+      const filterName =
+        category === CATEGORY.RANKING ? 'rankingFilter' : 'searchFilter';
+      const updatedFilter = getUpdatedFilter(filterName, state, illusts.length);
       const updatedIllusts = getUpdatedIllusts(illusts, state);
       return {
         ...state,
         ...updatedIllusts,
-        searchFilter: updatedFilter,
+        [filterName]: updatedFilter,
         status: 3,
       };
     }

@@ -1,7 +1,7 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2018-6-23
+ * @since 2018-6-28
  */
 
 import path from 'path';
@@ -38,5 +38,6 @@ export default WebpackConfig(() => {
     devServer: {
       host: '172.16.13.11',
     },
+    sourcemapMode: 'cheap-module-eval-source-map',
   };
 });

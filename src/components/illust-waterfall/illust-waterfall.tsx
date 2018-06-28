@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-6-28
  */
 
 import React, { Component } from 'react';
@@ -15,6 +15,7 @@ import IllustItem from './illust-item';
 import './illust-waterfall.less';
 
 interface IllustWaterfallProps {
+  step: number;
   filter: RankingFilter | SearchFilter;
   category: string;
   status: number;
@@ -52,7 +53,7 @@ export default class IllustWaterfall extends Component<
   IllustWaterfallState
 > {
   // 每次加载数据的数量
-  loaderStep: number = 30;
+  loaderStep: number = 0;
   // 滚动容器的ref
   scrollerRef: React.RefObject<HTMLDivElement> = React.createRef();
   // 加载器的ref
@@ -62,6 +63,12 @@ export default class IllustWaterfall extends Component<
     this.loadMoreIllusts.bind(this),
     100
   );
+
+  constructor(props: IllustWaterfallProps) {
+    super(props);
+    // 设置step
+    this.loaderStep = props.step;
+  }
 
   componentDidMount() {
     // 获取第一页数据
@@ -76,8 +83,10 @@ export default class IllustWaterfall extends Component<
 
     // 筛选条件变更时，重新请求数据
     if (!isEqual(nextFilter, thisFilter)) {
-      console.log('筛选条件变更，重新请求数据');
-      this.props.fetchIllustData(category, nextFilter);
+      this.props.fetchIllustData(category, {
+        ...nextFilter,
+        start: 0,
+      });
     }
   }
 
@@ -139,14 +148,25 @@ export default class IllustWaterfall extends Component<
   }
 
   render() {
+    const { illusts, status } = this.props;
+    const isEmpty = status === 0 && !illusts.length;
+
     return (
       <div
         className="illust-waterfall"
         ref={this.scrollerRef}
         onScroll={this.handleScrollLoading}
       >
-        {this.renderIllustWaterfall()}
-        {this.renderLoader()}
+        {isEmpty ? (
+          <div className="empty">
+            <p className="tips">什么都木有Orz...</p>
+          </div>
+        ) : (
+          <React.Fragment>
+            {this.renderIllustWaterfall()}
+            {this.renderLoader()}
+          </React.Fragment>
+        )}
       </div>
     );
   }

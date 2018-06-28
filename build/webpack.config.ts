@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-6-24
+ * @since 2018-6-28
  */
 
 import path from 'path';
@@ -26,6 +26,10 @@ interface WebpackConfig {
    * 资源公共目录
    */
   publicPath?: string;
+  /**
+   * sourcemap方案
+   */
+  sourcemapMode?: webpack.Options.Devtool;
 }
 
 export default (
@@ -63,7 +67,7 @@ export default (
       /**
        * 调试工具，开发模式下输出sourcemap
        */
-      devtool: isDev ? 'source-map' : false,
+      devtool: isDev ? configs.sourcemapMode || 'source-map' : false,
       /**
        * 本地开发调试
        */

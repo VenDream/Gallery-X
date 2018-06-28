@@ -26,7 +26,6 @@ export const defaultSearchFilter = (() => {
     word: '',
     sort: 'date_desc',
     target: 'partial_match_for_tags',
-    duration: 'within_last_month',
     start: 0,
     step: 30,
   };

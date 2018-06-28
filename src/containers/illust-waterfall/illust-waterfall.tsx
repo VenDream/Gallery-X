@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-6-28
  */
 
 import { connect } from 'react-redux';
@@ -10,7 +10,10 @@ import CATEGORY from 'constants/category';
 import IllustWaterfall from 'components/illust-waterfall';
 import { getRankingIllusts, getSearchIllusts } from 'actions/illust';
 
-function mapStateToProps(state: StoreState) {
+// 默认每次加载30条数据
+const DEFAULT_LOADER_STEP = 30;
+
+function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const app = state.app;
   const illust = state.illust;
   const illusts = illust.ids.map(id => illust.byId[id]);
@@ -20,6 +23,7 @@ function mapStateToProps(state: StoreState) {
       : illust.searchFilter;
 
   return {
+    step: ownProps.step || DEFAULT_LOADER_STEP,
     filter,
     category: app.category,
     status: illust.status,

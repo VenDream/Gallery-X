@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-6-28
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -20,6 +20,8 @@ import Message from 'components/common/message';
  */
 export function updateRankingFilter(patch: Record<string, any>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    // 更换筛选条件时，start从0开始
+    patch.start = 0;
     dispatch({ type: ACTIONS.UPDATE_RANKING_FILTER, data: { filter: patch } });
   };
 }
@@ -67,6 +69,8 @@ export function getRankingIllusts(opts?: RankingFilter) {
  */
 export function updateSearchFilter(patch: Record<string, any>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    // 更换筛选条件时，start从0开始
+    patch.start = 0;
     dispatch({ type: ACTIONS.UPDATE_SEARCH_FILTER, data: { filter: patch } });
   };
 }
