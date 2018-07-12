@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-7-12
  */
 
 import React, { Component } from 'react';
@@ -10,6 +10,7 @@ import isEqual from 'lodash.isequal';
 
 import { checkInViewport } from 'utils/common';
 import throttle from 'utils/throttle';
+import Toper from 'components/common/toper';
 import Waterfall from 'components/common/waterfall';
 import IllustItem from './illust-item';
 import CATEGORY from 'constants/category';
@@ -185,6 +186,7 @@ export default class IllustWaterfall extends Component<
             {this.renderLoader()}
           </React.Fragment>
         )}
+        <Toper />
       </div>
     );
   }

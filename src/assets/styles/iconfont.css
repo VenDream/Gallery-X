@@ -27,12 +27,20 @@
   content: '\e609';
 }
 
+.icon-filter:before {
+  content: '\e734';
+}
+
 .icon-ranking:before {
   content: '\e68b';
 }
 
 .icon-success:before {
   content: '\e6b3';
+}
+
+.icon-top:before {
+  content: '\e615';
 }
 
 .icon-user:before {

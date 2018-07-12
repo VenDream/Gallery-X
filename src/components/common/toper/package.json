@@ -1,0 +1,7 @@
+{
+  "name": "toper",
+  "version": "1.0.0",
+  "description": "回到顶部组件",
+  "main": "./toper.tsx",
+  "types": "./toper.tsx"
+}
