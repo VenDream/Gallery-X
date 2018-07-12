@@ -1,3 +1,5 @@
+@import '~assets/styles/color.less';
+
 .illust-waterfall {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -14,6 +16,10 @@
     height: 100%;
   }
 
+  .g-waterfall {
+    min-height: 40%;
+  }
+
   .waterfall-loader {
     display: flex;
     align-items: center;
@@ -23,6 +29,31 @@
     margin: 0.2rem auto;
 
     color: #121212;
+
+    font-size: 0.14rem;
+
+    &.end {
+      color: @grey;
+    }
+    &.no-result {
+      text-align: center;
+      .loader-icon {
+        display: none;
+      }
+      .no-result-tips {
+        padding: 0 0.2rem;
+
+        text-align: left;
+        word-break: break-all;
+
+        line-height: 1.5;
+        .keyword {
+          color: @red;
+
+          font-weight: bold;
+        }
+      }
+    }
 
     .loader-icon {
       display: inline-flex;

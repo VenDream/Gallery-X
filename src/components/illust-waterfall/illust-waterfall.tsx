@@ -12,6 +12,7 @@ import { checkInViewport } from 'utils/common';
 import throttle from 'utils/throttle';
 import Waterfall from 'components/common/waterfall';
 import IllustItem from './illust-item';
+import CATEGORY from 'constants/category';
 import './illust-waterfall.less';
 
 interface IllustWaterfallProps {
@@ -128,10 +129,15 @@ export default class IllustWaterfall extends Component<
 
   // 渲染底部加载状态
   renderLoader() {
-    const { status } = this.props;
+    const { status, filter, category } = this.props;
+    // 是否搜索不到任何结果
+    const isNoSearchResult =
+      category === CATEGORY.SEARCH && filter.start === 0 && status === 3;
     const loader = LOADERS[status];
     const iconClass = classnames('g-icon', loader.iconClass);
-    const loaderClass = classnames('waterfall-loader', loader.className);
+    const loaderClass = classnames('waterfall-loader', loader.className, {
+      'no-result': isNoSearchResult,
+    });
 
     return (
       <div className={loaderClass} ref={this.loaderRef}>
@@ -140,7 +146,19 @@ export default class IllustWaterfall extends Component<
             <span className={`loader-icon ${status === 1 ? 'rotate' : ''}`}>
               <i className={iconClass} />
             </span>
-            <span className="loader-text">{loader.text}</span>
+            <span className="loader-text">
+              {isNoSearchResult ? (
+                <div className="no-result-tips">
+                  没有找到关于&nbsp;
+                  <span className="keyword">
+                    "{(filter as SearchFilter).word}"
+                  </span>
+                  &nbsp;的结果
+                </div>
+              ) : (
+                loader.text
+              )}
+            </span>
           </React.Fragment>
         ) : null}
       </div>
