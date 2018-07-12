@@ -1,10 +1,12 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-7-12
  */
 
+import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 import CATEGORY from 'constants/category';
 import IllustWaterfall from 'components/illust-waterfall';
@@ -31,7 +33,9 @@ function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(
+  dispatch: ThunkDispatch<StoreState, {}, AnyAction>
+) {
   return {
     // 获取插画数据（排行榜or搜索结果）
     fetchIllustData: (

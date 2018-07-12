@@ -1,10 +1,12 @@
 /**
  * profile容器组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-7-12
  */
 
+import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 import Profile from 'components/page/profile';
 import { logout } from 'actions/user';
@@ -15,7 +17,9 @@ function mapStateToProps(state: StoreState) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(
+  dispatch: ThunkDispatch<StoreState, {}, AnyAction>
+) {
   return {
     logout: () => dispatch(logout()),
   };

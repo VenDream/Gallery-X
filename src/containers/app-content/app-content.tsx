@@ -1,10 +1,12 @@
 /**
  * 应用内容容器组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-7-12
  */
 
+import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { withRouter } from 'react-router-dom';
 
 import { getUserInfo } from 'actions/user';
@@ -20,7 +22,9 @@ function mapStateToProps(state: StoreState, ownProps: OwnProps) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(
+  dispatch: ThunkDispatch<StoreState, {}, AnyAction>
+) {
   return {
     getUserInfo: () => dispatch(getUserInfo()),
     hideAppLoader: () => {

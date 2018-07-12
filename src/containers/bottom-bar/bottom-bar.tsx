@@ -1,10 +1,12 @@
 /**
  * 底部导航栏组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-7-12
  */
 
+import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 import BottomBar from 'components/bottom-bar';
 import { redirectTo } from 'actions/router';
@@ -17,7 +19,9 @@ function mapStateToProps(state: StoreState & { router: RouterState }) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(
+  dispatch: ThunkDispatch<StoreState, {}, AnyAction>
+) {
   return {
     redirectTo: (path: string) => dispatch(redirectTo(path)),
   };
