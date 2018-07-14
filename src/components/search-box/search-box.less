@@ -2,18 +2,32 @@
 @import '~assets/styles/variable.less';
 
 .search-box {
-  width: 100%;
-  padding: 0.15rem 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  text-align: center;
+  width: 100%;
+  height: 0.6rem;
+  padding: 0.15rem 0.2rem;
 
   background-color: @theme-black;
   box-shadow: 0 0 0.01rem @theme-black;
 
-  .search-input {
-    position: relative;
+  .search-filter-mask {
+    position: fixed;
+    top: 0.6rem;
+    left: 0;
 
     width: 100%;
+    height: ~'calc(100% - 1rem)';
+
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .search-filter-input {
+    position: relative;
+
+    width: 90%;
     height: 0.3rem;
     margin: 0 auto;
 
@@ -35,5 +49,20 @@
       border: 0.01rem solid @white;
       border-radius: 0.2rem;
     }
+  }
+  .search-filter-btn {
+    margin-left: 0.1rem;
+
+    cursor: pointer;
+
+    color: @white;
+
+    font-size: 0.3rem;
+  }
+}
+
+@keyframes open-mask {
+  0% {
+    opacity: 0;
   }
 }

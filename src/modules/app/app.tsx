@@ -13,6 +13,7 @@ import initReactFastclick from 'react-fastclick';
 
 import 'normalize.css';
 import 'assets/styles/iconfont.css';
+import 'assets/styles/scrollbar.less';
 import './app.less';
 
 import App from 'containers/app';

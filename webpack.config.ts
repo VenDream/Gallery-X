@@ -35,9 +35,6 @@ export default WebpackConfig(() => {
         path: getPath('./dist'),
       }),
     ],
-    devServer: {
-      host: '172.16.13.11',
-    },
     sourcemapMode: 'cheap-module-eval-source-map',
   };
 });
