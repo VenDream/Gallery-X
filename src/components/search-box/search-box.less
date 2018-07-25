@@ -33,6 +33,8 @@
 
     text-align: center;
 
+    color: #333;
+
     .icon-search {
       position: absolute;
       top: 0.04rem;
@@ -48,6 +50,13 @@
 
       border: 0.01rem solid @white;
       border-radius: 0.2rem;
+
+      &:read-only {
+        cursor: not-allowed;
+
+        border-color: #aaa;
+        background-color: #aaa;
+      }
     }
   }
   .search-filter-btn {

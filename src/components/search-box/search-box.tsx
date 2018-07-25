@@ -61,12 +61,14 @@ export default class SearchBox extends Component<
 
   // 渲染输入框
   renderFilterInput() {
+    const { showFilterPanel } = this.state;
     return (
       <div className="search-filter-input">
         <i className="g-icon icon-search" />
         <input
           ref={this.inputRef}
           type="text"
+          readOnly={showFilterPanel}
           placeholder="输入关键字以进行搜索"
           onKeyDown={this.handleKeyDown}
         />
