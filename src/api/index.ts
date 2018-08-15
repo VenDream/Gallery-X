@@ -1,10 +1,12 @@
 /**
  * API接口定义
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-8-15
  */
 
-const API_HOST = 'http://43.239.159.171:8080';
+const globalConfig = window.__GALLERY_X_GLOBAL_CONFIG__;
+const isDevMode = process.env.NODE_ENV === 'development';
+const API_HOST = isDevMode ? '' : globalConfig.apiHost;
 const API_MAP = {
   LOGIN: 'login',
   LOGOUT: 'logout',
@@ -19,7 +21,6 @@ export default {
     if (!API_ITEM) {
       return null;
     }
-
     return `${API_HOST}/api/${API_ITEM}`;
   },
 };

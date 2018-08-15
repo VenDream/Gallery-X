@@ -1,50 +1,20 @@
 /**
  * 全局ajax公用方法
  * @author VenDream
- * @since 2018-7-25
+ * @since 2018-8-14
  */
 
-import 'whatwg-fetch';
 import qs from 'qs';
+import 'isomorphic-fetch';
+import ES6Promise from 'es6-promise';
 import deepExtend from 'deep-extend';
 import camelcaseKeys from 'camelcase-keys';
 
-type DATA_TYPE = 'text' | 'json';
-type METHOD = 'GET' | 'POST' | 'OPTION' | 'PUT';
-type CREDENTIALS = 'omit' | 'same-origin' | 'include';
-
-interface FetchOption {
-  /**
-   * 请求Method
-   */
-  method?: METHOD;
-  /**
-   * 请求数据
-   */
-  body?: Record<string, any> | string | null;
-  /**
-   * 请求头
-   */
-  headers?: Record<string, any>;
-  /**
-   * 认证模式，与cookies相关
-   *  omit => 不携带cookies
-   *  same-origin => 同源请求携带cookies，跨域请求不携带
-   *  include => 所有请求(包括跨域请求)均携带cookies
-   */
-  credentials?: CREDENTIALS;
-  /**
-   * 返回的数据类型
-   */
-  dataType?: DATA_TYPE;
-  /**
-   * 是否返回原始数据
-   */
-  raw?: boolean;
-}
+ES6Promise.polyfill();
 
 // 默认的请求参数
 const DEFAULT_OPTIONS: FetchOption = {
+  mode: 'cors',
   method: 'GET',
   body: null,
   headers: {
@@ -56,10 +26,11 @@ const DEFAULT_OPTIONS: FetchOption = {
 };
 
 /**
- * 通用的请求方法
+ * 通用请求方法
  *
- * @param {string} url 请求API链接
- * @param {FetchOption} options 请求参数
+ * @export
+ * @param {string} url 请求链接
+ * @param {FetchOption} [options] 请求参数
  * @returns
  */
 export function request(url: string, options?: FetchOption) {
@@ -67,7 +38,7 @@ export function request(url: string, options?: FetchOption) {
   const reqMethod = opt.method;
   const qsOpt = qs.stringify(opt.body);
 
-  if (reqMethod === 'GET') {
+  if (reqMethod === 'GET' && qsOpt) {
     // GET方法所有参数附在url上，body要置为null
     const linker = url.indexOf('?') > 0 ? '&' : '?';
     url += linker + qsOpt;
@@ -77,44 +48,36 @@ export function request(url: string, options?: FetchOption) {
     opt.body = qsOpt;
   }
 
-  return (window as any).fetch(url, opt).then(
-    async response => {
-      if (response.ok) {
-        if (opt.dataType === 'text') {
-          return response.text();
-        } else if (opt.dataType === 'json') {
-          let jsonRes: Record<string, any> = await response.json();
-
-          // 非raw模式下，判断code为200后直接返回data
-          if (!opt.raw && jsonRes.code === 200) {
-            jsonRes = jsonRes.data || {};
-          }
-
-          return typeof jsonRes === 'string'
-            ? jsonRes
-            : camelcaseKeys(jsonRes, { deep: true, exclude: [/_\d+/] });
-        }
-      } else {
-        const error: Record<string, any> = new Error(response.statusText);
-        error.response = response;
-        throw error;
+  const { raw, dataType, ...fetchOpt } = opt;
+  return window
+    .fetch(url, fetchOpt)
+    .then((response: Response) => response.json())
+    .then((res: Record<string, any>) => {
+      let result: Record<string, any>;
+      // 非raw模式下，判断code为200后直接返回data
+      if (!opt.raw && res.code === 200) {
+        res = res.data || {};
       }
-    },
-    error => {
-      alert(error);
-      console.log(error);
-    }
-  );
+      // 统一把key都转为驼峰形式
+      result = camelcaseKeys(res, { deep: true, exclude: [/_\d+/] });
+
+      return result;
+    })
+    .catch(err => {
+      console.error(err);
+      return null;
+    });
 }
 
 /**
  * Ajax.get方法
  *
- * @param {any} url 请求API链接
- * @param {FetchOption} options 请求参数
+ * @export
+ * @param {string} url 请求链接
+ * @param {FetchOption} [options] 请求参数
  * @returns
  */
-export function get(url, options?: FetchOption) {
+export function get(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, options, { method: 'GET' });
   return request(url, opt);
 }
@@ -122,11 +85,12 @@ export function get(url, options?: FetchOption) {
 /**
  * Ajax.post方法
  *
- * @param {any} url 请求API链接
- * @param {FetchOption} options 请求参数
+ * @export
+ * @param {string} url 请求链接
+ * @param {FetchOption} [options] 请求参数
  * @returns
  */
-export function post(url, options?: FetchOption) {
+export function post(url: string, options?: FetchOption) {
   const opt: FetchOption = deepExtend({}, options, { method: 'POST' });
   return request(url, opt);
 }

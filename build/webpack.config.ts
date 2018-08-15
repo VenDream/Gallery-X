@@ -1,14 +1,16 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-8-15
  */
 
 import path from 'path';
-import webpack from 'webpack';
+import webpack, { DefinePlugin } from 'webpack';
 import generateDefaultRules from './loaders';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const config = require('../var/config.json');
 
 /**
  * 自定义Webpack配置声明
@@ -150,7 +152,14 @@ export default (
                 filename: '[name].[contenthash:10].css',
               }),
             ]),
-      ].concat(configs.plugins || []),
+      ]
+        .concat([
+          // 注入全局配置
+          new DefinePlugin({
+            'window.__GALLERY_X_GLOBAL_CONFIG__': JSON.stringify(config),
+          }),
+        ])
+        .concat(configs.plugins || []),
     };
   };
 };

@@ -1,10 +1,11 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-8-14
  */
 
 import 'babel-polyfill';
+import qs from 'qs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -19,10 +20,19 @@ import './app.less';
 import App from 'containers/app';
 import store, { history } from 'store';
 
+// query对象
+const QUERY = qs.parse(window.location.search.substr(1));
+
 document.addEventListener('DOMContentLoaded', () => {
   // 禁用iOS300ms点击延迟
   initReactFastclick();
 });
+
+// 开发或调试模式下引入vConsole便于移动端调试
+if (process.env.NODE_ENV === 'development' || +QUERY['debug'] === 1) {
+  const vConsole = require('vconsole');
+  const v = new vConsole();
+}
 
 ReactDOM.render(
   <Provider store={store}>

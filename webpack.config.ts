@@ -1,12 +1,13 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-8-15
  */
 
 import path from 'path';
 import WebpackConfig from './build/webpack.config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+const config: Record<string, any> = require('./var/config.json');
 
 /**
  * 获取基于根目录的文件路径
@@ -16,6 +17,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 function getPath(filepath: string) {
   return path.resolve(__dirname, filepath);
 }
+
+let cookie;
+const { apiHost, devServer } = config;
 
 export default WebpackConfig(() => {
   return {
@@ -36,5 +40,24 @@ export default WebpackConfig(() => {
       }),
     ],
     sourcemapMode: 'cheap-module-eval-source-map',
+    devServer: {
+      host: devServer.host,
+      port: devServer.port,
+      proxy: {
+        '/api/*': {
+          target: apiHost,
+          secure: false,
+          changeOrigin: true,
+          onProxyReq: proxyReq => {
+            // 转发cookie
+            cookie && proxyReq.setHeader('Cookie', cookie);
+          },
+          onProxyRes: proxyRes => {
+            // 存储cookie
+            cookie = proxyRes.headers['set-cookie'];
+          },
+        },
+      },
+    },
   };
 });
