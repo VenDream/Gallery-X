@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-8-15
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -44,7 +44,7 @@ export default function popUpFactory<WrappedComponentProps>(
   return class ComponentWithPopUp extends Component<PopUpProps> {
     static defaultProps: PopUpProps = {
       container: document.body,
-      transitionClass: 'zoom-out',
+      transitionClass: 'zoom-in',
     };
 
     // 实例映射表

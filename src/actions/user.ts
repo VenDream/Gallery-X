@@ -65,10 +65,17 @@ export function login(data: LoginParams) {
       });
 
       let payload: Record<string, any> = { isLoading: false };
-      payload =
-        res.code === 200 && res.data
-          ? { ...payload, ...res.data }
-          : { ...payload, message: res.message || MESSAGE.LOGIN_FAILED };
+
+      if (+res.code === 200 && res.data) {
+        payload = { ...payload, ...res.data };
+        Message.show({
+          type: 2,
+          message: `欢迎回来，${(payload as UserModel).name}`,
+          duration: 2000,
+        });
+      } else {
+        payload = { ...payload, message: res.message || MESSAGE.LOGIN_FAILED };
+      }
 
       dispatch({
         type: ACTIONS.SET_USER_INFO,
@@ -94,6 +101,11 @@ export function logout() {
       const res = await ajax.post(api, { raw: true });
       if (res.code === 200) {
         const guest = UserModelClass.create();
+        Message.show({
+          type: 2,
+          message: '登出成功',
+          duration: 2000,
+        });
 
         // 退出登陆，回到首页
         dispatch(push(RouterMap.index.path));
