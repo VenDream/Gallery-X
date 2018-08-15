@@ -10,7 +10,7 @@ export function scrollTo(elem: Element, to: number, duration: number) {
   const start = elem.scrollTop;
   const change = to - start;
   let currTime = 0;
-  const increment = 15;
+  const increment = 10;
 
   // 缓动函数
   (Math as any).easeInOutQuad = function easeInOutQuad(t, b, c, d) {

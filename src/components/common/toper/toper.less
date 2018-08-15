@@ -1,6 +1,5 @@
 .g-toper {
   position: fixed;
-  z-index: -1;
 
   display: flex;
   align-items: center;
@@ -11,6 +10,7 @@
   cursor: pointer;
   pointer-events: none;
 
+  opacity: 0;
   border-radius: 0.05rem;
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -18,11 +18,13 @@
     z-index: 1;
 
     pointer-events: all;
+
+    opacity: 1;
   }
 
   .icon-top {
     color: #fff;
 
-    font-size: 26px;
+    font-size: 0.26rem;
   }
 }

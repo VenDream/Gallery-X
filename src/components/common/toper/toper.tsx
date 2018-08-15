@@ -6,7 +6,8 @@
 
 import classnames from 'classnames';
 import React, { Component } from 'react';
-import throttle from 'utils/throttle';
+import autobind from 'autobind-decorator';
+import { throttle } from 'helpful-decorators';
 import { scrollTo } from 'utils/scroll';
 
 import './toper.less';
@@ -66,14 +67,6 @@ export default class Toper extends Component<ToperProps, ToperState> {
   // 滚动容器
   scroller: HTMLElement | null = null;
 
-  constructor(props: ToperProps) {
-    super(props);
-    this.scrollHandler = throttle(this.handleScroll.bind(this), 100);
-  }
-
-  // 滚动处理
-  scrollHandler: (evt: EventTarget) => void = () => {};
-
   componentDidMount() {
     const root = this.rootRef.current;
 
@@ -83,15 +76,17 @@ export default class Toper extends Component<ToperProps, ToperState> {
       (document.scrollingElement as HTMLElement);
 
     // 监听父滚动容器的滚动事件
-    this.scroller.addEventListener('scroll', this.scrollHandler.bind(this));
+    this.scroller.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
     // 移除滚动监听
-    this.scroller.removeEventListener('scroll', this.scrollHandler.bind(this));
+    this.scroller.removeEventListener('scroll', this.handleScroll);
   }
 
   // 滚动处理
+  @autobind
+  @throttle(100)
   handleScroll() {
     const { threshold } = this.props;
     const scrollTop = this.scroller.scrollTop;
@@ -100,9 +95,10 @@ export default class Toper extends Component<ToperProps, ToperState> {
   }
 
   // 回到顶部
-  goTop = () => {
+  @autobind
+  goTop() {
     scrollTo(this.scroller, 0, this.props.duration);
-  };
+  }
 
   render() {
     const { visible } = this.state;

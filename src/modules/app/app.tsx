@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-8-14
+ * @since 2018-8-15
  */
 
 import 'babel-polyfill';
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initReactFastclick();
 });
 
-// 开发或调试模式下引入vConsole便于移动端调试
-if (process.env.NODE_ENV === 'development' || +QUERY['debug'] === 1) {
+// 调试模式下引入vConsole便于移动端调试
+if (+QUERY['debug'] === 1 || QUERY['debug'] === 'true') {
   const vConsole = require('vconsole');
   const v = new vConsole();
 }
