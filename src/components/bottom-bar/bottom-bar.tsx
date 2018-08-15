@@ -14,7 +14,7 @@ import './bottom-bar.less';
 
 interface BottomBarProps {
   path: string;
-  redirectTo: (path: string) => RouterAction;
+  redirectTo: (path: string) => void;
 }
 
 export default class BottomBar extends Component<BottomBarProps> {

@@ -15,7 +15,7 @@ import './app-content.less';
 interface AppContentProps {
   inited: boolean;
   user: UserModel;
-  getUserInfo: () => Promise<void>;
+  getUserInfo: () => void;
   hideAppLoader: () => void;
 }
 

@@ -11,7 +11,7 @@ import './login-box.less';
 
 interface LoginBoxProps {
   user: UserState;
-  login: (data: LoginParams) => Promise<void>;
+  login: (data: LoginParams) => void;
 }
 
 /**

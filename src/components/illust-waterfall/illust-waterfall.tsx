@@ -27,7 +27,7 @@ interface IllustWaterfallProps {
   fetchIllustData: (
     category: string,
     filter: RankingFilter | SearchFilter
-  ) => Promise<void>;
+  ) => void;
 }
 interface IllustWaterfallState {}
 

@@ -11,7 +11,7 @@ import './profile.less';
 
 interface ProfileProps {
   user: UserModel;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 function LabelItem(props: { label: string; value: string }) {
