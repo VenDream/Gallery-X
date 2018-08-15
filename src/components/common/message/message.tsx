@@ -1,11 +1,12 @@
 /**
  * 消息提示组件
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-8-15
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import autobind from 'autobind-decorator';
 import popUpFactory from 'components/hoc/popup';
 
 import './message.less';
@@ -92,13 +93,14 @@ export class Message extends Component<MessageProps> {
   }
 
   // 销毁组件
-  destroy = () => {
+  @autobind
+  destroy() {
     const { duration, onClose } = this.props;
     if (!duration || duration < 0) return;
 
     clearTimeout(this.timer);
     onClose && onClose();
-  };
+  }
 
   render() {
     const { type, message, showIcon, showMask, className, style } = this.props;

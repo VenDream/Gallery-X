@@ -1,11 +1,11 @@
 /**
  * 底部导航栏
  * @author VenDream
- * @since 2018-7-12
+ * @since 2018-8-15
  */
 
 import React, { Component } from 'react';
-import { RouterAction } from 'react-router-redux';
+import autobind from 'autobind-decorator';
 import classnames from 'classnames';
 
 import Message from 'components/common/message';
@@ -23,12 +23,13 @@ export default class BottomBar extends Component<BottomBarProps> {
     Message.hide();
   }
 
-  handleRoute = (path: string) => {
+  @autobind
+  handleRoute(path: string) {
     // 已选中，无需触发路由动作
     if (path === this.props.path) return;
 
     this.props.redirectTo(path);
-  };
+  }
 
   render() {
     return (

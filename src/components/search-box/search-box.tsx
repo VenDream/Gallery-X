@@ -1,10 +1,11 @@
 /**
  * 搜索框组件
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-8-15
  */
 
 import React, { Component, KeyboardEvent } from 'react';
+import autobind from 'autobind-decorator';
 
 import KEY_CODE from 'constants/keycode';
 import './search-box.less';
@@ -33,9 +34,10 @@ export default class SearchBox extends Component<
   inputRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   // 监听Enter键
-  handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
+  @autobind
+  handleKeyDown(evt: KeyboardEvent<HTMLInputElement>) {
     evt.keyCode === KEY_CODE.ENTER && this.doSearch();
-  };
+  }
 
   // 更新filter触发搜索请求
   doSearch() {
@@ -47,11 +49,12 @@ export default class SearchBox extends Component<
   }
 
   // 切换filter面板展开状态
-  toggleFilterPanel = () => {
+  @autobind
+  toggleFilterPanel() {
     this.setState(prevState => ({
       showFilterPanel: !prevState.showFilterPanel,
     }));
-  };
+  }
 
   // 渲染背景蒙层
   renderFilterMask() {

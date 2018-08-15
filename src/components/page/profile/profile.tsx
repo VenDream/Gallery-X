@@ -1,10 +1,11 @@
 /**
  * 我的资料组件
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-8-15
  */
 
 import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
 
 import Image from 'components/common/image';
 import './profile.less';
@@ -24,9 +25,10 @@ function LabelItem(props: { label: string; value: string }) {
 }
 
 export default class Profile extends Component<ProfileProps> {
-  handleLogout = () => {
+  @autobind
+  handleLogout() {
     this.props.logout();
-  };
+  }
 
   render() {
     const { user } = this.props;

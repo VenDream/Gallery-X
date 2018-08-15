@@ -1,11 +1,12 @@
 /**
  * 增强图片组件，支持图片预加载
  * @author VenDream
- * @since 2018-4-26
+ * @since 2018-8-15
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import autobind from 'autobind-decorator';
 
 import './image.less';
 
@@ -63,14 +64,16 @@ export default class Image extends Component<ImageProps, ImageState> {
     transitionClass: '',
   };
 
-  handleImageLoaded = () => {
+  @autobind
+  handleImageLoaded() {
     const { transitionClass } = this.props;
     this.setState({ loaded: true, transitionClass });
-  };
+  }
 
-  handleImageError = () => {
+  @autobind
+  handleImageError() {
     console.warn('图片加载失败');
-  };
+  }
 
   render() {
     const { alt, src, className, placeholder, style } = this.props;

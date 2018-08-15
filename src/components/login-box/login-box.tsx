@@ -1,10 +1,11 @@
 /**
  * 登陆组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-8-15
  */
 
 import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
 
 import Message from 'components/common/message';
 import './login-box.less';
@@ -42,7 +43,8 @@ export default class LoginBox extends Component<LoginBoxProps> {
     }
   }
 
-  handleLogin = (e: React.FormEvent<HTMLButtonElement>) => {
+  @autobind
+  handleLogin(e: React.FormEvent<HTMLButtonElement>) {
     e.preventDefault();
     const account = this.accountInput.value;
     const password = this.passwordInput.value;
@@ -54,7 +56,7 @@ export default class LoginBox extends Component<LoginBoxProps> {
       showTips('登陆中...', 0, -1);
       this.props.login({ account, password });
     }
-  };
+  }
 
   render() {
     return (
