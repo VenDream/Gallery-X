@@ -21,7 +21,7 @@ function mapDispatchToProps(
   dispatch: ThunkDispatch<StoreState, {}, AnyAction>
 ) {
   return {
-    updateFilter: (patch: Record<string, any>) =>
+    updateFilter: (patch: Partial<SearchFilter>) =>
       dispatch(updateSearchFilter(patch)),
   };
 }

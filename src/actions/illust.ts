@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-8-15
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -16,9 +16,10 @@ import Message from 'components/common/message';
  * 更新排行榜筛选条件
  *
  * @export
- * @param {Record<string, any>} patch 更新项
+ * @param {Partial<RankingFilter>} patch 更新补丁
+ * @returns
  */
-export function updateRankingFilter(patch: Record<string, any>) {
+export function updateRankingFilter(patch: Partial<RankingFilter>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     // 更换筛选条件时，start从0开始
     patch.start = 0;
@@ -64,10 +65,10 @@ export function getRankingIllusts(opts?: RankingFilter) {
  * 更新搜索参数
  *
  * @export
- * @param {Record<string, any>} patch 更新项
+ * @param {Partial<SearchFilter>} patch 更新补丁
  * @returns
  */
-export function updateSearchFilter(patch: Record<string, any>) {
+export function updateSearchFilter(patch: Partial<SearchFilter>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     // 更换筛选条件时，start从0开始
     patch.start = 0;

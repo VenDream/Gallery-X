@@ -12,7 +12,7 @@ import './search-box.less';
 
 interface SearchBoxProps {
   filter: SearchFilter;
-  updateFilter: (patch: Record<string, any>) => void;
+  updateFilter: (patch: Partial<SearchFilter>) => void;
 }
 
 interface SearchBoxState {
