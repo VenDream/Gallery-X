@@ -26,7 +26,7 @@ export default class SearchBox extends Component<
   SearchBoxProps,
   SearchBoxState
 > {
-  state = {
+  state: SearchBoxState = {
     showFilterPanel: false,
   };
 

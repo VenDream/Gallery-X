@@ -1,13 +1,17 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-8-16
  */
 
 import path from 'path';
 import WebpackConfig from './build/webpack.config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-const config: Record<string, any> = require('./var/config.json');
+import HtmlBeautifyPlugin from 'html-beautify-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+
+const isDev = process.env.NODE_ENV === 'development';
+const config: Record<string, any> = require('../var/static.config.json');
 
 /**
  * 获取基于根目录的文件路径
@@ -18,9 +22,6 @@ function getPath(filepath: string) {
   return path.resolve(__dirname, filepath);
 }
 
-let cookie;
-const { apiHost, devServer } = config;
-
 export default WebpackConfig(() => {
   return {
     context: getPath('.'),
@@ -29,35 +30,28 @@ export default WebpackConfig(() => {
       index: getPath('./src/modules/app'),
     },
     srcDir: getPath('./src'),
-    distDir: getPath('./dist'),
-    publicPath: '/',
+    distDir: config.distDir,
+    publicPath: config.cdnPath,
     plugins: [
-      // 导出html
+      // 生成html文件
       new HtmlWebpackPlugin({
         template: getPath('./index.pug'),
+        filename: 'index.ejs',
         chunks: ['vendor', 'index'],
-        path: getPath('./dist'),
+        path: config.distDir,
+        xhtml: true,
+        minify: !isDev,
+        alwaysWriteToDisk: true,
       }),
+      // 开发环境下html格式美化
+      ...(isDev ? [new HtmlBeautifyPlugin()] : []),
+      // 导出html文件
+      new HtmlWebpackHarddiskPlugin(),
     ],
     sourcemapMode: 'cheap-module-eval-source-map',
     devServer: {
-      host: devServer.host,
-      port: devServer.port,
-      proxy: {
-        '/api/*': {
-          target: apiHost,
-          secure: false,
-          changeOrigin: true,
-          onProxyReq: proxyReq => {
-            // 转发cookie
-            cookie && proxyReq.setHeader('Cookie', cookie);
-          },
-          onProxyRes: proxyRes => {
-            // 存储cookie
-            cookie = proxyRes.headers['set-cookie'];
-          },
-        },
-      },
+      host: config.host,
+      port: config.port,
     },
   };
 });

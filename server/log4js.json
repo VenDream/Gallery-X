@@ -1,0 +1,22 @@
+{
+  "appenders": {
+    "console": {
+      "type": "console",
+      "layout": {
+        "type": "colored"
+      }
+    },
+    "dateFile": {
+      "type": "dateFile",
+      "filename": "logs/app.log",
+      "pattern": ".yyyy-MM-dd",
+      "compress": true
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": ["console", "dateFile"],
+      "level": "info"
+    }
+  }
+}

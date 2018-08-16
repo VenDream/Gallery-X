@@ -1,16 +1,17 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-8-16
  */
 
 import path from 'path';
+import 'webpack-dev-server';
 import webpack, { DefinePlugin } from 'webpack';
 import generateDefaultRules from './loaders';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const config = require('../var/config.json');
+const config = require('../../var/static.config.json');
 
 /**
  * 自定义Webpack配置声明
@@ -79,6 +80,10 @@ export default (
             compress: true,
             progress: false,
             historyApiFallback: true,
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': '*',
+            },
             ...configs.devServer,
           }
         : {},
@@ -145,15 +150,17 @@ export default (
               }),
             ]
           : [
-              new CleanWebpackPlugin([configs.distDir], {
-                root: configs.context,
-              }),
               new MiniCssExtractPlugin({
                 filename: '[name].[contenthash:10].css',
               }),
             ]),
       ]
         .concat([
+          // 构建前清除distDir
+          new CleanWebpackPlugin([configs.distDir], {
+            root: configs.context,
+            allowExternal: true,
+          }),
           // 注入全局配置
           new DefinePlugin({
             'window.__GALLERY_X_GLOBAL_CONFIG__': JSON.stringify(config),

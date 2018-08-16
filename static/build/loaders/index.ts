@@ -12,6 +12,6 @@ export default function generateDefaultRules(isDev: boolean) {
     require('./css-loader').default,
     require('./pug-loader').default,
     require('./file-loader').default,
-  ]
+  ];
   return loaders.map(loader => loader.call(loader, isDev));
 }

@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "ext": "ts js",
+  "watch": ["src/"],
+  "ignore": ["node_modules/", "dist/", "logs/"],
+  "exec": "node --inspect=9229 -r ts-node/register src/index.ts"
+}

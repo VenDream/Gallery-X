@@ -1,0 +1,33 @@
+{
+  "name": "gallery-x-server",
+  "version": "1.0.0",
+  "description": "gallery-x node服务层",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "nodemon",
+    "build": "rm -rf dist && tsc"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^3.1.42",
+    "@types/koa": "^2.0.46",
+    "@types/koa-bodyparser": "^5.0.1",
+    "@types/koa-logger": "^3.1.0",
+    "@types/koa-router": "^7.0.30",
+    "@types/koa-session": "^5.7.4",
+    "@types/koa-views": "^2.0.3",
+    "@types/node-fetch": "^2.1.2"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "ejs": "^2.6.1",
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-combine-routers": "^4.0.1",
+    "koa-log4": "^2.3.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.2",
+    "koa-views": "^6.1.4",
+    "node-fetch": "^2.2.0",
+    "nodemon": "^1.18.3"
+  }
+}

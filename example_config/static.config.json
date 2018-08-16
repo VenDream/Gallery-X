@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "port": 3000,
+  "distDir": "var/static",
+  "cdnPath": "localhost:3000/app/gallery-x/"
+}
