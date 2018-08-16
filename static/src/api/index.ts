@@ -5,19 +5,15 @@
  */
 
 const apiMap = {
-  LOGIN: 'login',
-  LOGOUT: 'logout',
-  RANKING: 'ranking',
-  SEARCH: 'search',
-  GET_USER_INFO: '/user/info',
+  USER_INFO: '/api/user/info',
+  USER_LOGIN: '/api/user/login',
+  USER_LOGOUT: '/api/user/logout',
+  ILLUST_RANKING: '/api/illust/ranking',
+  ILLUST_SEARCH: '/api/illust/search',
 };
 
 export default {
   get: (apiName: string) => {
-    const apiPath = apiMap[apiName];
-    if (!apiPath) {
-      return null;
-    }
-    return `/api/${apiPath}`;
+    return apiMap[apiName] || null;
   },
 };

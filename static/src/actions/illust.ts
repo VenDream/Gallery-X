@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-8-16
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -39,7 +39,7 @@ export function getRankingIllusts(opts?: RankingFilter) {
       // 请求数据中
       dispatch({ type: ACTIONS.GET_RANKING_ILLUST_ING });
 
-      const api = API.get('RANKING');
+      const api = API.get('ILLUST_RANKING');
       const resp = await ajax.get(api, { body: opts });
       const type = resp.isEnd
         ? ACTIONS.GET_RANKING_ILLUST_END
@@ -90,7 +90,7 @@ export function getSearchIllusts(opts: SearchFilter) {
       // 请求数据中
       dispatch({ type: ACTIONS.GET_SEARCH_ILLUST_ING });
 
-      const api = API.get('SEARCH');
+      const api = API.get('ILLUST_SEARCH');
       const resp = await ajax.get(api, { body: opts });
       const type = resp.isEnd
         ? ACTIONS.GET_SEARCH_ILLUST_END

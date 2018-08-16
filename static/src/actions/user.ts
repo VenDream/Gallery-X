@@ -1,7 +1,7 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-8-16
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -24,7 +24,7 @@ import * as ajax from 'utils/ajax';
 export function getUserInfo() {
   return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     try {
-      const api = API.get('GET_USER_INFO');
+      const api = API.get('USER_INFO');
       const user = await ajax.get(api);
       dispatch({
         type: ACTIONS.SET_USER_INFO,
@@ -52,7 +52,7 @@ export function getUserInfo() {
 export function login(data: LoginParams) {
   return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     try {
-      const api = API.get('LOGIN');
+      const api = API.get('USER_LOGIN');
 
       dispatch({
         type: ACTIONS.SET_USER_INFO,
@@ -97,7 +97,7 @@ export function login(data: LoginParams) {
 export function logout() {
   return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     try {
-      const api = API.get('LOGOUT');
+      const api = API.get('USER_LOGOUT');
       const res = await ajax.post(api, { raw: true });
       if (res.code === 200) {
         const guest = UserModelClass.create();
