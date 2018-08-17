@@ -13,7 +13,7 @@ const apiMap = {
 };
 
 export default {
-  get: (apiName: string) => {
-    return apiMap[apiName] || null;
+  get: (apiName: string): string => {
+    return apiMap[apiName] || '';
   },
 };
