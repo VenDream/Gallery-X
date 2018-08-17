@@ -1,0 +1,7 @@
+{
+  "name": "oauth-service",
+  "version": "1.0.0",
+  "description": "授权服务模块",
+  "main": "./oauth.ts",
+  "types": "./oauth.ts"
+}

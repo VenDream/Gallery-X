@@ -8,6 +8,7 @@
 
 type METHOD = 'GET' | 'POST';
 
+// 请求参数对象
 interface FetchOption {
   /**
    * 请求method
@@ -25,4 +26,29 @@ interface FetchOption {
    * 请求超时时间
    */
   timeout?: number;
+}
+
+// session对象
+export interface AppSession {
+  /**
+   * 用户信息
+   */
+  user?: UserModel;
+  /**
+   * 访问token
+   */
+  accessToken?: string;
+  /**
+   * 刷新token
+   */
+  refreshToken?: {
+    /**
+     * token
+     */
+    value: string;
+    /**
+     * 过期时间
+     */
+    expiredAt: Date;
+  };
 }

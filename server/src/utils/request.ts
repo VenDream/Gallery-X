@@ -6,7 +6,9 @@
 
 import qs from 'qs';
 import deepExtend from 'deep-extend';
+import camelCaseKeys from 'camelcase-keys';
 import fetch, { BodyInit, Response } from 'node-fetch';
+import { FetchOption } from 'lib.d';
 
 // 默认请求参数
 const DEFAULT_OPTION: FetchOption = {
@@ -26,7 +28,10 @@ const DEFAULT_OPTION: FetchOption = {
  * @param {FetchOption} [option] 请求参数
  * @returns
  */
-export function request(url: string, option?: FetchOption) {
+export function request(
+  url: string,
+  option?: FetchOption
+): Record<string, any> {
   const fetchOpt: FetchOption = deepExtend({}, DEFAULT_OPTION, option);
   const reqMethod = fetchOpt.method;
   const qsOpt = qs.stringify(fetchOpt.data);
@@ -45,7 +50,12 @@ export function request(url: string, option?: FetchOption) {
   const { data, ...opt } = fetchOpt;
   return fetch(url, { ...opt, body })
     .then((response: Response) => response.json())
-    .then((res: Record<string, any>) => res)
+    .then((res: Record<string, any>) =>
+      camelCaseKeys(res, {
+        deep: true,
+        exclude: [/_\d+/],
+      })
+    )
     .catch(err => {
       console.error(err);
       return null;

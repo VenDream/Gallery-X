@@ -24,7 +24,7 @@ app.use(log4js.koaLogger(httpLogger, { level: 'auto' }));
 // 设置session
 app.keys = [serverConfig.sessionKey];
 const sessionConfig = {
-  key: 'token',
+  key: 'pixiv_session',
   maxAge: 86400000,
   overwrite: true,
   httpOnly: true,

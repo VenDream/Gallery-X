@@ -1,4 +1,5 @@
 {
   "port": 8000,
-  "sessionKey": "gallery-x"
+  "sessionKey": "gallery-x",
+  "proxyHost": "http://43.239.159.171:8080/pixiv_proxy"
 }
