@@ -6,10 +6,10 @@
 
 import Router from 'koa-router';
 import * as UserSvr from '../../service/user';
+import { getSessionByKey } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
 import RESPONSE_CODE from '../../constants/response-code';
 import { setUserSession, clearUserSession } from './session';
-import { getSessionByKey, proxyImageObj } from '../../utils/common';
 
 const router = new Router();
 
@@ -20,11 +20,9 @@ router.post('/login', async (ctx, next) => {
   const isLoginSucceed = setUserSession(ctx, resp);
 
   if (isLoginSucceed) {
-    const user = resp.user as UserModel;
-    proxyImageObj(user.profileImageUrls);
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
-      data: user,
+      data: resp.user,
     };
   } else {
     const errMsg = resp.message as string;
@@ -53,11 +51,9 @@ router.get('/info', async (ctx, next) => {
     const isRefreshSucceed = setUserSession(ctx, resp);
 
     if (isRefreshSucceed) {
-      const user = resp.user as UserModel;
-      proxyImageObj(user.profileImageUrls);
       ctx.body = {
         code: RESPONSE_CODE.SUCCESS,
-        data: user,
+        data: resp.user,
       };
     } else {
       ctx.body = resp;

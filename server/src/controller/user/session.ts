@@ -6,6 +6,7 @@
 
 import Router from 'koa-router';
 import { AppSession } from 'lib.d';
+import { proxyImageObj } from '../../utils/common';
 import { getDateAfterSeconds } from '../../utils/date';
 
 /**
@@ -19,14 +20,20 @@ export function setUserSession(
   ctx: Router.IRouterContext,
   userResp: Record<string, any>
 ) {
-  if (userResp.user) {
+  const user = userResp.user as UserModel;
+  if (user) {
     const session = ctx.session as AppSession;
-    session.user = userResp.user;
+
+    // 头像图片反向代理
+    proxyImageObj(user.profileImageUrls);
+    // 设置用户相关session
+    session.user = user;
     session.accessToken = userResp.accessToken;
     session.refreshToken = {
       value: userResp.refreshToken,
       expiredAt: getDateAfterSeconds(userResp.expiresIn),
     };
+
     return true;
   }
   return false;
