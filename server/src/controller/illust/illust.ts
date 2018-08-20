@@ -30,7 +30,7 @@ router.get('/ranking', async (ctx, next) => {
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
       data: {
-        illust: getParsedIllusts(illusts).slice(0, taken),
+        illusts: getParsedIllusts(illusts).slice(0, taken),
         isEnd: !!!nextUrl,
       },
     };

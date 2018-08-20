@@ -1,0 +1,7 @@
+{
+  "name": "not-found",
+  "version": "1.0.0",
+  "description": "404页面",
+  "main": "./not-found.tsx",
+  "types": "./not-found.tsx"
+}
