@@ -1,11 +1,10 @@
 /**
  * 用户相关session操作模块
  * @author VenDream
- * @since 2018-8-17
+ * @since 2018-8-20
  */
 
 import Router from 'koa-router';
-import { AppSession } from 'lib.d';
 import { proxyImageObj } from '../../utils/common';
 import { getDateAfterSeconds } from '../../utils/date';
 

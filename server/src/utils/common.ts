@@ -1,12 +1,25 @@
 /**
  * 常用工具函数
  * @author VenDream
- * @since 2018-8-17
+ * @since 2018-8-20
  */
 
 import Router from 'koa-router';
-import { AppSession } from 'lib.d';
+import headers from '../constants/headers';
 import config from '../../../var/server.config.json';
+
+/**
+ * 获取带认证的header，用于请求鉴权api
+ *
+ * @export
+ * @param {string} accessToken accessToken
+ */
+export function getAuthHeaders(accessToken: string) {
+  return {
+    ...headers.app,
+    authorization: `Bearer ${accessToken}`,
+  };
+}
 
 /**
  * 通过key获取对应的session值

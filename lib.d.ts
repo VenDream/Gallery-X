@@ -72,9 +72,17 @@ interface IllustModel {
    */
   title: string;
   /**
+   * 插画说明
+   */
+  caption: string;
+  /**
    * 插画标签
    */
   tags: string;
+  /**
+   * 作画软件
+   */
+  tools: string[];
   /**
    * 插画原图宽度
    */
@@ -84,13 +92,17 @@ interface IllustModel {
    */
   height: number;
   /**
+   * 插画总页数
+   */
+  pageCount: number;
+  /**
    * 插画总预览数
    */
   totalView: number;
   /**
    * 插画总收藏数
    */
-  totalBookmarked: number;
+  totalBookmarks: number;
   /**
    * 插画创作日期
    */
@@ -160,14 +172,7 @@ interface RankingFilter {
     | 'day_male_r18'
     | 'day_female_r18'
     | 'week_r18'
-    | 'week_r18g'
-    | 'day_manga'
-    | 'week_manga'
-    | 'month_manga'
-    | 'week_rookie_manga'
-    | 'day_r18_manga'
-    | 'week_r18_manga'
-    | 'week_r18g_manga';
+    | 'week_r18g';
   /**
    * 日期，当模式组合为day前缀时生效
    */

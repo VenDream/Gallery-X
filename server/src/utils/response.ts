@@ -1,7 +1,7 @@
 /**
  * 通用response处理模块
  * @author VenDream
- * @since 2018-8-17
+ * @since 2018-8-20
  */
 
 /**
@@ -15,6 +15,8 @@ export function handlePixivResp(response: Record<string, any>) {
   if (response.hasError) {
     const error = response.errors && response.errors.system;
     return error;
+  } else if (response.error) {
+    return response.error;
   } else {
     return response.response || response;
   }

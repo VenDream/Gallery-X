@@ -29,7 +29,7 @@ interface FetchOption {
 }
 
 // session对象
-export interface AppSession {
+interface AppSession {
   /**
    * 用户信息
    */

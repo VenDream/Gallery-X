@@ -1,14 +1,16 @@
 /**
  * 全局request公用方法
  * @author VenDream
- * @since 2018-8-17
+ * @since 2018-8-20
  */
 
 import qs from 'qs';
 import deepExtend from 'deep-extend';
 import camelCaseKeys from 'camelcase-keys';
 import fetch, { BodyInit, Response } from 'node-fetch';
-import { FetchOption } from 'lib.d';
+import { httpLogger } from '../utils/logger';
+
+const isDev = process.env.NODE_ENV === 'development';
 
 // 默认请求参数
 const DEFAULT_OPTION: FetchOption = {
@@ -47,18 +49,22 @@ export function request(
     body = qsOpt;
   }
 
+  httpLogger.info('请求接口地址:\n', url);
+  httpLogger.info('请求参数:\n', JSON.stringify(fetchOpt));
   const { data, ...opt } = fetchOpt;
   return fetch(url, { ...opt, body })
     .then((response: Response) => response.json())
-    .then((res: Record<string, any>) =>
-      camelCaseKeys(res, {
+    .then((res: Record<string, any>) => {
+      const result = camelCaseKeys(res, {
         deep: true,
         exclude: [/_\d+/],
-      })
-    )
+      });
+      // 开发环境打印请求响应数据
+      isDev && httpLogger.info('接口响应数据:\n', JSON.stringify(result));
+      return result;
+    })
     .catch(err => {
-      console.error(err);
-      return null;
+      throw new Error((err && err.message) || err);
     });
 }
 

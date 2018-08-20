@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-8-17
+ * @since 2018-8-20
  */
 
 import Router from 'koa-router';
@@ -27,9 +27,12 @@ router.post('/login', async (ctx, next) => {
   } else {
     const errMsg = resp.message as string;
     if (errMsg && errMsg.includes('103')) {
-      resp.message = 'Incorret Pixiv ID or password';
+      resp.message = '用户名或密码错误';
     }
-    ctx.body = resp;
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp,
+    };
   }
 });
 
