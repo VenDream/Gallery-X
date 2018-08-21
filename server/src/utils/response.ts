@@ -12,12 +12,8 @@
  * @returns
  */
 export function handlePixivResp(response: Record<string, any>) {
-  if (response.hasError) {
-    const error = response.errors && response.errors.system;
-    return error;
-  } else if (response.error) {
-    const error = response.error || {};
-    return error.message || error.userMessage || error;
+  if (response.hasError || response.error) {
+    return response.errors || response.error || response;
   } else {
     return response.response || response;
   }

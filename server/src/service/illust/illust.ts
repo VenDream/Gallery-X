@@ -13,6 +13,8 @@ const apiList = {
   search: '/v1/search/illust',
   comments: '/v2/illust/comments',
   commentReplies: '/v1/illust/comment/replies',
+  like: '/v2/illust/bookmark/add',
+  unlike: '/v1/illust/bookmark/delete',
 };
 
 /**
@@ -90,5 +92,44 @@ export function commentReplies(accessToken: string, commentId: string) {
   return ajax.get(api, {
     headers,
     data: { comment_id: commentId },
+  });
+}
+
+/**
+ * 收藏插画
+ *
+ * @export
+ * @param {string} accessToken accessToken
+ * @param {string} illustId 插画ID
+ * @param {boolean} [isPrivate=false] 是否私人收藏
+ */
+export function like(
+  accessToken: string,
+  illustId: string,
+  isPrivate: boolean = false
+) {
+  const api = apiHost + apiList.like;
+  const headers = getAuthHeaders(accessToken);
+
+  return ajax.post(api, {
+    headers,
+    data: { illust_id: illustId, restrict: isPrivate ? 'private' : 'public' },
+  });
+}
+
+/**
+ * 取消收藏插画
+ *
+ * @export
+ * @param {string} accessToken accessToken
+ * @param {string} illustId 插画ID
+ */
+export function unlike(accessToken: string, illustId: string) {
+  const api = apiHost + apiList.unlike;
+  const headers = getAuthHeaders(accessToken);
+
+  return ajax.post(api, {
+    headers,
+    data: { illust_id: illustId },
   });
 }

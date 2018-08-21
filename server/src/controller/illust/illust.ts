@@ -9,7 +9,11 @@ import * as IllustSvr from '../../service/illust';
 import { getAccessToken } from '../auth';
 import { handlePixivResp } from '../../utils/response';
 import { getRankingParams, getSearchParams } from '../../utils/illust';
-import { returnIllustResp, returnCommentsResp } from './returner';
+import {
+  returnIllustResp,
+  returnCommentsResp,
+  returnLikeResp,
+} from './returner';
 
 const router = new Router();
 
@@ -49,6 +53,24 @@ router.get('/comment/replies', async (ctx, next) => {
   const resp = handlePixivResp(repliesResp);
 
   returnCommentsResp(ctx, resp);
+});
+
+router.post('/like', async (ctx, next) => {
+  const { illustId, isPrivate } = ctx.request.body as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const likeResp = await IllustSvr.like(token, illustId, isPrivate);
+  const resp = handlePixivResp(likeResp);
+
+  returnLikeResp(ctx, resp);
+});
+
+router.post('/unlike', async (ctx, next) => {
+  const { illustId } = ctx.request.body as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const likeResp = await IllustSvr.unlike(token, illustId);
+  const resp = handlePixivResp(likeResp);
+
+  returnLikeResp(ctx, resp);
 });
 
 export default router.routes();

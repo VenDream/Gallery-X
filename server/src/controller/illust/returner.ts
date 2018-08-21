@@ -72,3 +72,24 @@ export function returnCommentsResp(
     };
   }
 }
+
+/**
+ * 收藏类请求的统一返回结果处理
+ *
+ * @export
+ * @param {Router.IRouterContext} ctx 请求上下文
+ * @param {Record<string, any>} resp 响应数据
+ */
+export function returnLikeResp(
+  ctx: Router.IRouterContext,
+  resp: Record<string, any>
+) {
+  if (!resp.message && !resp.userMessage) {
+    ctx.body = { code: RESPONSE_CODE.SUCCESS };
+  } else {
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp.userMessage || '操作失败',
+    };
+  }
+}
