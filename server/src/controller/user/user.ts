@@ -6,6 +6,7 @@
 
 import Router from 'koa-router';
 import * as UserSvr from '../../service/user';
+import { getAccessToken } from '../auth';
 import { getSessionByKey } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
 import RESPONSE_CODE from '../../constants/response-code';
@@ -74,6 +75,38 @@ router.get('/info', async (ctx, next) => {
 router.post('/logout', async (ctx, next) => {
   clearUserSession(ctx);
   ctx.body = { code: RESPONSE_CODE.SUCCESS };
+});
+
+router.post('/follow', async (ctx, next) => {
+  const { userId } = ctx.request.body as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const followResp = await UserSvr.follow(token, userId);
+  const resp = handlePixivResp(followResp);
+
+  if (!resp.message && !resp.userMessage) {
+    ctx.body = { code: RESPONSE_CODE.SUCCESS };
+  } else {
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp.userMessage || '操作失败',
+    };
+  }
+});
+
+router.post('/unfollow', async (ctx, next) => {
+  const { userId } = ctx.request.body as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const followResp = await UserSvr.unfollow(token, userId);
+  const resp = handlePixivResp(followResp);
+
+  if (!resp.message && !resp.userMessage) {
+    ctx.body = { code: RESPONSE_CODE.SUCCESS };
+  } else {
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp.userMessage || '操作失败',
+    };
+  }
 });
 
 export default router.routes();
