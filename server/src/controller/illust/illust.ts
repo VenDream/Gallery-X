@@ -1,22 +1,22 @@
 /**
  * 插画相关路由
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-8-21
  */
 
 import Router from 'koa-router';
 import * as IllustSvr from '../../service/illust';
-import { getRankingParams, getParsedIllusts } from '../../utils/illust';
+import { getAccessToken } from '../auth';
 import { handlePixivResp } from '../../utils/response';
+import { getRankingParams, getParsedIllusts } from '../../utils/illust';
 import RESPONSE_CODE from '../../constants/response-code';
 
 const router = new Router();
 
 router.get('/ranking', async (ctx, next) => {
-  const session = ctx.session as AppSession;
-  const token = session.accessToken;
   const filter = ctx.request.query as Record<string, any>;
   const params = getRankingParams(filter);
+  const token = await getAccessToken(ctx);
   const rankingResp = await IllustSvr.ranking(token, params);
   const resp = handlePixivResp(rankingResp) || {};
   const { illusts, nextUrl } = resp;
