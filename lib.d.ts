@@ -1,7 +1,7 @@
 /**
  * 应用全局类型声明
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-8-21
  */
 
 //  Pixiv用户模型
@@ -160,7 +160,7 @@ interface RankingFilter {
   /**
    * 模式，按照日期，性取向和类型进行组合
    */
-  mode:
+  mode?:
     | 'day'
     | 'week'
     | 'month'
@@ -176,7 +176,7 @@ interface RankingFilter {
   /**
    * 日期，当模式组合为day前缀时生效
    */
-  date: string;
+  date?: string;
   /**
    * 开始位置
    */
@@ -204,10 +204,6 @@ interface SearchFilter {
     | 'partial_match_for_tags'
     | 'exact_match_for_tags'
     | 'title_and_caption';
-  /**
-   * 搜索日期范围，日周月
-   */
-  duration?: 'within_last_day' | 'within_last_week' | 'within_last_month';
   /**
    * 起始日期(YYYY-MM-DD)
    */

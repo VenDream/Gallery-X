@@ -27,10 +27,14 @@ export async function getAccessToken(
   const hasExpired = new Date(refreshToken.expiredAt) <= new Date();
   // 口令已过期，重新获取
   if (hasExpired) {
-    const refreshResp = await UserSvr.getUserInfo(refreshToken.value);
-    const resp: Record<string, any> = handlePixivResp(refreshResp);
-    const isRefreshSucceed = setUserSession(ctx, resp);
-    return isRefreshSucceed ? resp.accessToken : '';
+    try {
+      const refreshResp = await UserSvr.getUserInfo(refreshToken.value);
+      const resp: Record<string, any> = handlePixivResp(refreshResp);
+      const isRefreshSucceed = setUserSession(ctx, resp);
+      return isRefreshSucceed ? resp.accessToken : '';
+    } catch (err) {
+      throw new Error((err && err.message) || err);
+    }
   } else {
     // 口令有效，继续使用
     return accessToken;

@@ -1,7 +1,7 @@
 /**
  * 插画数据处理工具函数
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-8-21
  */
 
 import { getProxyImageUrl } from './common';
@@ -10,12 +10,30 @@ import { getProxyImageUrl } from './common';
  * 获取排行榜请求接口参数
  *
  * @export
- * @param {Record<string, any>} filter 前端传入的参数
+ * @param {RankingFilter} filter 前端传入的参数
+ * @returns {RankingParams}
  */
-export function getRankingParams(filter: Record<string, any>) {
+export function getRankingParams(filter: RankingFilter): RankingParams {
   const { start, step, ...restParams } = filter;
   return {
     ...restParams,
+    offset: start || 0,
+    filter: 'for_ios',
+  };
+}
+
+/**
+ * 获取搜索请求接口参数
+ *
+ * @export
+ * @param {SearchFilter} filter 前端传入的参数
+ */
+export function getSearchParams(filter: SearchFilter): SearchParams {
+  const { start, step, startDate, endDate, ...restParams } = filter;
+  return {
+    ...restParams,
+    start_date: startDate,
+    end_date: endDate,
     offset: start || 0,
     filter: 'for_ios',
   };

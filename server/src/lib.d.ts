@@ -1,7 +1,7 @@
 /**
  * 后端全局类型声明
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-8-21
  */
 
 /// <reference path="../../lib.d.ts" />
@@ -51,4 +51,69 @@ interface AppSession {
      */
     expiredAt: Date;
   };
+}
+
+interface RankingParams {
+  /**
+   * 模式，按照日期，性取向和类型进行组合
+   */
+  mode?:
+    | 'day'
+    | 'week'
+    | 'month'
+    | 'day_male'
+    | 'day_female'
+    | 'week_original'
+    | 'week_rookie'
+    | 'day_r18'
+    | 'day_male_r18'
+    | 'day_female_r18'
+    | 'week_r18'
+    | 'week_r18g';
+  /**
+   * 日期，当模式组合为day前缀时生效
+   */
+  date?: string;
+  /**
+   * 偏移量
+   */
+  offset?: number;
+  /**
+   * 请求结果筛选目标
+   */
+  filter?: 'for_ios';
+}
+
+interface SearchParams {
+  /**
+   * 搜索关键词
+   */
+  word: string;
+  /**
+   * 结果排序，从新到旧或从旧到新
+   */
+  sort?: 'date_desc' | 'date_asc';
+  /**
+   * 匹配规则，分为模糊匹配，精确匹配和标题描述
+   */
+  target?:
+    | 'partial_match_for_tags'
+    | 'exact_match_for_tags'
+    | 'title_and_caption';
+  /**
+   * 起始日期(YYYY-MM-DD)
+   */
+  start_date?: string;
+  /**
+   * 终止日期(YYYY-MM-DD)
+   */
+  end_date?: string;
+  /**
+   * 偏移量
+   */
+  offset?: number;
+  /**
+   * 请求结果筛选目标
+   */
+  filter?: 'for_ios';
 }
