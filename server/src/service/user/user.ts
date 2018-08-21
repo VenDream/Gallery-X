@@ -43,14 +43,19 @@ export function getUserInfo(token: string) {
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @param {boolean} [isPrivate=false] 是否私人关注
  */
-export function follow(accessToken: string, userId: string) {
+export function follow(
+  accessToken: string,
+  userId: string,
+  isPrivate: boolean = false
+) {
   const api = apiHost + apiList.follow;
   const headers = getAuthHeaders(accessToken);
 
   return ajax.post(api, {
     headers,
-    data: { user_id: userId },
+    data: { user_id: userId, restrict: isPrivate ? 'private' : 'public' },
   });
 }
 

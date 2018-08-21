@@ -78,9 +78,9 @@ router.post('/logout', async (ctx, next) => {
 });
 
 router.post('/follow', async (ctx, next) => {
-  const { userId } = ctx.request.body as Record<string, any>;
+  const { userId, isPrivate } = ctx.request.body as Record<string, any>;
   const token = await getAccessToken(ctx);
-  const followResp = await UserSvr.follow(token, userId);
+  const followResp = await UserSvr.follow(token, userId, isPrivate);
   const resp = handlePixivResp(followResp);
 
   if (!resp.message && !resp.userMessage) {

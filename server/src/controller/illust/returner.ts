@@ -61,7 +61,7 @@ export function returnCommentsResp(
       code: RESPONSE_CODE.SUCCESS,
       data: {
         comments: parsedComments,
-        lastCommentId: lastComment.id,
+        lastCommentId: lastComment.id || '',
         isEnd: !!!nextUrl,
       },
     };
