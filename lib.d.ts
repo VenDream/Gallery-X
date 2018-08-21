@@ -4,7 +4,7 @@
  * @since 2018-8-21
  */
 
-//  Pixiv用户模型
+// Pixiv用户数据模型
 interface UserModel {
   /**
    * 用户id
@@ -57,7 +57,7 @@ interface UserModel {
   [key: string]: any;
 }
 
-// Pixiv插画模型
+// Pixiv插画数据模型
 interface IllustModel {
   /**
    * 插画ID
@@ -153,6 +153,47 @@ interface IllustModel {
      */
     original: string;
   }>;
+}
+
+// Pixiv插画评论数据模型
+interface CommentModel {
+  /**
+   * 评论ID
+   */
+  id: string;
+  /**
+   * 评论内容
+   */
+  comment: string;
+  /**
+   * 评论日期
+   */
+  date: string;
+  /**
+   * 评论用户
+   */
+  user: {
+    /**
+     * ID
+     */
+    id: string;
+    /**
+     * 帐号
+     */
+    account: string;
+    /**
+     * 头像
+     */
+    avatar: string;
+    /**
+     * 昵称
+     */
+    name: string;
+  };
+  /**
+   * 是否有回复
+   */
+  hasReplies: boolean;
 }
 
 // Pixiv排行榜筛选参数

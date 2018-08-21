@@ -126,3 +126,40 @@ export function getParsedIllusts(
     throw new Error(err.message || err);
   }
 }
+
+/**
+ * 解析接口返回的评论数据
+ *
+ * @export
+ * @param {Array<Record<string, any>>} comments 评论数据
+ * @returns {CommentModel[]}
+ */
+export function getParsedComments(
+  comments: Array<Record<string, any>>
+): CommentModel[] {
+  const parsedComments: CommentModel[] = [];
+
+  try {
+    for (const comment of comments) {
+      const { id, comment: content, date, user, hasReplies } = comment;
+      const avatar = user.profileImageUrls.medium;
+
+      parsedComments.push({
+        id,
+        comment: content,
+        date,
+        user: {
+          id: user.id,
+          name: user.name,
+          account: user.account,
+          avatar: getProxyImageUrl(avatar),
+        },
+        hasReplies,
+      });
+    }
+
+    return parsedComments;
+  } catch (err) {
+    throw new Error(err.message || err);
+  }
+}

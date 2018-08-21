@@ -8,48 +8,10 @@ import Router from 'koa-router';
 import * as IllustSvr from '../../service/illust';
 import { getAccessToken } from '../auth';
 import { handlePixivResp } from '../../utils/response';
-import RESPONSE_CODE from '../../constants/response-code';
-import {
-  getRankingParams,
-  getSearchParams,
-  getParsedIllusts,
-} from '../../utils/illust';
+import { getRankingParams, getSearchParams } from '../../utils/illust';
+import { returnIllustResp, returnCommentsResp } from './returner';
 
 const router = new Router();
-
-/**
- * 插画类请求的统一返回结果处理
- *
- * @param {Router.IRouterContext} ctx 请求上下文
- * @param {Record<string, any>} resp 响应数据
- * @param {number} [step=30] 返回的记录数量
- */
-function returnIllustResp(
-  ctx: Router.IRouterContext,
-  resp: Record<string, any>,
-  step: number = 30
-) {
-  const { illusts, nextUrl } = resp;
-  if (illusts) {
-    // 取值范围[1, 30]
-    let taken = step;
-    taken = Math.min(30, taken);
-    taken = Math.max(1, taken);
-
-    ctx.body = {
-      code: RESPONSE_CODE.SUCCESS,
-      data: {
-        illusts: getParsedIllusts(illusts).slice(0, taken),
-        isEnd: !!!nextUrl,
-      },
-    };
-  } else {
-    ctx.body = {
-      code: RESPONSE_CODE.FAILED,
-      message: resp.message || resp,
-    };
-  }
-}
 
 router.get('/ranking', async (ctx, next) => {
   const filter = ctx.request.query as RankingFilter;
@@ -69,6 +31,24 @@ router.get('/search', async (ctx, next) => {
   const resp = handlePixivResp(searchResp) || {};
 
   returnIllustResp(ctx, resp, filter.step);
+});
+
+router.get('/comments', async (ctx, next) => {
+  const { illustId, lastCommentId } = ctx.request.query;
+  const token = await getAccessToken(ctx);
+  const commentsResp = await IllustSvr.comments(token, illustId, lastCommentId);
+  const resp = handlePixivResp(commentsResp);
+
+  returnCommentsResp(ctx, resp);
+});
+
+router.get('/comment/replies', async (ctx, next) => {
+  const { commentId } = ctx.request.query;
+  const token = await getAccessToken(ctx);
+  const repliesResp = await IllustSvr.commentReplies(token, commentId);
+  const resp = handlePixivResp(repliesResp);
+
+  returnCommentsResp(ctx, resp);
 });
 
 export default router.routes();
