@@ -32,7 +32,6 @@
     "koa-session": "^5.8.2",
     "koa-views": "^6.1.4",
     "node-fetch": "^2.2.0",
-    "nodemon": "^1.18.3",
-    "ts-node": "^6.2.0"
+    "nodemon": "^1.18.3"
   }
 }
