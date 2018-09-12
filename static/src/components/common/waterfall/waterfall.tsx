@@ -1,12 +1,13 @@
 /**
  * 瀑布流组件（绝对定位实现)
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-9-12
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import debounce from 'utils/debounce';
+import autobind from 'autobind-decorator';
+import { debounce } from 'helpful-decorators';
 
 import './waterfall.less';
 
@@ -82,21 +83,18 @@ export default class Waterfall extends Component<WaterfallProps> {
   gridWidth: number = 0;
   // 瀑布流对象
   waterfall: WaterfallObj | null = null;
-  // 绑定debounce的update方法
-  updateWaterfall: EventListenerOrEventListenerObject = debounce(
-    this.checkGridWidth.bind(this),
-    0
-  );
 
   componentDidMount() {
-    this.root.current && this.forceUpdate();
-
     // 容器的宽度发生变化时，刷新瀑布流布局
-    window.addEventListener('resize', this.updateWaterfall);
+    window.addEventListener('resize', this.checkGridWidth);
   }
 
   componentDidUpdate() {
     this.update();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkGridWidth);
   }
 
   // 更新瀑布流的布局和样式
@@ -160,6 +158,8 @@ export default class Waterfall extends Component<WaterfallProps> {
   }
 
   // 检查grid宽度是否发生变化
+  @autobind
+  @debounce(0)
   checkGridWidth() {
     if (!this.root.current) return;
     const gridWidth = this.root.current.getBoundingClientRect().width;

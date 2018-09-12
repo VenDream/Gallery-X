@@ -1,7 +1,7 @@
 /**
  * 全局request公用方法
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-8-23
  */
 
 import qs from 'qs';
@@ -64,7 +64,9 @@ export function request(
       return result;
     })
     .catch(err => {
-      throw new Error((err && err.message) || err);
+      const errMsg = (err && err.message) || err;
+      httpLogger.error(errMsg);
+      throw new Error(errMsg);
     });
 }
 

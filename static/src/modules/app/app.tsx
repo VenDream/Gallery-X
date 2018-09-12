@@ -1,10 +1,10 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-9-10
  */
 
-import 'babel-polyfill';
+import '@babel/polyfill';
 import qs from 'qs';
 import React from 'react';
 import ReactDOM from 'react-dom';
