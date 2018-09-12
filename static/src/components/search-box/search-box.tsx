@@ -74,6 +74,7 @@ export default class SearchBox extends Component<IProps, IState> {
 
   // 渲染输入框
   renderFilterInput() {
+    const { word } = this.props.filter;
     return (
       <div className="filter-input">
         <i className="g-icon icon-search" />
@@ -83,10 +84,12 @@ export default class SearchBox extends Component<IProps, IState> {
           placeholder="输入关键词以进行搜索"
           onKeyDown={this.handleKeyDown}
         />
-        <i
-          className="filter-btn g-icon icon-filter"
-          onClick={this.toggleFilterPanel}
-        />
+        {word && (
+          <i
+            className="filter-btn g-icon icon-filter"
+            onClick={this.toggleFilterPanel}
+          />
+        )}
       </div>
     );
   }

@@ -9,8 +9,7 @@
     "dateFile": {
       "type": "dateFile",
       "filename": "logs/app.log",
-      "pattern": ".yyyy-MM-dd",
-      "compress": true
+      "pattern": ".yyyy-MM-dd"
     }
   },
   "categories": {
