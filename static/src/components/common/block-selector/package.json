@@ -1,0 +1,7 @@
+{
+  "name": "block-selector",
+  "version": "1.0.0",
+  "description": "块选择组件",
+  "main": "./block-selector.tsx",
+  "types": "./block-selector.tsx"
+}

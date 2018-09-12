@@ -1,7 +1,7 @@
 /**
  * 后端全局类型声明
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-9-12
  */
 
 /// <reference path="../../lib.d.ts" />
@@ -96,7 +96,7 @@ interface SearchParams {
   /**
    * 匹配规则，分为模糊匹配，精确匹配和标题描述
    */
-  target?:
+  search_target?:
     | 'partial_match_for_tags'
     | 'exact_match_for_tags'
     | 'title_and_caption';
