@@ -1,7 +1,7 @@
 /**
  * 搜索页面组件
  * @author VenDream
- * @since 2018-6-28
+ * @since 2018-9-12
  */
 
 import React, { Component } from 'react';
@@ -18,7 +18,7 @@ export default class Search extends Component<SearchProps> {
   }
 
   renderIllustWaterfall() {
-    return <IllustWaterfall column={3} gutter={20} />;
+    return <IllustWaterfall column={2} gutter={20} />;
   }
 
   render() {
