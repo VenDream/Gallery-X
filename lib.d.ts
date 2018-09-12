@@ -1,7 +1,7 @@
 /**
  * 应用全局类型声明
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-9-12
  */
 
 // Pixiv用户数据模型
@@ -235,11 +235,11 @@ interface SearchFilter {
    */
   word: string;
   /**
-   * 结果排序，从新到旧或从旧到新
+   * 搜索排序: 从新到旧，从旧到新或者按热度从高到低
    */
-  sort?: 'date_desc' | 'date_asc';
+  sort?: 'date_desc' | 'date_asc' | 'popular_desc';
   /**
-   * 匹配规则，分为模糊匹配，精确匹配和标题描述
+   * 搜索对象: 标签部分匹配，标签完全匹配或标题描述匹配
    */
   target?:
     | 'partial_match_for_tags'

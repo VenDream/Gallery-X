@@ -42,7 +42,7 @@ export default class FilterPanel extends Component<IProps, IState> {
   }
 
   /**
-   * 更新日期排序
+   * 更新搜索排序
    *
    * @param {Option} option 更新项
    * @returns
@@ -51,7 +51,13 @@ export default class FilterPanel extends Component<IProps, IState> {
   @autobind
   updateSortFilter(option: Option) {
     const sort = option.key;
-    if (sort !== 'date_desc' && sort !== 'date_asc') return;
+    if (
+      sort !== 'date_desc' &&
+      sort !== 'date_asc' &&
+      sort !== 'popular_desc'
+    ) {
+      return;
+    }
     this.updateFilter({ sort });
   }
 
@@ -75,14 +81,14 @@ export default class FilterPanel extends Component<IProps, IState> {
     this.updateFilter({ target });
   }
 
-  // 日期排序
+  // 搜索排序
   renderSortFilter() {
     const { sort } = this.props.filter;
     const options = OPTIONS.sort;
     const selectedIdx = options.findIndex(option => option.key === sort) || 0;
     return (
       <BlockSelector
-        label="日期排序"
+        label="搜索排序"
         options={options}
         selectedIdx={selectedIdx}
         onSelected={this.updateSortFilter}
