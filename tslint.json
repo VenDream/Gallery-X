@@ -20,6 +20,7 @@
     "curly": [true, "ignore-same-line"],
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-requires": false,
-    "no-empty": [true, "allow-empty-functions"]
+    "no-empty": [true, "allow-empty-functions"],
+    "jsx-no-lambda": false
   }
 }

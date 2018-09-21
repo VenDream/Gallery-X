@@ -1,7 +1,7 @@
 /**
  * 插画数据处理工具函数
  * @author VenDream
- * @since 2018-9-12
+ * @since 2018-9-13
  */
 
 import { getProxyImageUrl } from './common';
@@ -30,14 +30,17 @@ export function getRankingParams(filter: RankingFilter): RankingParams {
  */
 export function getSearchParams(filter: SearchFilter): SearchParams {
   const { start, target, step, startDate, endDate, ...restParams } = filter;
-  return {
+  const params: SearchParams = {
     ...restParams,
-    start_date: startDate,
-    end_date: endDate,
     offset: start || 0,
     filter: 'for_ios',
     search_target: target,
   };
+  // 附加日期范围
+  if (startDate) params.start_date = startDate;
+  if (endDate) params.end_date = endDate;
+
+  return params;
 }
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-9-21
  */
 
 import Koa from 'koa';
@@ -57,5 +57,9 @@ for (const [name, router] of Object.entries(routers)) {
 app.use(notFoundHandler());
 // 监听端口并启动服务
 app.listen(serverConfig.port);
+// 开发模式下，不进行https证书校验
+if (process.env.NODE_ENV === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
 
 appLogger.info(`服务已启动，监听端口： ${serverConfig.port}`);

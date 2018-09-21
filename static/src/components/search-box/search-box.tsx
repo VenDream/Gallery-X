@@ -84,7 +84,7 @@ export default class SearchBox extends Component<IProps, IState> {
           placeholder="输入关键词以进行搜索"
           onKeyDown={this.handleKeyDown}
         />
-        {word && (
+        {!word && (
           <i
             className="filter-btn g-icon icon-filter"
             onClick={this.toggleFilterPanel}
