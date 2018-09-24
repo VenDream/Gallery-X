@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-9-24
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -92,9 +92,11 @@ export default function popUpFactory<WrappedComponentProps>(
       // 加入实例映射表
       setTimeout(() => {
         const instance = instanceRef.current;
-        instance.overlay = overlay;
-        instance.instanceId = instanceId;
-        ComponentWithPopUp.instances[instanceId] = instance;
+        if (instance) {
+          instance.overlay = overlay;
+          instance.instanceId = instanceId;
+          ComponentWithPopUp.instances[instanceId] = instance;
+        }
       }, 0);
 
       return instanceId;

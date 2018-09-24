@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-9-24
  */
 
 import Router from 'koa-router';
@@ -26,7 +26,7 @@ router.post('/login', async (ctx, next) => {
       data: resp.user,
     };
   } else {
-    const errMsg = resp.message as string;
+    const errMsg = resp && resp.system && (resp.system.message as string);
     if (errMsg && errMsg.includes('103')) {
       resp.message = '用户名或密码错误';
     }
