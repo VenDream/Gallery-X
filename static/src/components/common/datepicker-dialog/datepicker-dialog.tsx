@@ -1,7 +1,7 @@
 /**
  * 日期范围选择弹窗
  * @author VenDream
- * @since 2018-9-13
+ * @since 2018-9-26
  */
 
 import React, { Component } from 'react';
@@ -10,6 +10,7 @@ import classnames from 'classnames';
 import autobind from 'autobind-decorator';
 import DatePicker from 'react-mobile-datepicker';
 
+import Message from 'components/common/message';
 import popUpFactory from 'components/hoc/popup';
 import './datepicker-dialog.less';
 
@@ -28,17 +29,25 @@ interface IProps {
    */
   endDate?: string;
   /**
+   * 日期范围下界
+   */
+  min?: string | Date;
+  /**
+   * 日期范围上界
+   */
+  max?: string | Date;
+  /**
    * 弹窗关闭回调
    */
   onClose?: () => void;
   /**
    * 取消后的回调
    */
-  onCancel?: (startDate?: string, endDate?: string) => void;
+  onCancel?: (dateRange?: { startDate?: string; endDate?: string }) => void;
   /**
    * 选择日期后的回调
    */
-  onSelected?: (startDate?: string, endDate?: string) => void;
+  onSelected?: (dateRange?: { startDate?: string; endDate?: string }) => void;
 }
 interface IState {
   /**
@@ -70,9 +79,13 @@ class DatePickerDialog extends Component<IProps, IState> {
     };
   }
 
-  // 获取日期选择器通用配置，详细配置见：https://www.npmjs.com/package/react-mobile-datepicker#proptypes
+  // 生成日期选择器公用配置
+  // 详细配置见：https://www.npmjs.com/package/react-mobile-datepicker#proptypes
   getConfig() {
+    const { min, max } = this.props;
     return {
+      min: min ? new Date(min) : null,
+      max: max ? new Date(max) : null,
       isPopup: true,
       theme: 'ios',
       dateFormat: ['YYYY年', 'MM月', 'DD日'],
@@ -123,7 +136,7 @@ class DatePickerDialog extends Component<IProps, IState> {
   @autobind
   onCancel() {
     const { startDate, endDate } = this.state;
-    this.props.onCancel && this.props.onCancel(startDate, endDate);
+    this.props.onCancel && this.props.onCancel({ startDate, endDate });
     this.onClose();
   }
 
@@ -131,7 +144,25 @@ class DatePickerDialog extends Component<IProps, IState> {
   @autobind
   onSelected() {
     const { startDate, endDate } = this.state;
-    this.props.onSelected && this.props.onSelected(startDate, endDate);
+
+    if (!startDate) {
+      Message.show({ type: 1, message: '请选择开始日期', duration: 1000 });
+      return;
+    }
+    if (!endDate) {
+      Message.show({ type: 1, message: '请选择结束日期', duration: 1000 });
+      return;
+    }
+    if (startDate > endDate) {
+      Message.show({
+        type: 3,
+        message: '开始日期不能大于结束日期',
+        duration: 1000,
+      });
+      return;
+    }
+
+    this.props.onSelected && this.props.onSelected({ startDate, endDate });
     this.onClose();
   }
 
@@ -170,14 +201,14 @@ class DatePickerDialog extends Component<IProps, IState> {
       <div className="datepicker-group">
         <DatePicker
           {...dpConfig}
-          value={new Date(startDate)}
+          value={startDate ? new Date(startDate) : new Date()}
           isOpen={isOpenStartDatePicker}
           onSelect={(date: string) => this.updateDate('start', date)}
           onCancel={() => this.toggleDatePicker('start', false)}
         />
         <DatePicker
           {...dpConfig}
-          value={new Date(endDate)}
+          value={endDate ? new Date(endDate) : new Date()}
           isOpen={isOpenEndDatePicker}
           onSelect={(date: string) => this.updateDate('end', date)}
           onCancel={() => this.toggleDatePicker('end', false)}
@@ -196,7 +227,7 @@ class DatePickerDialog extends Component<IProps, IState> {
           {this.renderDateRange()}
           {this.renderDatePicker()}
           <div className="btn-group">
-            <button className="cancel-btn" onClick={this.onClose}>
+            <button className="cancel-btn" onClick={this.onCancel}>
               取消
             </button>
             <button className="ok-btn" onClick={this.onSelected}>

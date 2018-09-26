@@ -56,9 +56,13 @@
         margin: 0 0.1rem;
         padding: 0.04rem 0.1rem;
 
+        user-select: none;
         text-align: center;
+        white-space: nowrap;
 
         color: @theme-blue;
+
+        -webkit-tap-highlight-color: transparent;
       }
     }
 
@@ -87,7 +91,7 @@
   }
 }
 
-/* 重写部分日期选择器样式 */
+/* 重写日期选择器部分样式 */
 .datepicker {
   .datepicker-header {
     height: 2.5em !important;
@@ -96,6 +100,8 @@
     line-height: 2.5em !important;
   }
   .datepicker-scroll > li {
+    transform: translate3d(0, 0, 0);
+
     font-size: 0.16rem !important;
   }
 }

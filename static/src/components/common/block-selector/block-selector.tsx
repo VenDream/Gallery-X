@@ -1,7 +1,7 @@
 /**
  * 块选择组件
  * @author VenDream
- * @since 2018-9-12
+ * @since 2018-9-26
  */
 
 import React, { Component } from 'react';
@@ -19,6 +19,10 @@ interface IProps {
    * 选择标签
    */
   label: string;
+  /**
+   * 自定义类名
+   */
+  className?: string;
   /**
    * 默认的选中项索引
    */
@@ -82,8 +86,9 @@ export default class BlockSelector extends Component<IProps, IState> {
   }
 
   render() {
+    const blockCls = classnames('g-block-selector', this.props.className);
     return (
-      <div className="g-block-selector">
+      <div className={blockCls}>
         <span className="label">{this.props.label}</span>
         <div className="b-option-list">{this.renderOptions()}</div>
       </div>
