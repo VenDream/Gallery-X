@@ -53,6 +53,7 @@
     "@babel/runtime": "^7.0.0",
     "autobind-decorator": "^2.1.0",
     "classnames": "^2.2.6",
+    "css-hot-loader": "^1.4.2",
     "deep-extend": "^0.6.0",
     "es6-promise": "^4.2.5",
     "helpful-decorators": "^1.7.2",

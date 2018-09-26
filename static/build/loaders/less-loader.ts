@@ -11,21 +11,16 @@ export default function loader(isDev: boolean) {
   return {
     test: /\.less$/,
     use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-      },
+      isDev ? 'css-hot-loader' : '',
+      MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 1,
+          importLoaders: 2,
         },
       },
-      {
-        loader: 'postcss-loader',
-      },
-      {
-        loader: 'less-loader',
-      },
+      'postcss-loader',
+      'less-loader',
     ],
   };
 }

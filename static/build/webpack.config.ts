@@ -78,7 +78,7 @@ export default (
         ? {
             hot: true,
             compress: true,
-            progress: false,
+            progress: true,
             historyApiFallback: true,
             headers: {
               'Access-Control-Allow-Origin': '*',

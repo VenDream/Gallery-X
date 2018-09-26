@@ -11,18 +11,15 @@ export default function loader(isDev: boolean) {
   return {
     test: /\.css$/,
     use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-      },
+      isDev ? 'css-hot-loader' : '',
+      MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
           importLoaders: 1,
         },
       },
-      {
-        loader: 'postcss-loader',
-      },
+      'postcss-loader',
     ],
   };
 }
