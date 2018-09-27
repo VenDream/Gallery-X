@@ -1,0 +1,11 @@
+.git
+.vscode
+.cache
+.*
+LICENSE
+README.md
+example_config
+node_modules
+build_docker_image.sh
+tslint.json
+static

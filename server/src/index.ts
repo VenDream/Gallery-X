@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-9-21
+ * @since 2018-9-27
  */
 
 import Koa from 'koa';
@@ -12,13 +12,20 @@ import session from 'koa-session';
 import favicon from 'koa-favicon';
 import bodyParser from 'koa-bodyparser';
 
+import { loadJSON } from './utils/loader';
 import { appLogger, httpLogger } from './utils/logger';
 import * as routers from './controller';
 import notFoundHandler from './middleare/404';
 import checkAuthHandler from './middleare/auth';
 import globalErrorHandler from './middleare/error';
-import serverConfig from '../../var/server.config.json';
-import staticConfig from '../../var/static.config.json';
+
+// 读取配置文件
+const serverConfig = loadJSON(
+  path.resolve(__dirname, '../../var/server.config.json')
+);
+const staticConfig = loadJSON(
+  path.resolve(__dirname, '../../var/static.config.json')
+);
 
 // 创建Koa实例
 const app = new Koa();
@@ -43,7 +50,7 @@ app.use(bodyParser());
 // 注入全局错误处理模块
 app.use(globalErrorHandler());
 // 提供favicon网站图标
-app.use(favicon(path.resolve(__dirname + './../public/favicon.ico')));
+app.use(favicon(path.resolve(__dirname + './public/favicon.ico')));
 // 注入模版渲染引擎
 app.use(views(staticConfig.distDir));
 // 注入授权检查处理模块
@@ -55,11 +62,5 @@ for (const [name, router] of Object.entries(routers)) {
 }
 // 注入404处理模块
 app.use(notFoundHandler());
-// 监听端口并启动服务
-app.listen(serverConfig.port);
-// 开发模式下，不进行https证书校验
-if (process.env.NODE_ENV === 'development') {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-}
 
-appLogger.info(`服务已启动，监听端口： ${serverConfig.port}`);
+export default app;

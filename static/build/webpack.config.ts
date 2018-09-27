@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-9-27
  */
 
 import path from 'path';

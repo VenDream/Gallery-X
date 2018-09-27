@@ -1,8 +1,0 @@
-{
-  "name": "controller",
-  "author": "VenDream",
-  "description": "路由控制器",
-  "version": "1.0.0",
-  "main": "./controller.ts",
-  "types": "./controller.ts"
-}

@@ -1,13 +1,17 @@
 /**
  * 常用工具函数
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-9-27
  */
 
+import path, { dirname } from 'path';
 import Router from 'koa-router';
 import headers from '../constants/headers';
-import config from '../../../var/server.config.json';
+import { loadJSON } from './loader';
 
+const config = loadJSON(
+  path.resolve(__dirname, '../../../var/server.config.json')
+);
 /**
  * 获取带认证的header，用于请求鉴权api
  *

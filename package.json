@@ -7,7 +7,7 @@
     "dev-server": "cd server && cross-env NODE_ENV=development npm start",
     "dev-static": "cd static && cross-env NODE_ENV=development npm start",
     "build-server": "cd server && npm run build",
-    "build-static": "cd static && cross-env NODE_ENV=development npm run build",
+    "build-static": "cd static && cross-env NODE_ENV=production npm run build",
     "tslint": "tslint -c tslint.json -p . --fix",
     "precommit": "lint-staged",
     "test": "npm test"

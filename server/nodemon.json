@@ -3,5 +3,10 @@
   "ext": "ts js",
   "watch": ["src/"],
   "ignore": ["node_modules/", "dist/", "logs/"],
-  "exec": "node --inspect=9229 -r ts-node/register src/index.ts"
+  "exec": "node --inspect=9229 -r ts-node/register src/bin/www.ts",
+  "env": {
+    "PORT": 8000,
+    "NODE_ENV": "development",
+    "NODE_TLS_REJECT_UNAUTHORIZED": 0
+  }
 }

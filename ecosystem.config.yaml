@@ -1,0 +1,10 @@
+apps:
+  - script: server/dist/bin/www.js
+    name: Gallery-X
+    exec_mode: cluster
+    interpreter: node
+    instances: 0
+    instance_var: INSTANCE_ID
+    error_file: logs/pm2-error.log
+    out_file: logs/pm2-out.log
+    merge_logs: true

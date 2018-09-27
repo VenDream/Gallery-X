@@ -8,10 +8,9 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
  * @returns
  */
 export default function loader(isDev: boolean) {
-  return {
+  const rule = {
     test: /\.css$/,
     use: [
-      isDev ? 'css-hot-loader' : '',
       MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
@@ -22,4 +21,9 @@ export default function loader(isDev: boolean) {
       'postcss-loader',
     ],
   };
+
+  // 开发模式启用CSS热更新
+  isDev && rule.use.unshift('css-hot-loader');
+
+  return rule;
 }
