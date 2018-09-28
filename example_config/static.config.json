@@ -1,6 +1,9 @@
 {
-  "host": "localhost",
-  "port": 3000,
   "distDir": "var/static",
-  "cdnPath": "http://localhost:3000/app/gallery-x/"
+  "cdnPath": "http://localhost:3000/app/gallery-x/",
+  "qiniu": {
+    "bucket": "Your Qiniu Bucket",
+    "accessKey": "Your Qiniu AccessKey",
+    "secretKey": "Your Qiniu SecretKey"
+  }
 }

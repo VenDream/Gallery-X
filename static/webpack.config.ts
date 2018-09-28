@@ -1,10 +1,11 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-9-28
  */
 
 import path from 'path';
+import parse from 'url-parse';
 import WebpackConfig from './build/webpack.config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlBeautifyPlugin from 'html-beautify-webpack-plugin';
@@ -12,6 +13,7 @@ import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 
 const isDev = process.env.NODE_ENV === 'development';
 const config: Record<string, any> = require('../var/static.config.json');
+const cdnUrl = parse(config.cdnPath);
 
 /**
  * 获取基于根目录的文件路径
@@ -50,8 +52,8 @@ export default WebpackConfig(() => {
     ],
     sourcemapMode: 'cheap-module-eval-source-map',
     devServer: {
-      host: config.host,
-      port: config.port,
+      host: cdnUrl.hostname || 'localhost',
+      port: +cdnUrl.port || 3000,
     },
   };
 });

@@ -13,43 +13,47 @@ tag=$timestamp-$short
 # 记录当前目录为项目根目录
 rootdir=$(pwd)
 
+# 颜色变量
+NC='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+# 通用打印函数
+print_info() {
+  MSG=$1
+  printf "${GREEN}---------------------------------------${NC}\n"
+  printf "${GREEN}[$(date +'%Y-%m-%d %H:%M:%S')] ${MSG}${NC}\n"
+  printf "${GREEN}---------------------------------------${NC}\n"
+}
+
 # 清理临时目录
-echo '========================='
-echo '[INFO] clean temp dirs...'
-echo '========================='
+print_info 'Clean temp dirs...'
 rm -rf server/dist \
 && rm -rf server/logs \
 && rm -rf var/static
 
-# 按照依赖
-echo '========================='
-echo '[INFO] install deps...'
-echo '========================='
+# 安装依赖
+print_info 'Install dependencies...'
 npm install --unsafe-perm || exit 1
 
 # 构建后端代码
-echo '========================='
-echo '[INFO] build server app...'
-echo '========================='
+print_info 'Build server app...'
 npm run build-server || exit 1
 
 # 构建前端代码
-echo '========================='
-echo '[INFO] build static app...'
-echo '========================='
+print_info 'Build static app...'
 npm run build-static || exit 1
 
 # 构建docker镜像
-echo '========================='
-echo '[INFO] build docker image...'
-echo '========================='
+print_info 'Build docker image...'
 cd $rootdir
 docker build -t $img . \
 && docker tag $img $img:$tag \
 || exit 0
+print_info "Done, name=$img, tag=$tag"
 
-echo '========================='
-echo '[INFO] Done.'
-echo "[INFO] Image name: $img"
-echo "[INFO] Image tag: $tag"
-echo '========================='
+# 上传前端静态文件到CDN
+print_info 'Upload files to CDN...'
+node upload-to-qiniu.js
+
+# 打印总耗时
+print_info "Execution time: $SECONDS secs"

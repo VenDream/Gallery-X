@@ -80,6 +80,7 @@ export default (
             compress: true,
             progress: true,
             historyApiFallback: true,
+            publicPath: configs.publicPath,
             headers: {
               'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': '*',
