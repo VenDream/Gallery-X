@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-9-24
+ * @since 2018-9-30
  */
 
 import Router from 'koa-router';
@@ -9,6 +9,7 @@ import * as UserSvr from '../../service/user';
 import { getAccessToken } from '../auth';
 import { getSessionByKey } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
+import { returnIllustResp } from '../illust/returner';
 import RESPONSE_CODE from '../../constants/response-code';
 import { setUserSession, clearUserSession } from './session';
 
@@ -107,6 +108,15 @@ router.post('/unfollow', async (ctx, next) => {
       message: resp.message || resp.userMessage || '操作失败',
     };
   }
+});
+
+router.get('/illusts', async (ctx, next) => {
+  const { userId } = ctx.request.query as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const illustsResp = await UserSvr.getUserIllusts(token, userId);
+  const resp = handlePixivResp(illustsResp);
+
+  returnIllustResp(ctx, resp);
 });
 
 export default router.routes();

@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import TitleBar from './title-bar';
 import ImageList from './image-list';
 import DetailInfo from './detail-info';
+import ArtistInfo from './artist-info';
 import './illust-detail.less';
 
 interface IProps {
@@ -32,6 +33,7 @@ export default class IllustDetail extends Component<IProps, IState> {
         <div className="detail-content">
           <ImageList illust={illust} />
           <DetailInfo illust={illust} />
+          <ArtistInfo artist={illust.user} />
         </div>
       </div>
     );

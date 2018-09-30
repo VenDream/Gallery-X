@@ -1,7 +1,7 @@
 /**
  * 用户相关接口服务
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-9-30
  */
 
 import * as OAuthSvr from '../oauth';
@@ -12,6 +12,7 @@ const apiHost = 'https://app-api.pixiv.net';
 const apiList = {
   follow: '/v1/user/follow/add',
   unfollow: '/v1/user/follow/delete',
+  illusts: '/v1/user/illusts',
 };
 
 /**
@@ -73,5 +74,26 @@ export function unfollow(accessToken: string, userId: string) {
   return ajax.post(api, {
     headers,
     data: { user_id: userId },
+  });
+}
+
+/**
+ * 获取用户近期作品
+ *
+ * @export
+ * @param {string} accessToken accessToken
+ * @param {string} userId 用户ID
+ */
+export function getUserIllusts(accessToken: string, userId: string) {
+  const api = apiHost + apiList.illusts;
+  const headers = getAuthHeaders(accessToken);
+
+  return ajax.get(api, {
+    headers,
+    data: {
+      type: 'illust',
+      filter: 'for_ios',
+      user_id: userId,
+    },
   });
 }

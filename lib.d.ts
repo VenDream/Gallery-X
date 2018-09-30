@@ -57,6 +57,30 @@ interface UserModel {
   [key: string]: any;
 }
 
+// Pixiv画师数据模型
+interface ArtistModel {
+  /**
+   * ID
+   */
+  id: string;
+  /**
+   * 帐号
+   */
+  account: string;
+  /**
+   * 头像
+   */
+  avatar: string;
+  /**
+   * 昵称
+   */
+  name: string;
+  /**
+   * 是否已关注
+   */
+  isFollowed: boolean;
+}
+
 // Pixiv插画数据模型
 interface IllustModel {
   /**
@@ -114,28 +138,7 @@ interface IllustModel {
   /**
    * 插画作者
    */
-  user: {
-    /**
-     * ID
-     */
-    id: string;
-    /**
-     * 帐号
-     */
-    account: string;
-    /**
-     * 头像
-     */
-    avatar: string;
-    /**
-     * 昵称
-     */
-    name: string;
-    /**
-     * 是否已关注
-     */
-    isFollowed: boolean;
-  };
+  user: ArtistModel;
   /**
    * 插画图片源
    */
