@@ -1,7 +1,7 @@
 /**
  * 增强图片组件，支持图片预加载
  * @author VenDream
- * @since 2018-8-15
+ * @since 2018-9-30
  */
 
 import React, { Component } from 'react';
@@ -38,6 +38,10 @@ interface ImageProps {
    * 自定义样式
    */
   style?: Record<string, any>;
+  /**
+   * 图片加载成功回调
+   */
+  onImageLoad?: (image?: HTMLImageElement) => void;
 }
 
 interface ImageState {
@@ -59,6 +63,9 @@ export default class Image extends Component<ImageProps, ImageState> {
     transitionClass: 'fade-in',
   };
 
+  // img节点引用
+  image: React.RefObject<HTMLImageElement> = React.createRef();
+
   state: ImageState = {
     loaded: false,
     transitionClass: '',
@@ -68,6 +75,7 @@ export default class Image extends Component<ImageProps, ImageState> {
   handleImageLoaded() {
     const { transitionClass } = this.props;
     this.setState({ loaded: true, transitionClass });
+    this.props.onImageLoad && this.props.onImageLoad(this.image.current);
   }
 
   @autobind
@@ -90,6 +98,7 @@ export default class Image extends Component<ImageProps, ImageState> {
         <img
           src={src}
           alt={alt}
+          ref={this.image}
           className="original"
           onLoad={this.handleImageLoaded}
           onError={this.handleImageError}

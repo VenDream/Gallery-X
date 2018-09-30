@@ -1,0 +1,24 @@
+.image-list {
+  width: 100%;
+  padding: 0.1rem;
+
+  // 利用`padding-bottom`的hack样式使图片默认正方形占位
+  // 参考：https://www.voorhoede.nl/en/blog/say-no-to-image-reflow/
+  .g-image {
+    position: relative;
+
+    height: 0;
+    padding-bottom: 100%;
+
+    box-shadow: 0 0 0.01rem #333;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  .g-image + .g-image {
+    margin-top: 0.1rem;
+  }
+}

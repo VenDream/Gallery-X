@@ -1,0 +1,7 @@
+{
+  "name": "cmp-illust-detail",
+  "version": "1.0.0",
+  "description": "插画详情组件",
+  "main": "./illust-detail.tsx",
+  "types": "./illust-detail.tsx"
+}

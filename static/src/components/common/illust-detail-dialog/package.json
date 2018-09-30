@@ -1,0 +1,7 @@
+{
+  "name": "illust-detail-dialog",
+  "version": "1.0.0",
+  "description": "作品详情弹窗",
+  "main": "./illust-detail-dialog.tsx",
+  "types": "./illust-detail-dialog.tsx"
+}

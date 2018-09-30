@@ -1,0 +1,58 @@
+@import '~assets/styles/variable.less';
+
+.detail-info {
+  padding: 0 0.1rem 0.2rem;
+
+  border-bottom: 0.01rem solid #ddd;
+
+  .statistic {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 0.1rem;
+
+    color: #aaa;
+
+    font-size: 0.14rem;
+
+    .total-view, .total-like {
+      display: inline-flex;
+      align-items: center;
+
+      margin-left: 0.1rem;
+
+      .data-value {
+        color: @theme-blue;
+      }
+    }
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-bottom: 0.1rem;
+
+    .tag {
+      margin-right: 0.1rem;
+      margin-bottom: 0.05rem;
+      padding: 0.05rem 0.1rem;
+
+      cursor: pointer;
+      user-select: none;
+
+      color: #666;
+      border-radius: 0.04rem;
+      background-color: #ddd;
+
+      font-size: 0.12rem;
+    }
+  }
+
+  .caption {
+    color: #333;
+
+    font-size: 0.14rem;
+    line-height: 1.3em;
+  }
+}

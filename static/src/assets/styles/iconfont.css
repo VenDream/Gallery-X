@@ -54,3 +54,7 @@
 .icon-loading:before {
   content: '\e668';
 }
+
+.icon-close:before {
+  content: '\e65a';
+}
