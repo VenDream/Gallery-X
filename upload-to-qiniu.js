@@ -51,12 +51,14 @@ function uploadToQiniu(dir) {
       }
       const { statusCode } = respInfo;
       const cdnFilename = cdnPath + file.name;
-      if (+statusCode === 200) {
+      if (+statusCode === 200 || +statusCode === 614) {
         uploaded += 1;
-        logSucc(`[${uploaded}/${files.length}] ${file.path} => ${cdnFilename}`);
-        if (uploaded === files.length) {
-          logSucc('[INFO] All files uploaded');
-        }
+        const isExisted = +statusCode === 614;
+        const succInfo = isExisted
+          ? `[${uploaded}/${files.length}] ${cdnFilename} exists`
+          : `[${uploaded}/${files.length}] ${file.path} => ${cdnFilename}`;
+        logSucc(succInfo);
+        uploaded === files.length && logSucc('[INFO] All files uploaded');
       } else {
         logErr('[ERROR]', statusCode, respBody);
       }
