@@ -16,19 +16,20 @@ import { getRankingIllusts, getSearchIllusts } from 'actions/illust';
 const DEFAULT_LOADER_STEP = 30;
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
-  const app = state.app;
-  const illust = state.illust;
-  const filters = state.filter;
-  const illusts = illust.ids.map(id => illust.byId[id]);
-  const filter =
-    app.category === CATEGORY.RANKING ? filters.ranking : filters.search;
+  const { app, page, filter, illust } = state;
+  const isRanking = app.category === CATEGORY.RANKING;
+  const currFilter = isRanking ? filter.ranking : filter.search;
+  const currIllustIds = isRanking
+    ? page.ranking.illustIds
+    : page.search.illustIds;
+  const currIllusts = currIllustIds.map(id => illust.byId[id]);
 
   return {
     step: ownProps.step || DEFAULT_LOADER_STEP,
-    filter,
+    filter: currFilter,
     category: app.category,
     status: illust.status,
-    illusts,
+    illusts: currIllusts,
   };
 }
 

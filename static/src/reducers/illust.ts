@@ -17,22 +17,16 @@ const initState: IllustState = {
 
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
-    case ACTIONS.LOCATION_CHANGE: {
-      return initState;
-    }
-
     // 正在获取
     case ACTIONS.GET_RANKING_ILLUST_ING:
     case ACTIONS.GET_SEARCH_ILLUST_ING: {
       return { ...state, status: 1 };
     }
-
     // 获取失败
     case ACTIONS.GET_RANKING_ILLUST_FAIL:
     case ACTIONS.GET_SEARCH_ILLUST_FAIL: {
       return { ...state, status: 2 };
     }
-
     // 获取成功
     case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
     case ACTIONS.GET_SEARCH_ILLUST_SUCCESS: {
@@ -44,7 +38,6 @@ export default function reducer(state = initState, action: AnyAction) {
         status: 0,
       };
     }
-
     // 获取完毕
     case ACTIONS.GET_RANKING_ILLUST_END:
     case ACTIONS.GET_SEARCH_ILLUST_END: {

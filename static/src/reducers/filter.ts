@@ -58,7 +58,6 @@ export default function reducer(state = initState, action: AnyAction) {
         },
       };
     }
-
     default:
       return state;
   }

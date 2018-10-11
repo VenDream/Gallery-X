@@ -18,5 +18,9 @@ export function getUpdatedIllusts(illusts: IllustModel[], state: IllustState) {
     ids.push(illust.id);
     byId[illust.id] = illust;
   }
-  return { byId: { ...state.byId, ...byId }, ids: [...state.ids, ...ids] };
+  return {
+    byId: { ...state.byId, ...byId },
+    // 利用ES6的set去重
+    ids: Array.from(new Set(state.ids.concat(ids))),
+  };
 }

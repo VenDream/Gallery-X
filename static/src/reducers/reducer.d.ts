@@ -54,7 +54,7 @@ interface IllustState {
 }
 
 /**
- * 筛选条件state
+ * 筛选条件 state
  */
 interface FilterState {
   /**
@@ -68,11 +68,30 @@ interface FilterState {
 }
 
 /**
+ * 页面 state
+ */
+interface PageState {
+  /**
+   * 排行页面插画ID
+   */
+  ranking: {
+    illustIds: string[];
+  };
+  /**
+   * 搜索页面插画ID
+   */
+  search: {
+    illustIds: string[];
+  };
+}
+
+/**
  * Store全局状态
  */
 interface StoreState {
   app: AppState;
   user: UserState;
+  page: PageState;
   illust: IllustState;
   filter: FilterState;
   layout: LayoutState;
