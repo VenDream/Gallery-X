@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2018-10-11
  */
 
 import { AnyAction } from 'redux';
@@ -18,11 +18,10 @@ const DEFAULT_LOADER_STEP = 30;
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const app = state.app;
   const illust = state.illust;
+  const filters = state.filter;
   const illusts = illust.ids.map(id => illust.byId[id]);
   const filter =
-    app.category === CATEGORY.RANKING
-      ? illust.rankingFilter
-      : illust.searchFilter;
+    app.category === CATEGORY.RANKING ? filters.ranking : filters.search;
 
   return {
     step: ownProps.step || DEFAULT_LOADER_STEP,

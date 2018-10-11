@@ -51,14 +51,20 @@ interface IllustState {
    * 状态 0: 就绪，1: 加载中，2: 加载失败 3: 加载完毕
    */
   status: number;
+}
+
+/**
+ * 筛选条件state
+ */
+interface FilterState {
   /**
    * 排行榜筛选参数
    */
-  rankingFilter: RankingFilter;
+  ranking: RankingFilter;
   /**
    * 搜索参数
    */
-  searchFilter: SearchFilter;
+  search: SearchFilter;
 }
 
 /**
@@ -68,5 +74,6 @@ interface StoreState {
   app: AppState;
   user: UserState;
   illust: IllustState;
+  filter: FilterState;
   layout: LayoutState;
 }

@@ -1,7 +1,7 @@
 /**
  * 搜索框容器组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2018-10-11
  */
 
 import { AnyAction } from 'redux';
@@ -13,7 +13,7 @@ import { updateSearchFilter } from 'actions/illust';
 
 function mapStateToProps(state: StoreState) {
   return {
-    filter: state.illust.searchFilter,
+    filter: state.filter.search,
   };
 }
 
