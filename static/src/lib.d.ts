@@ -1,7 +1,7 @@
 /**
  * 前端全局类型声明
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-10-17
  */
 
 /// <reference path="../../lib.d.ts" />
@@ -45,6 +45,15 @@ interface FetchOption {
    * 是否返回原始数据
    */
   raw?: boolean;
+  /**
+   * 是否支持取消请求
+   */
+  isCancelable?: boolean;
+}
+
+interface CancelablePromise {
+  promise: Promise<any>;
+  cancel(): void;
 }
 
 interface Window {

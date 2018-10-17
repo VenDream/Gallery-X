@@ -1,7 +1,7 @@
 /**
  * 全局ajax公用方法
  * @author VenDream
- * @since 2018-8-14
+ * @since 2018-10-17
  */
 
 import qs from 'qs';
@@ -23,7 +23,31 @@ const DEFAULT_OPTIONS: FetchOption = {
   credentials: 'include',
   dataType: 'json',
   raw: false,
+  isCancelable: false,
 };
+
+/**
+ * 使promise可以取消
+ * 参考：https://github.com/facebook/react/issues/5465#issuecomment-157888325
+ *
+ * @export
+ * @param {Promise<any>} promise promise
+ * @returns
+ */
+export function makeCancelable(promise: Promise<any>) {
+  let hasCanceled = false;
+  const wrappedPromise: Promise<any> = new Promise((resolve, reject) => {
+    promise
+      .then(val => (hasCanceled ? reject({ isCanceled: true }) : resolve(val)))
+      .catch(err => (hasCanceled ? reject({ isCanceled: true }) : reject(err)));
+  });
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled = true;
+    },
+  };
+}
 
 /**
  * 通用请求方法
@@ -33,7 +57,10 @@ const DEFAULT_OPTIONS: FetchOption = {
  * @param {FetchOption} [options] 请求参数
  * @returns
  */
-export function request(url: string, options?: FetchOption) {
+export function request(
+  url: string,
+  options?: FetchOption
+): CancelablePromise | Promise<any> {
   const opt: FetchOption = deepExtend({}, DEFAULT_OPTIONS, options);
   const reqMethod = opt.method;
   const qsOpt = qs.stringify(opt.body);
@@ -48,8 +75,8 @@ export function request(url: string, options?: FetchOption) {
     opt.body = qsOpt;
   }
 
-  const { raw, dataType, ...fetchOpt } = opt;
-  return window
+  const { raw, dataType, isCancelable, ...fetchOpt } = opt;
+  const reqPromise = window
     .fetch(url, fetchOpt)
     .then((response: Response) => response.json())
     .then((res: Record<string, any>) => {
@@ -67,6 +94,8 @@ export function request(url: string, options?: FetchOption) {
       console.error(err);
       return null;
     });
+
+  return isCancelable ? makeCancelable(reqPromise) : reqPromise;
 }
 
 /**

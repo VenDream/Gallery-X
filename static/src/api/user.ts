@@ -1,7 +1,7 @@
 /**
  * 用户相关接口
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-10-17
  */
 
 import API from './index';
@@ -15,5 +15,5 @@ import * as ajax from 'utils/ajax';
  */
 export function getUserIllusts(userId: string) {
   const api = API.get('USER_ILLUSTS');
-  return ajax.get(api, { body: { userId } });
+  return ajax.get(api, { body: { userId }, isCancelable: true });
 }

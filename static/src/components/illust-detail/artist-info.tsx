@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-10-17
  */
 
 import React, { Component } from 'react';
@@ -40,8 +40,16 @@ export default class ArtistInfo extends Component<IProps, IState> {
     isLoadingIllusts: false,
   };
 
+  // 可取消promise队列
+  cancelablePromises: CancelablePromise[] = [];
+
   componentDidMount() {
     this.fetchUserIllusts();
+  }
+
+  // 组件卸载时，取消正在进行的promise
+  componentWillUnmount() {
+    this.cancelablePromises.forEach(cp => cp.cancel());
   }
 
   // 请求画师作品数据
@@ -50,15 +58,17 @@ export default class ArtistInfo extends Component<IProps, IState> {
     try {
       this.setState({ isLoadingIllusts: true });
       // 获取数据并取前3个进行展示
-      const data = await getUserIllusts(id);
+      const userIllustsCP = getUserIllusts(id) as CancelablePromise;
+      this.cancelablePromises.push(userIllustsCP);
+
+      const data = await userIllustsCP.promise;
       if (data && data.illusts) {
         const illusts: IllustModel[] = data.illusts || [];
         this.setState({ illusts: illusts.slice(0, 3) });
       }
+      this.setState({ isLoadingIllusts: false });
     } catch (err) {
       console.error(err);
-    } finally {
-      this.setState({ isLoadingIllusts: false });
     }
   }
 
