@@ -5,10 +5,12 @@
  */
 
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import autobind from 'autobind-decorator';
 
-import { getUserIllusts } from 'api/user';
+import { getUserIllusts, follow, unfollow } from 'api/user';
 import Image from 'components/common/image';
+import Message from 'components/common/message';
 import IllustDetailDialog from 'components/common/illust-detail-dialog';
 import './artist-info.less';
 
@@ -21,6 +23,14 @@ interface IProps {
    * 添加插画
    */
   addIllust: (illusts: IllustModel[]) => void;
+  /**
+   * 关注用户
+   */
+  follow: (userId: string) => void;
+  /**
+   * 取消关注用户
+   */
+  unfollow: (userId: string) => void;
 }
 
 interface IState {
@@ -77,6 +87,8 @@ export default class ArtistInfo extends Component<IProps, IState> {
         const illusts: IllustModel[] = data.illusts || [];
         this.props.addIllust(illusts);
         this.setState({ illusts });
+      } else {
+        Message.show({ type: 3, message: '网络错误，请刷新重试' });
       }
       this.setState({ isLoadingIllusts: false });
     } catch (err) {
@@ -90,9 +102,51 @@ export default class ArtistInfo extends Component<IProps, IState> {
    * @memberof ArtistInfo
    */
   @autobind
-  follow() {
+  async toggleFollow() {
+    const { isOperating } = this.state;
+    const { id, isFollowed } = this.props.artist;
+    const followReq = isFollowed ? unfollow : follow;
+    const followAction = isFollowed ? this.props.unfollow : this.props.follow;
+
+    if (isOperating) return;
+
+    try {
+      this.setState({ isOperating: true });
+      const data = await followReq(id);
+      if (data && +data.code === 200) {
+        followAction(id);
+      } else {
+        Message.show({ type: 3, message: '网络错误，请重试' });
+      }
+      this.setState({ isOperating: false });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // 渲染关注按钮
+  renderFollowBtn() {
     const { isFollowed } = this.props.artist;
-    console.log(isFollowed ? '取消关注' : '关注');
+    const { isOperating } = this.state;
+    const followBtnCls = classnames('follow-btn', {
+      operating: isOperating,
+      followed: !isOperating && isFollowed,
+    });
+    const followBtnContent = isOperating ? (
+      <span className="rotate">
+        <i className="g-icon icon-loading" />
+      </span>
+    ) : isFollowed ? (
+      <span>已关注</span>
+    ) : (
+      <span>关注</span>
+    );
+
+    return (
+      <button className={followBtnCls} onClick={this.toggleFollow}>
+        {followBtnContent}
+      </button>
+    );
   }
 
   // 渲染近期作品
@@ -120,7 +174,8 @@ export default class ArtistInfo extends Component<IProps, IState> {
   }
 
   render() {
-    const { id, name, avatar, isFollowed } = this.props.artist;
+    const { id, name, avatar } = this.props.artist;
+
     return (
       <div className="artist-info" data-id={id}>
         <div className="info">
@@ -128,14 +183,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
             <Image src={avatar} className="artist-avatar" />
             <p className="artist-name">{name}</p>
           </div>
-          <div className="right-block">
-            <button
-              className={`follow-btn${isFollowed ? ' followed' : ''}`}
-              onClick={this.follow}
-            >
-              {isFollowed ? '已关注' : '关注'}
-            </button>
-          </div>
+          <div className="right-block">{this.renderFollowBtn()}</div>
         </div>
         <div className="recent-works">{this.renderRecentWorks()}</div>
       </div>

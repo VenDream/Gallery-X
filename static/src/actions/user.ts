@@ -1,7 +1,7 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-10-17
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -118,5 +118,31 @@ export function logout() {
       console.error(e);
       Message.show({ type: 3, message: MESSAGE.LOGOUT_FAILED });
     }
+  };
+}
+
+/**
+ * 关注用户
+ *
+ * @export
+ * @param {string} userId 用户ID
+ * @returns
+ */
+export function follow(userId: string) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.FOLLOW_USER, data: { userId } });
+  };
+}
+
+/**
+ * 取消关注用户
+ *
+ * @export
+ * @param {string} userId 用户ID
+ * @returns
+ */
+export function unfollow(userId: string) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.UNFOLLOW_USER, data: { userId } });
   };
 }

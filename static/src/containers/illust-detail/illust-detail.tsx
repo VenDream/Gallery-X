@@ -10,6 +10,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import IllustDetail from 'components/illust-detail';
 import { addIllust } from 'actions/illust';
+import { follow, unfollow } from 'actions/user';
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const illustId: string = ownProps.id;
@@ -30,6 +31,8 @@ function mapDispatchToProps(
 ) {
   return {
     addIllust: (illusts: IllustModel[]) => dispatch(addIllust(illusts)),
+    follow: (userId: string) => dispatch(follow(userId)),
+    unfollow: (userId: string) => dispatch(unfollow(userId)),
   };
 }
 

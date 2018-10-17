@@ -34,7 +34,12 @@
       padding-right: 0.1rem;
 
       .follow-btn {
+        flex-basis: 90%;
+
+        max-width: 0.6rem;
         padding: 0.05rem 0.1rem;
+
+        transition: all 0.2s ease;
 
         color: @theme-blue;
         border: 0.01rem solid @theme-blue;
@@ -42,6 +47,15 @@
         background-color: #fff;
 
         font-size: 0.12rem;
+
+        &.operating {
+          .rotate {
+            display: inline-block;
+          }
+          .g-icon {
+            font-size: 0.12rem;
+          }
+        }
 
         &.followed {
           color: #fff;

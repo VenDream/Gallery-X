@@ -17,6 +17,9 @@ export default {
   ADD_ILLUST: 'ADD_ILLUST',
   // 添加艺术家
   ADD_ARTIST: 'ADD_ARTIST',
+  // 关注/取消关注用户
+  FOLLOW_USER: 'FOLLOW_USER',
+  UNFOLLOW_USER: 'UNFOLLOW_USER',
 
   // 获取插画排行榜
   UPDATE_RANKING_FILTER: 'UPDATE_RANKING_FILTER',

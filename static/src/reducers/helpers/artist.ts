@@ -25,3 +25,29 @@ export function getUpdatedArtists(illusts: IllustModel[], state: ArtistState) {
     ids: Array.from(new Set(state.ids.concat(ids))),
   };
 }
+
+/**
+ * 获取关注状态更新后的状态
+ *
+ * @export
+ * @param {string} artistId 艺术家ID
+ * @param {ArtistState} state 艺术家state
+ * @param {boolean} followStatus 关注状态
+ */
+export function getFollowToggledState(
+  artistId: string,
+  state: ArtistState,
+  followStatus: boolean
+) {
+  const artist: ArtistModel = {
+    ...state.byId[artistId],
+    isFollowed: followStatus,
+  };
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [artistId]: artist,
+    },
+  };
+}

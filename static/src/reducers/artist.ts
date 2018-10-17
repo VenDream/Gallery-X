@@ -6,7 +6,7 @@
 
 import { AnyAction } from 'redux';
 import ACTIONS from 'constants/actions';
-import { getUpdatedArtists } from './helpers/artist';
+import { getUpdatedArtists, getFollowToggledState } from './helpers/artist';
 
 const initState: ArtistState = {
   byId: {},
@@ -15,6 +15,16 @@ const initState: ArtistState = {
 
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
+    // 关注用户
+    case ACTIONS.FOLLOW_USER: {
+      const artistId = action.data.userId;
+      return getFollowToggledState(artistId, state, true);
+    }
+    // 取消关注用户
+    case ACTIONS.UNFOLLOW_USER: {
+      const artistId = action.data.userId;
+      return getFollowToggledState(artistId, state, false);
+    }
     // 增加插画时，同步增加涉及到的艺术家
     case ACTIONS.ADD_ILLUST:
     case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
@@ -28,7 +38,6 @@ export default function reducer(state = initState, action: AnyAction) {
         ...updatedArtists,
       };
     }
-
     default:
       return state;
   }
