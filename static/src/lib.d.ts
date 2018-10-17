@@ -13,6 +13,13 @@ type DATA_TYPE = 'text' | 'json';
 type METHOD = 'GET' | 'POST' | 'OPTION' | 'PUT';
 type CREDENTIALS = 'omit' | 'same-origin' | 'include';
 
+interface IllustSaveModel extends IllustBaseModel {
+  /**
+   * 插画作者ID
+   */
+  user: string;
+}
+
 interface FetchOption {
   /**
    * 跨域设置

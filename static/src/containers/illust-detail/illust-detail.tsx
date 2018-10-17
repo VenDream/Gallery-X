@@ -14,7 +14,13 @@ import { addIllust } from 'actions/illust';
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const illustId: string = ownProps.id;
   const illusts = state.illust;
-  const illust: IllustModel = illusts.byId[illustId];
+  const artists = state.artist;
+  const basicIllust = illusts.byId[illustId];
+  // 从illust状态和artist状态中取出实际的数据
+  const illust: IllustModel = {
+    ...basicIllust,
+    user: artists.byId[basicIllust.user],
+  };
 
   return { id: illustId, illust };
 }

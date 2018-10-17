@@ -32,13 +32,27 @@ interface LayoutState {
 }
 
 /**
+ * 艺术家 state
+ */
+interface ArtistState {
+  /**
+   * 具体的艺术家对象
+   */
+  byId: Record<string, ArtistModel>;
+  /**
+   * 艺术家引用集合
+   */
+  ids: string[];
+}
+
+/**
  * 插画 state
  */
 interface IllustState {
   /**
    * 具体的插画对象
    */
-  byId: Record<string, IllustModel>;
+  byId: Record<string, IllustSaveModel>;
   /**
    * 插画引用集合
    */
@@ -92,6 +106,7 @@ interface StoreState {
   app: AppState;
   user: UserState;
   page: PageState;
+  artist: ArtistState;
   illust: IllustState;
   filter: FilterState;
   layout: LayoutState;
