@@ -84,3 +84,22 @@
     opacity: 1;
   }
 }
+
+/* 从右往左渐显动画 */
+.fade-in-right {
+  animation: fade-in-right 0.4s ease;
+
+  animation-fill-mode: forwards;
+}
+@keyframes fade-in-right {
+  0% {
+    transform: translate3d(100%, 0, 0);
+
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+
+    opacity: 1;
+  }
+}

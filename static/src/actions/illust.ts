@@ -111,3 +111,16 @@ export function getSearchIllusts(opts: SearchFilter) {
     }
   };
 }
+
+/**
+ * 添加插画
+ *
+ * @export
+ * @param {IllustModel[]} illusts 插画
+ * @returns
+ */
+export function addIllust(illusts: IllustModel[]) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.ADD_ILLUST, data: { illusts } });
+  };
+}

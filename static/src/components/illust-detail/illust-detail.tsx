@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-10-17
  */
 
 import React, { Component } from 'react';
@@ -21,19 +21,24 @@ interface IProps {
    * 插画具体数据
    */
   illust: IllustModel;
+  /**
+   * 添加插画
+   */
+  addIllust: (illusts: IllustModel[]) => void;
 }
 interface IState {}
 
 export default class IllustDetail extends Component<IProps, IState> {
   render() {
-    const { illust } = this.props;
+    const { illust, addIllust } = this.props;
+
     return (
       <div className="illust-detail">
         <TitleBar illust={illust} />
         <div className="detail-content">
           <ImageList illust={illust} />
           <DetailInfo illust={illust} />
-          <ArtistInfo artist={illust.user} />
+          <ArtistInfo artist={illust.user} addIllust={addIllust} />
         </div>
       </div>
     );

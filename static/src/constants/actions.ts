@@ -1,7 +1,7 @@
 /**
  * ACTION常量定义
  * @author VenDream
- * @since 2018-6-27
+ * @since 2018-10-17
  */
 
 export default {
@@ -12,6 +12,11 @@ export default {
   LOCATION_CHANGE: '@@router/LOCATION_CHANGE',
   // 设置相关布局组件的显示状态
   SET_VISIBLE: 'SET_VISIBLE',
+
+  // 添加插画
+  ADD_ILLUST: 'ADD_ILLUST',
+  // 添加艺术家
+  ADD_ARTIST: 'ADD_ARTIST',
 
   // 获取插画排行榜
   UPDATE_RANKING_FILTER: 'UPDATE_RANKING_FILTER',

@@ -27,7 +27,8 @@ export default function reducer(state = initState, action: AnyAction) {
     case ACTIONS.GET_SEARCH_ILLUST_FAIL: {
       return { ...state, status: 2 };
     }
-    // 获取成功
+    // 获取成功 & 添加插画
+    case ACTIONS.ADD_ILLUST:
     case ACTIONS.GET_RANKING_ILLUST_SUCCESS:
     case ACTIONS.GET_SEARCH_ILLUST_SUCCESS: {
       const illusts: IllustModel[] = action.data.illusts;

@@ -56,17 +56,23 @@
 
     .works-list {
       display: flex;
+      overflow: auto;
+      overflow: overlay;
+      overflow-y: hidden;
       align-items: center;
 
+      width: 100%;
+      padding: 0.1rem 0;
+
       .work-item {
-        width: 33%;
+        flex: 1 0 33%;
+
         height: 100%;
 
         border-radius: 0.04rem;
         box-shadow: 0 0 0.01rem #666;
 
         line-height: 0;
-
         .g-image {
           position: relative;
 

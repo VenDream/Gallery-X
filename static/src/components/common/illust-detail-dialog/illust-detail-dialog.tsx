@@ -23,7 +23,7 @@ class IllustDetailDialog extends Component<IProps> {
     const { id } = this.props;
 
     return id ? (
-      <div className="illust-detail-dialog fade-in">
+      <div className="illust-detail-dialog fade-in-right">
         <IllustDetail id={this.props.id} store={store} />
       </div>
     ) : null;

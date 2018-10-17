@@ -9,6 +9,7 @@ import autobind from 'autobind-decorator';
 
 import { getUserIllusts } from 'api/user';
 import Image from 'components/common/image';
+import IllustDetailDialog from 'components/common/illust-detail-dialog';
 import './artist-info.less';
 
 interface IProps {
@@ -16,6 +17,10 @@ interface IProps {
    * 画师数据
    */
   artist: ArtistModel;
+  /**
+   * 添加插画
+   */
+  addIllust: (illusts: IllustModel[]) => void;
 }
 
 interface IState {
@@ -52,9 +57,15 @@ export default class ArtistInfo extends Component<IProps, IState> {
     this.cancelablePromises.forEach(cp => cp.cancel());
   }
 
+  // 查看其它插画
+  checkIllust(id: string) {
+    IllustDetailDialog.show({ id });
+  }
+
   // 请求画师作品数据
   async fetchUserIllusts() {
     const { id } = this.props.artist;
+
     try {
       this.setState({ isLoadingIllusts: true });
       // 获取数据并取前3个进行展示
@@ -64,7 +75,8 @@ export default class ArtistInfo extends Component<IProps, IState> {
       const data = await userIllustsCP.promise;
       if (data && data.illusts) {
         const illusts: IllustModel[] = data.illusts || [];
-        this.setState({ illusts: illusts.slice(0, 3) });
+        this.props.addIllust(illusts);
+        this.setState({ illusts });
       }
       this.setState({ isLoadingIllusts: false });
     } catch (err) {
@@ -93,7 +105,11 @@ export default class ArtistInfo extends Component<IProps, IState> {
     ) : hasWorks ? (
       <div className="works-list">
         {illusts.map(illust => (
-          <span className="work-item" key={illust.id}>
+          <span
+            className="work-item"
+            key={illust.id}
+            onClick={() => this.checkIllust(illust.id)}
+          >
             <Image src={illust.imageUrls[0].medium} />
           </span>
         ))}
