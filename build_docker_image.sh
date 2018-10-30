@@ -53,7 +53,7 @@ print_info "Done, name=$img, tag=$tag"
 
 # 上传前端静态文件到CDN
 print_info 'Upload files to CDN...'
-node upload-to-qiniu.js
+sh upload_static_files.sh
 
 # 打印总耗时
 print_info "Execution time: $SECONDS secs"
