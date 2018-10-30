@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # 镜像名
 img=vendream/gallery-x

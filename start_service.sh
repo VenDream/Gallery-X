@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # 拉取最新镜像
 docker pull vendream/gallery-x:latest

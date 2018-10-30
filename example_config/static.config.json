@@ -5,5 +5,11 @@
     "bucket": "Your Qiniu Bucket",
     "accessKey": "Your Qiniu AccessKey",
     "secretKey": "Your Qiniu SecretKey"
+  },
+  "ali-oss": {
+    "region": "Your Ali-OSS region",
+    "bucket": "Your Ali-OSS bucket",
+    "accessKey": "Your Ali-OSS AccessKey",
+    "secretKey": "Your Ali-OSS SecretKey"
   }
 }
