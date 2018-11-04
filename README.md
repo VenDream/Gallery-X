@@ -6,7 +6,7 @@ Gallery-X is a third-party pixiv gallery with some extra features.
 
 ### Online demo
 
-[See here](http://43.239.159.171:8000/)
+[See here](http://pixiv.yeshenxue.com/)
 
 ### Dev
 

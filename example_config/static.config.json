@@ -1,6 +1,6 @@
 {
   "distDir": "var/static",
-  "cdnPath": "http://localhost:3000/app/gallery-x/",
+  "cdnPath": "http://localhost:3000/static/",
   "qiniu": {
     "bucket": "Your Qiniu Bucket",
     "accessKey": "Your Qiniu AccessKey",
