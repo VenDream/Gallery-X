@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  galery-x:
+    name: Gallery-X
+    image: vendream/gallery-x:latest
+    ports:
+      - '8000:8000'
+    depends_on:
+      - redis
+    volumes:
+      - '/$(pwd)/logs:/app/logs'
+      - '/$(pwd)/var/server.config.json:/app/var/server.config.json'
+      - '/$(pwd)/var/static.config.json:/app/var/static.config.json'
+  redis:
+    name: Redis
+    image: 5-alpine
+    ports:
+      - '6379'
+    volumes:
+      - '/data/gallery-x/redis:/data'
