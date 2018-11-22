@@ -1,7 +1,7 @@
 /**
  * 全局授权校验处理模块
  * @author VenDream
- * @since 2018-8-20
+ * @since 2018-11-22
  */
 
 import Router from 'koa-router';
@@ -19,10 +19,10 @@ export default function checkUserAuth() {
 
     // 无授权访问，返回错误消息
     if (isAuthNeededApi && !hasUserSession) {
-      ctx.body = {
+      return (ctx.body = {
         code: RESPONSE_CODE.NOT_LOGINED,
         msg: '请先登录',
-      };
+      });
     } else {
       return next();
     }

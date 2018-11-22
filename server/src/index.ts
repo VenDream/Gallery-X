@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-9-27
+ * @since 2018-11-22
  */
 
 import Koa from 'koa';
@@ -12,12 +12,13 @@ import session from 'koa-session';
 import favicon from 'koa-favicon';
 import bodyParser from 'koa-bodyparser';
 
+import cache from './middleare/cache';
 import { loadJSON } from './utils/loader';
-import { appLogger, httpLogger } from './utils/logger';
 import * as routers from './controller';
 import notFoundHandler from './middleare/404';
 import checkAuthHandler from './middleare/auth';
 import globalErrorHandler from './middleare/error';
+import { appLogger, httpLogger } from './utils/logger';
 
 // 读取配置文件
 const serverConfig = loadJSON(
@@ -47,14 +48,16 @@ app.use(session(sessionConfig, app));
 
 // 注入bodyparser
 app.use(bodyParser());
+// 注入授权检查处理模块
+app.use(checkAuthHandler());
+// 注入缓存模块
+app.use(cache());
 // 注入全局错误处理模块
 app.use(globalErrorHandler());
 // 提供favicon网站图标
 app.use(favicon(path.resolve(__dirname + './public/favicon.ico')));
 // 注入模版渲染引擎
 app.use(views(staticConfig.distDir));
-// 注入授权检查处理模块
-app.use(checkAuthHandler());
 // 注入路由模块
 for (const [name, router] of Object.entries(routers)) {
   appLogger.info(`加载路由模块...${name}`);

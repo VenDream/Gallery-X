@@ -117,3 +117,14 @@ interface SearchParams {
    */
   filter?: 'for_ios';
 }
+
+interface ApiCacheItem {
+  /**
+   * 源请求URL
+   */
+  requestUrl: string;
+  /**
+   * 缓存响应体
+   */
+  responseBody: Record<string, any>;
+}
