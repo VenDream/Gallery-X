@@ -13,6 +13,9 @@ services:
       - './logs:/app/logs'
       - './var/server.config.json:/app/var/server.config.json'
       - './var/static.config.json:/app/var/static.config.json'
+    environment:
+      - REDIS_HOST=redis
+
   redis:
     container_name: redis
     image: redis:5-alpine

@@ -27,7 +27,7 @@ const cacheConfig = {
   // redis缓存key前缀
   prefix: 'GALLERY_X_API:',
   // redis配置
-  redis: { host: '127.0.0.1', port: 6379 },
+  redis: { host: process.env.REDIS_HOST || '127.0.0.1', port: 6379 },
   // 需要匹配的路由
   routes: ['/api/user/illusts', RANKING_API, '/api/illust/search'],
 };
