@@ -19,13 +19,13 @@ import RESPONSE_CODE from '../constants/response-code';
 const RANKING_API = '/api/illust/ranking';
 
 // 缓存配置，暂时不开放给外部
-const cacheConfig = {
+export const cacheConfig = {
   // 全局缓存有效时长(1小时)
   expire: 60 * 60,
   // 需要跳过缓存时传递的参数
   bypassParam: 'noCache',
   // redis缓存key前缀
-  prefix: 'GALLERY_X_API:',
+  prefix: 'GALLERY_X_API',
   // redis配置
   redis: { host: process.env.REDIS_HOST || '127.0.0.1', port: 6379 },
   // 需要匹配的路由
@@ -33,7 +33,7 @@ const cacheConfig = {
 };
 
 // 创建redis客户端实例
-const redisClient = (() => {
+export const redisClient = (() => {
   const redisConfig = cacheConfig.redis;
   const { host, port } = redisConfig;
   return new Redis({ host, port });
@@ -68,8 +68,10 @@ function isTargetRoute(path: string) {
 export default function cache() {
   return async (ctx: Router.IRouterContext, next: () => Promise<any>) => {
     const { path, url, query } = ctx.request;
+    const session = ctx.session as AppSession;
+    const userId = session.user.id || 'guest';
     const { expire, prefix, bypassParam } = cacheConfig;
-    const key = prefix + md5(url);
+    const key = `${prefix}_${userId}_${md5(url)}`;
     let shouldHaveCache = isTargetRoute(path);
     const bypass = query[bypassParam] === 'true' || +query[bypassParam] === 1;
 

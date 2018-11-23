@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-11-23
  */
 
 import Router from 'koa-router';
@@ -9,6 +9,7 @@ import * as UserSvr from '../../service/user';
 import { getAccessToken } from '../auth';
 import { getSessionByKey } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
+import { cleanUserApiCache } from '../../utils/cache';
 import { returnIllustResp } from '../illust/returner';
 import RESPONSE_CODE from '../../constants/response-code';
 import { setUserSession, clearUserSession } from './session';
@@ -79,12 +80,14 @@ router.post('/logout', async (ctx, next) => {
 });
 
 router.post('/follow', async (ctx, next) => {
+  const session = ctx.session as AppSession;
   const { userId, isPrivate } = ctx.request.body as Record<string, any>;
   const token = await getAccessToken(ctx);
   const followResp = await UserSvr.follow(token, userId, isPrivate);
   const resp = handlePixivResp(followResp);
 
   if (!resp.message && !resp.userMessage) {
+    cleanUserApiCache(session.user.id);
     ctx.body = { code: RESPONSE_CODE.SUCCESS };
   } else {
     ctx.body = {
@@ -95,12 +98,14 @@ router.post('/follow', async (ctx, next) => {
 });
 
 router.post('/unfollow', async (ctx, next) => {
+  const session = ctx.session as AppSession;
   const { userId } = ctx.request.body as Record<string, any>;
   const token = await getAccessToken(ctx);
   const followResp = await UserSvr.unfollow(token, userId);
   const resp = handlePixivResp(followResp);
 
   if (!resp.message && !resp.userMessage) {
+    cleanUserApiCache(session.user.id);
     ctx.body = { code: RESPONSE_CODE.SUCCESS };
   } else {
     ctx.body = {

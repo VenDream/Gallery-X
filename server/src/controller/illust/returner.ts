@@ -1,11 +1,12 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-11-23
  */
 
 import Router from 'koa-router';
 import RESPONSE_CODE from '../../constants/response-code';
+import { cleanUserApiCache } from '../../utils/cache';
 import { getParsedIllusts, getParsedComments } from '../../utils/illust';
 
 /**
@@ -84,7 +85,11 @@ export function returnLikeResp(
   ctx: Router.IRouterContext,
   resp: Record<string, any>
 ) {
+  const session = ctx.session as AppSession;
+  const { id } = session.user;
+
   if (!resp.message && !resp.userMessage) {
+    cleanUserApiCache(id);
     ctx.body = { code: RESPONSE_CODE.SUCCESS };
   } else {
     ctx.body = {

@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
   gallery-x:
     container_name: gallery-x
@@ -13,6 +14,8 @@ services:
       - './logs:/app/logs'
       - './var/server.config.json:/app/var/server.config.json'
       - './var/static.config.json:/app/var/static.config.json'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
     environment:
       - REDIS_HOST=redis
 
@@ -23,3 +26,5 @@ services:
       - '6379'
     volumes:
       - '/data/gallery-x/redis:/data'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
