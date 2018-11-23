@@ -22,6 +22,7 @@ Gallery-X is a third-party pixiv gallery with some extra features.
 
 ### Start service from the docker image on remote server(VPS)
 
+- Install docker and docker-compose
 - Pull code
 - Copy var config as above said
 - Edit `distDir` to `'/app/var/static'`
