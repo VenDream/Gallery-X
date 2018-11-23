@@ -55,7 +55,7 @@ app.use(cache());
 // 注入全局错误处理模块
 app.use(globalErrorHandler());
 // 提供favicon网站图标
-app.use(favicon(path.resolve(__dirname + './public/favicon.ico')));
+app.use(favicon(path.resolve(__dirname + '/public/favicon.ico')));
 // 注入模版渲染引擎
 app.use(views(staticConfig.distDir));
 // 注入路由模块
