@@ -6,6 +6,7 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server",
     "build": "webpack -p --progress --profile",
+    "tslint": "tslint -p . --type-check",
     "clean": "rm -rf .cache & rm -rf dist"
   },
   "devDependencies": {

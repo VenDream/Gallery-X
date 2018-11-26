@@ -8,7 +8,9 @@
     "dev-static": "cd static && cross-env NODE_ENV=development npm start",
     "build-server": "cd server && npm run build",
     "build-static": "cd static && cross-env NODE_ENV=production npm run build",
-    "tslint": "tslint -c tslint.json -p . --fix",
+    "tslint": "cd server && npm run tslint && cd ../static && npm run tslint",
+    "tslint:server": "cd server && npm run tslint --",
+    "tslint:static": "cd static && npm run tslint --",
     "test": "npm test"
   },
   "husky": {

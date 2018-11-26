@@ -1,0 +1,7 @@
+{
+  "linters": {
+    "server/**/*.ts": ["npm run tslint:server -- --fix", "git add"],
+    "static/**/*.{ts,tsx}": ["npm run tslint:static -- --fix", "git add"]
+  },
+  "ignore": []
+}

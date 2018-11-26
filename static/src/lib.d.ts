@@ -65,5 +65,5 @@ interface CancelablePromise {
 
 interface Window {
   __GALLERY_X_GLOBAL_CONFIG__: Record<string, any>;
-  fetch: (url: string, opt: FetchOption) => Promise<any>;
+  // fetch: (url: string, opt: FetchOption) => Promise<any>;
 }

@@ -76,8 +76,7 @@ export function request(
   }
 
   const { raw, dataType, isCancelable, ...fetchOpt } = opt;
-  const reqPromise = window
-    .fetch(url, fetchOpt)
+  const reqPromise = (window.fetch as any)(url, fetchOpt)
     .then((response: Response) => response.json())
     .then((res: Record<string, any>) => {
       let result: Record<string, any>;

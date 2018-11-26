@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2018-11-26
  */
 
 import React, { Component } from 'react';
@@ -21,7 +21,7 @@ interface IllustWaterfallProps {
   filter: RankingFilter | SearchFilter;
   category: string;
   status: number;
-  illusts: IllustModel[];
+  illusts: IllustSaveModel[];
   column?: number;
   gutter?: number;
   fetchIllustData: (

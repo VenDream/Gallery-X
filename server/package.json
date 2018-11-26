@@ -7,6 +7,7 @@
     "start": "npm run dev",
     "dev": "nodemon",
     "build": "rm -rf dist && tsc && npm run copy-public",
+    "tslint": "tslint -p . --type-check",
     "copy-public": "cp -r src/public dist/public"
   },
   "devDependencies": {
