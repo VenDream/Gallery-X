@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-11-26
  */
 
 import React, { Component } from 'react';
@@ -84,7 +84,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
 
       const data = await userIllustsCP.promise;
       if (data && data.illusts) {
-        const illusts: IllustModel[] = data.illusts || [];
+        const illusts: IllustModel[] = (data.illusts || []).slice(0, 3);
         this.props.addIllust(illusts);
         this.setState({ illusts });
       } else {

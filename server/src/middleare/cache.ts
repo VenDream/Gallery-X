@@ -2,7 +2,7 @@
  * 缓存中间件，用于缓存更新频率低且请求耗时长的接口
  *
  * @author VenDream
- * @since 2018-11-22
+ * @since 2018-11-26
  * @note 假设默认的响应格式都为application/json
  */
 
@@ -69,7 +69,7 @@ export default function cache() {
   return async (ctx: Router.IRouterContext, next: () => Promise<any>) => {
     const { path, url, query } = ctx.request;
     const session = ctx.session as AppSession;
-    const userId = session.user.id || 'guest';
+    const userId = (session.user && session.user.id) || 'guest';
     const { expire, prefix, bypassParam } = cacheConfig;
     const key = `${prefix}_${userId}_${md5(url)}`;
     let shouldHaveCache = isTargetRoute(path);
