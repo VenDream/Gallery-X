@@ -1,7 +1,7 @@
 /**
  * API接口定义
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-11-26
  */
 
 const apiMap = {
@@ -11,6 +11,8 @@ const apiMap = {
   USER_FOLLOW: '/api/user/follow',
   USER_UNFOLLOW: '/api/user/unfollow',
   USER_ILLUSTS: '/api/user/illusts',
+  ILLUST_LIKE: '/api/illust/like',
+  ILLUST_UNLIKE: '/api/illust/unlike',
   ILLUST_RANKING: '/api/illust/ranking',
   ILLUST_SEARCH: '/api/illust/search',
 };

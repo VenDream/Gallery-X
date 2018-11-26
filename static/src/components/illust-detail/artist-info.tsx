@@ -116,7 +116,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
       if (data && +data.code === 200) {
         followAction(id);
       } else {
-        Message.show({ type: 3, message: '网络错误，请重试' });
+        Message.show({ type: 3, message: '操作失败，请重试' });
       }
       this.setState({ isOperating: false });
     } catch (err) {

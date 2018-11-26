@@ -27,7 +27,7 @@ export function getUpdatedArtists(illusts: IllustModel[], state: ArtistState) {
 }
 
 /**
- * 获取关注状态更新后的状态
+ * 获取关注状态更新后的state
  *
  * @export
  * @param {string} artistId 艺术家ID

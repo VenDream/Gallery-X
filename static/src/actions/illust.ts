@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-8-16
+ * @since 2018-11-26
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -122,5 +122,31 @@ export function getSearchIllusts(opts: SearchFilter) {
 export function addIllust(illusts: IllustModel[]) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     dispatch({ type: ACTIONS.ADD_ILLUST, data: { illusts } });
+  };
+}
+
+/**
+ * 收藏插画
+ *
+ * @export
+ * @param {string} illustId 插画ID
+ * @returns
+ */
+export function like(illustId: string) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.LIKE_ILLUST, data: { illustId } });
+  };
+}
+
+/**
+ * 取消收藏插画
+ *
+ * @export
+ * @param {string} illustId 插画ID
+ * @returns
+ */
+export function unlike(illustId: string) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    dispatch({ type: ACTIONS.UNLIKE_ILLUST, data: { illustId } });
   };
 }

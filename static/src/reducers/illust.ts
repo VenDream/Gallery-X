@@ -1,12 +1,12 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-10-11
+ * @since 2018-11-26
  */
 
 import { AnyAction } from 'redux';
 import ACTIONS from 'constants/actions';
-import { getUpdatedIllusts } from './helpers/illust';
+import { getLikeToggleState, getUpdatedIllusts } from './helpers/illust';
 
 const initState: IllustState = {
   byId: {},
@@ -49,6 +49,16 @@ export default function reducer(state = initState, action: AnyAction) {
         ...updatedIllusts,
         status: 3,
       };
+    }
+    // 收藏插画
+    case ACTIONS.LIKE_ILLUST: {
+      const { illustId } = action.data;
+      return getLikeToggleState(illustId, state, true);
+    }
+    // 取消收藏插画
+    case ACTIONS.UNLIKE_ILLUST: {
+      const { illustId } = action.data;
+      return getLikeToggleState(illustId, state, false);
     }
     default:
       return state;

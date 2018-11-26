@@ -1,7 +1,7 @@
 /**
  * 插画详情容器组件
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-11-26
  */
 
 import { AnyAction } from 'redux';
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import IllustDetail from 'components/illust-detail';
-import { addIllust } from 'actions/illust';
+import { addIllust, like, unlike } from 'actions/illust';
 import { follow, unfollow } from 'actions/user';
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
@@ -31,6 +31,8 @@ function mapDispatchToProps(
 ) {
   return {
     addIllust: (illusts: IllustModel[]) => dispatch(addIllust(illusts)),
+    like: (illustId: string) => dispatch(like(illustId)),
+    unlike: (illustId: string) => dispatch(unlike(illustId)),
     follow: (userId: string) => dispatch(follow(userId)),
     unfollow: (userId: string) => dispatch(unfollow(userId)),
   };

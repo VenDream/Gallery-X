@@ -3,7 +3,7 @@
 
   src: url('../fonts/iconfont.eot');
   src: url('../fonts/iconfont.woff') format('woff'),
-  url('../fonts/iconfont.ttf') format('truetype');
+    url('../fonts/iconfont.ttf') format('truetype');
 }
 
 .g-icon {
@@ -17,6 +17,10 @@
 
 .icon-fail:before {
   content: '\e6da';
+}
+
+.icon-like:before {
+  content: '\e94a';
 }
 
 .icon-search:before {
@@ -33,6 +37,10 @@
 
 .icon-ranking:before {
   content: '\e68b';
+}
+
+.icon-liked:before {
+  content: '\e619';
 }
 
 .icon-success:before {

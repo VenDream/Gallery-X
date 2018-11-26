@@ -1,7 +1,7 @@
 /**
  * 插画状态同步辅助函数
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-11-26
  */
 
 /**
@@ -28,5 +28,31 @@ export function getUpdatedIllusts(illusts: IllustModel[], state: IllustState) {
     byId: { ...state.byId, ...byId },
     // 利用ES6的set去重
     ids: Array.from(new Set(state.ids.concat(ids))),
+  };
+}
+
+/**
+ * 获取收藏状态更新后的state
+ *
+ * @export
+ * @param {string} illustId 插画ID
+ * @param {IllustState} state 插画state
+ * @param {boolean} likeStatus 收藏状态
+ */
+export function getLikeToggleState(
+  illustId: string,
+  state: IllustState,
+  likeStatus: boolean
+) {
+  const illust: IllustSaveModel = {
+    ...state.byId[illustId],
+    isBookmarked: likeStatus,
+  };
+  return {
+    ...state,
+    byId: {
+      ...state.byId,
+      [illustId]: illust,
+    },
   };
 }

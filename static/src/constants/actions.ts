@@ -1,7 +1,7 @@
 /**
  * ACTION常量定义
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-11-26
  */
 
 export default {
@@ -15,6 +15,9 @@ export default {
 
   // 添加插画
   ADD_ILLUST: 'ADD_ILLUST',
+  // 收藏/取消收藏插画
+  LIKE_ILLUST: 'LIKE_ILLUST',
+  UNLIKE_ILLUST: 'UNLIKE_ILLUST',
   // 添加艺术家
   ADD_ARTIST: 'ADD_ARTIST',
   // 关注/取消关注用户
