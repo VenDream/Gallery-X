@@ -17,6 +17,6 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "es2015", "es2016", "es2017", "esnext"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "build/**/*", "./webpack.config.ts"],
   "exlucde": ["node_modules/**/*"]
 }

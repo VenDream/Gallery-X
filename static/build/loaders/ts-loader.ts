@@ -14,11 +14,12 @@ export default function loader(isDev: boolean) {
     exclude: /node_modules/,
     use: [
       {
-        loader: 'babel-loader',
+        loader: 'cache-loader',
         options: {
-          cacheDirectory: isDev ? '.cache' : false,
+          cacheDirectory: '.cache',
         },
       },
+      'babel-loader',
       {
         loader: 'ts-loader',
         options: {

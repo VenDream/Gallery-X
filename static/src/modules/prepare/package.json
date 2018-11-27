@@ -1,0 +1,7 @@
+{
+  "name": "prepare",
+  "version": "1.0.0",
+  "description": "应用预执行模块",
+  "main": "./prepare.ts",
+  "types": "./prepare.ts"
+}

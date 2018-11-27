@@ -9,13 +9,6 @@ export default function loader(isDev: boolean) {
   return {
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    use: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: isDev ? '.cache' : false,
-        },
-      },
-    ],
+    use: ['babel-loader'],
   };
 }

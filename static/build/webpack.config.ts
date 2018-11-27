@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-9-27
+ * @since 2018-11-27
  */
 
 import path from 'path';
@@ -136,6 +136,9 @@ export default (
               chunks: 'all',
             },
           },
+        },
+        runtimeChunk: {
+          name: 'manifest',
         },
       },
       /**
