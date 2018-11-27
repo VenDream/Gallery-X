@@ -1,7 +1,7 @@
 /**
  * 插画状态同步辅助函数
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-11-27
  */
 
 /**
@@ -44,15 +44,21 @@ export function getLikeToggleState(
   state: IllustState,
   likeStatus: boolean
 ) {
-  const illust: IllustSaveModel = {
-    ...state.byId[illustId],
+  const originIllust = state.byId[illustId];
+  const updateillust: IllustSaveModel = {
+    ...originIllust,
+    // 更新收藏状态
     isBookmarked: likeStatus,
+    // 更新总收藏数
+    totalBookmarks: likeStatus
+      ? originIllust.totalBookmarks + 1
+      : originIllust.totalBookmarks - 1,
   };
   return {
     ...state,
     byId: {
       ...state.byId,
-      [illustId]: illust,
+      [illustId]: updateillust,
     },
   };
 }
