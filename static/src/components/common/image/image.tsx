@@ -1,7 +1,7 @@
 /**
  * 增强图片组件，支持图片预加载
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-11-28
  */
 
 import React, { Component } from 'react';
@@ -39,9 +39,13 @@ interface ImageProps {
    */
   style?: Record<string, any>;
   /**
+   * 图片加载失败回调
+   */
+  onImageLoadError?: (image?: HTMLImageElement) => void;
+  /**
    * 图片加载成功回调
    */
-  onImageLoad?: (image?: HTMLImageElement) => void;
+  onImageLoaded?: (image?: HTMLImageElement) => void;
 }
 
 interface ImageState {
@@ -75,12 +79,14 @@ export default class Image extends Component<ImageProps, ImageState> {
   handleImageLoaded() {
     const { transitionClass } = this.props;
     this.setState({ loaded: true, transitionClass });
-    this.props.onImageLoad && this.props.onImageLoad(this.image.current);
+    this.props.onImageLoaded && this.props.onImageLoaded(this.image.current);
   }
 
   @autobind
   handleImageError() {
     console.warn('图片加载失败');
+    this.props.onImageLoadError &&
+      this.props.onImageLoadError(this.image.current);
   }
 
   render() {

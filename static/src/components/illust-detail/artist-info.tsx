@@ -31,6 +31,10 @@ interface IProps {
    * 取消关注用户
    */
   unfollow: (userId: string) => void;
+  /**
+   * 刷新IScroll
+   */
+  refreshIScroll: () => void;
 }
 
 interface IState {
@@ -86,7 +90,11 @@ export default class ArtistInfo extends Component<IProps, IState> {
       if (data && data.illusts) {
         const illusts: IllustModel[] = (data.illusts || []).slice(0, 3);
         this.props.addIllust(illusts);
-        this.setState({ illusts });
+        this.setState({ illusts }, () => {
+          setTimeout(() => {
+            illusts.length && this.props.refreshIScroll();
+          }, 0);
+        });
       } else {
         Message.show({ type: 3, message: '网络错误，请刷新重试' });
       }

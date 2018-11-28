@@ -1,10 +1,15 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-11-28
  */
 
 import React, { Component } from 'react';
+import iScroll from 'iscroll/build/iscroll';
+import ReactIScroll from 'react-iscroll';
+import autobind from 'autobind-decorator';
+
+import { isMobile } from 'utils/common';
 
 import TitleBar from './title-bar';
 import LikeBtn from './like-btn';
@@ -46,18 +51,70 @@ interface IProps {
 interface IState {}
 
 export default class IllustDetail extends Component<IProps, IState> {
+  // React-iScroll组件引用
+  reactIScrollRef: React.RefObject<any> = React.createRef();
+  // iScroll配置，参考: https://github.com/cubiq/iscroll#configuring-the-iscroll
+  iScrollOptions: IScorllOptions2 = {
+    // 显示滚动条
+    scrollbars: true,
+    // 自动隐藏滚动条
+    fadeScrollbars: true,
+    // 鼠标滚轮控制
+    mouseWheel: !isMobile(),
+    // 滚轮滚动速度
+    mouseWheelSpeed: 1,
+    // 减速因子
+    deceleration: 0.00005,
+    // 回弹时间
+    bounceTime: 600,
+    // 回弹缓动函数
+    bounceEasing: 'quadratic',
+  };
+
+  componentDidMount() {
+    // See: https://github.com/cubiq/iscroll/issues/1130
+    document.addEventListener('touchstart', this.preventDefault, {
+      passive: false,
+    });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('touchstart', this.preventDefault);
+  }
+
+  preventDefault(e: TouchEvent) {
+    e.preventDefault();
+  }
+
+  @autobind
+  refreshIScroll() {
+    const iScorller: IScroll = this.reactIScrollRef.current.getIScroll();
+    iScorller && iScorller.refresh();
+  }
+
   render() {
     const { illust, addIllust, like, unlike, follow, unfollow } = this.props;
-    const methods = { addIllust, follow, unfollow };
 
     return (
       <div className="illust-detail">
         <TitleBar illust={illust} />
-        <div className="detail-content">
-          <ImageList illust={illust} />
-          <DetailInfo illust={illust} />
-          <ArtistInfo artist={illust.user} {...methods} />
-        </div>
+        <ReactIScroll
+          ref={this.reactIScrollRef}
+          iScroll={iScroll}
+          options={this.iScrollOptions}
+        >
+          <div className="detail-content">
+            <ImageList illust={illust} refreshIScroll={this.refreshIScroll} />
+            <DetailInfo illust={illust} />
+            <ArtistInfo
+              artist={illust.user}
+              addIllust={addIllust}
+              follow={follow}
+              unfollow={unfollow}
+              refreshIScroll={this.refreshIScroll}
+            />
+          </div>
+        </ReactIScroll>
         <LikeBtn
           illustId={illust.id}
           hasLiked={illust.isBookmarked}

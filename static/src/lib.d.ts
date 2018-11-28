@@ -7,6 +7,7 @@
 /// <reference path="../../lib.d.ts" />
 /// <reference path="./actions/actions.d.ts" />
 /// <reference path="./reducers/reducer.d.ts" />
+/// <reference types="@types/iscroll" />
 
 type MODE = 'cors' | 'no-cors' | 'same-origin';
 type DATA_TYPE = 'text' | 'json';
@@ -66,4 +67,11 @@ interface CancelablePromise {
 interface Window {
   __GALLERY_X_GLOBAL_CONFIG__: Record<string, any>;
   // fetch: (url: string, opt: FetchOption) => Promise<any>;
+}
+
+interface IScorllOptions2 extends IScrollOptions {
+  /**
+   * 减速因子
+   */
+  deceleration: number;
 }

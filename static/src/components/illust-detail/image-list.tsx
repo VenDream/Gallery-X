@@ -1,7 +1,7 @@
 /**
  * 插画详情-图片列表组件
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-11-28
  */
 
 import React, { Component } from 'react';
@@ -15,6 +15,10 @@ interface IProps {
    * 插画数据
    */
   illust: IllustModel;
+  /**
+   * 刷新IScroll
+   */
+  refreshIScroll: () => void;
 }
 
 export default class ImageList extends Component<IProps> {
@@ -25,12 +29,16 @@ export default class ImageList extends Component<IProps> {
    * @memberof ImageList
    */
   @autobind
-  handleImageLoad(image: HTMLImageElement) {
+  handleImageLoaded(image: HTMLImageElement) {
     if (!image) return;
     const { naturalWidth, naturalHeight } = image;
     const ratio = naturalHeight / naturalWidth;
     const wrapper = image.parentNode as HTMLElement;
     wrapper && (wrapper.style.paddingBottom = `${ratio * 100}%`);
+
+    // 非第一张图片加载完成后，刷新iScroll
+    if (image.src === this.props.illust.imageUrls[0].large) return;
+    this.props.refreshIScroll();
   }
 
   render() {
@@ -44,7 +52,7 @@ export default class ImageList extends Component<IProps> {
               src={imageUrl.large}
               key={`${id}_${idx + 1}`}
               style={{ paddingBottom: `${preRatio * 100}%` }}
-              onImageLoad={this.handleImageLoad}
+              onImageLoaded={this.handleImageLoaded}
             />
           );
         })}

@@ -1,7 +1,7 @@
 /**
  * 常用公用方法
  * @author VenDream
- * @since 2018-5-11
+ * @since 2018-11-28
  */
 
 /**
@@ -37,4 +37,13 @@ export function checkInViewport(node: HTMLElement, container?: HTMLElement) {
   const nodeBottom = nodeTop + node.getBoundingClientRect().height;
 
   return nodeBottom <= docViewBottom && docViewTop <= nodeTop;
+}
+
+/**
+ * 判断当前环境是否为移动端
+ *
+ * @export
+ */
+export function isMobile() {
+  return 'ontouchstart' in window;
 }

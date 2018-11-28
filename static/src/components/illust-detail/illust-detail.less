@@ -14,11 +14,18 @@
   }
 
   .detail-content {
-    overflow: auto;
-    overflow: overlay;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
 
-    height: 100%;
+  // iScroll滚动条样式
+  .iScrollVerticalScrollbar {
+    position: absolute;
+
+    width: 4px !important;
+  }
+
+  .iScrollIndicator {
+    border-radius: 10px !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
   }
 }
