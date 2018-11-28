@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-11-28
  */
 
 import React, { Component } from 'react';
@@ -31,6 +31,9 @@ interface IllustWaterfallProps {
 }
 interface IllustWaterfallState {}
 
+// 浏览器宽度
+const BROWSER_WIDTH = document.documentElement.clientWidth;
+// 加载文本图标常量
 const LOADERS = [
   {},
   {
@@ -114,11 +117,13 @@ export default class IllustWaterfall extends Component<
   // 渲染瀑布流
   renderIllustWaterfall() {
     const { illusts, column, gutter } = this.props;
+    const isLargeScreen = BROWSER_WIDTH >= 768;
+    const thumbSrcKey = isLargeScreen ? 'large' : 'medium';
     const items = illusts.map(illust => ({
       content: (
         <IllustItem
           id={illust.id}
-          thumb={illust.imageUrls[0].medium}
+          thumb={illust.imageUrls[0][thumbSrcKey]}
           total={illust.imageUrls.length}
         />
       ),
