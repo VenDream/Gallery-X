@@ -2,6 +2,10 @@
  * 插画评论组件
  * @author VenDream
  * @since 2018-11-29
+ *
+ * @todo 评论数据量太大时影响页面滚动性能，考虑采用分页实现
+ *       评论总数参考接口: https://www.pixiv.net/touch/ajax/comment/illust?work_id=71876402&page=1
+ *       也可以考虑采用单独弹窗显示所有评论，参考: https://github.com/bvaughn/react-window
  */
 
 import React, { Component } from 'react';
