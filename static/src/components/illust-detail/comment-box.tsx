@@ -131,7 +131,7 @@ export default class CommentBox extends Component<IProps, IState> {
         const replies: CommentModel[] = resp.replies;
         this.updateCommentReply(
           commentId,
-          { isFetching: false, replies },
+          { isFetching: false, replies: replies.reverse() },
           () => {
             replies.length && this.props.refreshIScroll();
           }
