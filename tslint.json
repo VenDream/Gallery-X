@@ -21,6 +21,7 @@
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-requires": false,
     "no-empty": [true, "allow-empty-functions"],
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-shadowed-variable": false
   }
 }

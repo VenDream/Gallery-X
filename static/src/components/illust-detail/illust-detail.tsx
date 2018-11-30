@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-11-28
+ * @since 2018-11-29
  */
 
 import React, { Component } from 'react';
@@ -16,6 +16,7 @@ import LikeBtn from './like-btn';
 import ImageList from './image-list';
 import DetailInfo from './detail-info';
 import ArtistInfo from './artist-info';
+import CommentBox from './comment-box';
 import './illust-detail.less';
 
 interface IProps {
@@ -58,7 +59,7 @@ export default class IllustDetail extends Component<IProps, IState> {
     // 显示滚动条
     scrollbars: true,
     // 自动隐藏滚动条
-    fadeScrollbars: true,
+    // fadeScrollbars: true,
     // 鼠标滚轮控制
     mouseWheel: !isMobile(),
     // 滚轮滚动速度
@@ -111,6 +112,10 @@ export default class IllustDetail extends Component<IProps, IState> {
               addIllust={addIllust}
               follow={follow}
               unfollow={unfollow}
+              refreshIScroll={this.refreshIScroll}
+            />
+            <CommentBox
+              illustId={illust.id}
               refreshIScroll={this.refreshIScroll}
             />
           </div>

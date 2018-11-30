@@ -1,7 +1,7 @@
 /**
  * 插画相关路由
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-11-29
  */
 
 import Router from 'koa-router';
@@ -43,7 +43,7 @@ router.get('/comments', async (ctx, next) => {
   const commentsResp = await IllustSvr.comments(token, illustId, lastCommentId);
   const resp = handlePixivResp(commentsResp);
 
-  returnCommentsResp(ctx, resp);
+  returnCommentsResp(ctx, resp, { respKey: 'comments' });
 });
 
 router.get('/comment/replies', async (ctx, next) => {
@@ -52,7 +52,7 @@ router.get('/comment/replies', async (ctx, next) => {
   const repliesResp = await IllustSvr.commentReplies(token, commentId);
   const resp = handlePixivResp(repliesResp);
 
-  returnCommentsResp(ctx, resp);
+  returnCommentsResp(ctx, resp, { respKey: 'replies' });
 });
 
 router.post('/like', async (ctx, next) => {

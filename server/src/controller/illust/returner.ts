@@ -1,7 +1,7 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-11-23
+ * @since 2018-11-29
  */
 
 import Router from 'koa-router';
@@ -43,26 +43,40 @@ export function returnIllustResp(
   }
 }
 
+// 评论类接口返回选项
+interface CommentRespOption {
+  /**
+   * 数据载体的key
+   */
+  respKey?: 'comments' | 'replies';
+}
+
 /**
- * 评论类请求的统一返回结果处理
  *
+ *
+ * @export
  * @param {Router.IRouterContext} ctx 请求上下文
  * @param {Record<string, any>} resp 响应数据
+ * @param {CommentRespOption} option 其他选项
  */
 export function returnCommentsResp(
   ctx: Router.IRouterContext,
-  resp: Record<string, any>
+  resp: Record<string, any>,
+  option: CommentRespOption
 ) {
   const { comments, nextUrl } = resp;
   if (comments) {
-    const parsedComments = getParsedComments(comments);
-    const lastComment = parsedComments[parsedComments.length - 1];
+    const { respKey } = option;
+    const commentData: CommentModel[] = comments;
+    const totalLen = commentData.length;
+    const parsedComments = getParsedComments(commentData);
+    const lastComment = totalLen >= 1 ? parsedComments[totalLen - 1] : null;
 
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
       data: {
-        comments: parsedComments,
-        lastCommentId: lastComment.id || '',
+        [respKey]: parsedComments,
+        lastCommentId: (lastComment && lastComment.id) || '',
         isEnd: !!!nextUrl,
       },
     };

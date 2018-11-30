@@ -1,7 +1,7 @@
 /**
  * API接口定义
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-11-29
  */
 
 const apiMap = {
@@ -15,6 +15,8 @@ const apiMap = {
   ILLUST_UNLIKE: '/api/illust/unlike',
   ILLUST_RANKING: '/api/illust/ranking',
   ILLUST_SEARCH: '/api/illust/search',
+  ILLUST_COMMENT: '/api/illust/comments',
+  ILLUST_COMMENT_REPLIES: '/api/illust/comment/replies',
 };
 
 export default {

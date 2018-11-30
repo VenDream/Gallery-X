@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-11-29
  */
 
 import React, { Component } from 'react';
@@ -185,7 +185,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
     const { id, name, avatar } = this.props.artist;
 
     return (
-      <div className="artist-info" data-id={id}>
+      <div className="artist-info">
         <div className="info">
           <div className="left-block">
             <Image src={avatar} className="artist-avatar" />
