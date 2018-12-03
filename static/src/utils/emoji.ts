@@ -4,6 +4,8 @@
  * @since 2018-11-30
  */
 
+// pixiv图片代理服务器
+const PROXY_HOST = window.__PIXIV_PROXY_HOST__ || '';
 // emoji
 const EMOJI_URI = 'https://s.pximg.net/common/images/emoji/[id].png';
 
@@ -48,3 +50,17 @@ const EMOJIS = {
   teardrop: 502,
   star: 503,
 };
+
+/**
+ * 根据key获取表情贴图地址
+ *
+ * @export
+ * @param {string} key key
+ */
+export function getEmojiImageUrl(key: string) {
+  const id = EMOJIS[key] || 0;
+  if (!id || !PROXY_HOST) return '';
+
+  const url = EMOJI_URI.replace('[id]', id);
+  return `${PROXY_HOST}?url=${url}`;
+}

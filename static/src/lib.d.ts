@@ -1,7 +1,7 @@
 /**
  * 前端全局类型声明
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-12-3
  */
 
 /// <reference path="../../lib.d.ts" />
@@ -65,8 +65,8 @@ interface CancelablePromise {
 }
 
 interface Window {
+  __PIXIV_PROXY_HOST__: string;
   __GALLERY_X_GLOBAL_CONFIG__: Record<string, any>;
-  // fetch: (url: string, opt: FetchOption) => Promise<any>;
 }
 
 interface IScorllOptions2 extends IScrollOptions {
