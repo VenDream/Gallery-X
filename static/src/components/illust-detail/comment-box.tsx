@@ -1,11 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-11-29
- *
- * @todo 评论数据量太大时影响页面滚动性能，考虑采用分页实现
- *       评论总数参考接口: https://www.pixiv.net/touch/ajax/comment/illust?work_id=71876402&page=1
- *       也可以考虑采用单独弹窗显示所有评论，参考: https://github.com/bvaughn/react-window
+ * @since 2018-12-3
  */
 
 import React, { Component } from 'react';
@@ -14,6 +10,7 @@ import autobind from 'autobind-decorator';
 
 import Image from 'components/common/image';
 import Message from 'components/common/message';
+import CommentDialog from 'components/common/comment-dialog';
 import { getComments, getCommentReplies } from 'api/illust';
 import { parseCommentStr } from 'components/helpers/comment';
 import './comment-box.less';
@@ -24,9 +21,13 @@ interface IProps {
    */
   illustId: string;
   /**
+   * 预览模式
+   */
+  previewMode?: boolean;
+  /**
    * 刷新IScroll
    */
-  refreshIScroll: () => void;
+  refreshIScroll?: () => void;
 }
 
 interface IState {
@@ -55,6 +56,12 @@ interface IState {
 }
 
 export default class CommentBox extends Component<IProps, IState> {
+  static defaultProps: IProps = {
+    illustId: '',
+    previewMode: false,
+    refreshIScroll: () => {},
+  };
+
   state: IState = {
     isEnd: false,
     isFetchingComment: false,
@@ -181,20 +188,34 @@ export default class CommentBox extends Component<IProps, IState> {
     );
   }
 
+  /**
+   * 唤起评论列表独立弹窗
+   *
+   * @memberof CommentBox
+   */
+  @autobind
+  showCommentDialog() {
+    const { illustId } = this.props;
+    CommentDialog.show({ id: illustId });
+  }
+
   // 渲染评论列表
   renderCommentList() {
+    const { previewMode } = this.props;
     const { isEnd, comments } = this.state;
 
     // 没有评论数据
     if (isEnd && !comments.length) return <p className="empty">暂无评论</p>;
-    // 评论列表
-    const commentList = comments.map(comment => (
-      <CommentItem
-        key={comment.id}
-        comment={comment}
-        renderReplies={this.renderReplies}
-      />
-    ));
+    // 评论列表(预览模式下只展示前两条)
+    const commentList = (previewMode ? comments.slice(0, 2) : comments).map(
+      comment => (
+        <CommentItem
+          key={comment.id}
+          comment={comment}
+          renderReplies={this.renderReplies}
+        />
+      )
+    );
 
     return <div className="comment-list">{commentList}</div>;
   }
@@ -232,12 +253,19 @@ export default class CommentBox extends Component<IProps, IState> {
 
   // 渲染加载更多按钮
   renderLoadMoreBtn() {
-    const { isEnd, lastCommentId, isFetchingComment } = this.state;
+    const { previewMode } = this.props;
+    const { isEnd, comments, lastCommentId, isFetchingComment } = this.state;
+    // 预览模式下只展示前两条数据
+    const showPreview = previewMode && comments.length > 2;
 
     // 没有评论数据
     if (isEnd && !lastCommentId) return null;
 
-    const content = isEnd ? (
+    const content = showPreview ? (
+      <button className="open-dialog" onClick={this.showCommentDialog}>
+        查看更多 &gt;
+      </button>
+    ) : isEnd ? (
       <p className="end">已加载所有评论</p>
     ) : isFetchingComment ? (
       <button className="loading">
@@ -247,7 +275,9 @@ export default class CommentBox extends Component<IProps, IState> {
         正在加载...
       </button>
     ) : (
-      <button onClick={this.fetchCommentData}>查看更多</button>
+      <button className="load-more" onClick={this.fetchCommentData}>
+        查看更多
+      </button>
     );
 
     return <div className="comment-loader">{content}</div>;
@@ -256,7 +286,7 @@ export default class CommentBox extends Component<IProps, IState> {
   render() {
     return (
       <div className="comment-box">
-        <h3>评论</h3>
+        {this.props.previewMode && <h3>评论</h3>}
         {this.renderCommentList()}
         {this.renderLoadMoreBtn()}
       </div>

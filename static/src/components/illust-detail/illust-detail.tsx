@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-11-29
+ * @since 2018-12-3
  */
 
 import React, { Component } from 'react';
@@ -52,6 +52,8 @@ interface IProps {
 interface IState {}
 
 export default class IllustDetail extends Component<IProps, IState> {
+  // 根节点引用
+  rootRef: React.RefObject<HTMLDivElement> = React.createRef();
   // React-iScroll组件引用
   reactIScrollRef: React.RefObject<any> = React.createRef();
   // iScroll配置，参考: https://github.com/cubiq/iscroll#configuring-the-iscroll
@@ -74,13 +76,16 @@ export default class IllustDetail extends Component<IProps, IState> {
 
   componentDidMount() {
     // See: https://github.com/cubiq/iscroll/issues/1130
-    document.addEventListener('touchstart', this.preventDefault, {
-      passive: false,
-    });
+    const root = this.rootRef.current;
+    root &&
+      root.addEventListener('touchstart', this.preventDefault, {
+        passive: false,
+      });
   }
 
   componentWillUnmount() {
-    document.removeEventListener('touchstart', this.preventDefault);
+    const root = this.rootRef.current;
+    root && root.removeEventListener('touchstart', this.preventDefault);
   }
 
   preventDefault(e: TouchEvent) {
@@ -97,7 +102,7 @@ export default class IllustDetail extends Component<IProps, IState> {
     const { illust, addIllust, like, unlike, follow, unfollow } = this.props;
 
     return (
-      <div className="illust-detail">
+      <div className="illust-detail" ref={this.rootRef}>
         <TitleBar illust={illust} />
         <ReactIScroll
           ref={this.reactIScrollRef}
@@ -115,6 +120,7 @@ export default class IllustDetail extends Component<IProps, IState> {
               refreshIScroll={this.refreshIScroll}
             />
             <CommentBox
+              previewMode={true}
               illustId={illust.id}
               refreshIScroll={this.refreshIScroll}
             />

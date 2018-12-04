@@ -1,0 +1,7 @@
+{
+  "name": "comment-dialog",
+  "version": "1.0.0",
+  "description": "插画评论列表弹窗",
+  "main": "./comment-dialog.tsx",
+  "types": "./comment-dialog.tsx"
+}
