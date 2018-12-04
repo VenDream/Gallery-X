@@ -17,6 +17,7 @@ import ImageList from './image-list';
 import DetailInfo from './detail-info';
 import ArtistInfo from './artist-info';
 import CommentBox from './comment-box';
+import Message from 'components/common/message/';
 import './illust-detail.less';
 
 interface IProps {
@@ -97,6 +98,28 @@ export default class IllustDetail extends Component<IProps, IState> {
   }
 
   preventDefault(e: TouchEvent) {
+    const node = e.target as HTMLElement;
+
+    // 超链接正常触发跳转
+    if (node.nodeName === 'A') {
+      const href = (node as HTMLAnchorElement).href;
+      if (href) {
+        const newWin = window.open('', '_blank');
+        if (!newWin) {
+          Message.show({
+            type: 3,
+            message: '弹窗已触发但被阻止了',
+          });
+        } else {
+          setTimeout(() => {
+            newWin.location.href = href;
+          }, 100);
+        }
+      }
+      return;
+    }
+
+    // 其他点击事件均屏蔽
     e.preventDefault();
   }
 
