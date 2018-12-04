@@ -1,7 +1,7 @@
 /**
  * 搜索框组件
  * @author VenDream
- * @since 2018-9-12
+ * @since 2018-12-4
  */
 
 import React, { Component, KeyboardEvent } from 'react';
@@ -31,6 +31,17 @@ export default class SearchBox extends Component<IProps, IState> {
 
   // 输入框ref
   inputRef: React.RefObject<HTMLInputElement> = React.createRef();
+
+  componentDidUpdate(prevProps: IProps) {
+    const prevWord = prevProps.filter.word;
+    const thisWord = this.props.filter.word;
+
+    // 改变关键词时，input同步更改显示
+    if (prevWord && thisWord) {
+      const input = this.inputRef.current;
+      input && (input.value = thisWord);
+    }
+  }
 
   // 监听Enter键
   @autobind
@@ -81,6 +92,7 @@ export default class SearchBox extends Component<IProps, IState> {
         <input
           ref={this.inputRef}
           type="text"
+          defaultValue={word}
           placeholder="输入关键词以进行搜索"
           onKeyDown={this.handleKeyDown}
         />

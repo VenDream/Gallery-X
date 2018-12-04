@@ -1,12 +1,16 @@
 /**
  * 插画详情-详细信息组件
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-12-4
  */
 
 import React, { Component } from 'react';
 import moment from 'moment';
+import autobind from 'autobind-decorator';
 
+import PAGE from 'constants/page';
+import RouterMap from 'constants/routers';
+import IllustDetailDialog from 'components/common/illust-detail-dialog';
 import './detail-info.less';
 
 interface IProps {
@@ -14,9 +18,28 @@ interface IProps {
    * 插画数据
    */
   illust: IllustModel;
+  /**
+   * 通过标签搜索插画
+   */
+  searchByTag: (tag: string) => void;
+  /**
+   * 路由重定向
+   */
+  redirectTo: (path: string) => void;
 }
 
 export default class DetailInfo extends Component<IProps> {
+  @autobind
+  handleClickTag(tag: string) {
+    const searchPagePath = RouterMap[PAGE.SEARCH].path;
+    // 关闭作品详情弹窗
+    IllustDetailDialog.hide();
+    // 重定向到搜索页
+    this.props.redirectTo(searchPagePath);
+    // 设定标签为关键词，开始搜索
+    this.props.searchByTag(tag);
+  }
+
   // 渲染插画统计数据
   renderStatistic() {
     const { illust } = this.props;
@@ -44,7 +67,11 @@ export default class DetailInfo extends Component<IProps> {
     return (
       <div className="tags">
         {tags.split(';').map((tag, idx) => (
-          <span className="tag" key={idx}>
+          <span
+            key={idx}
+            className="tag"
+            onClick={() => this.handleClickTag(tag)}
+          >
             {tag}
           </span>
         ))}

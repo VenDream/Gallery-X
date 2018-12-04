@@ -1,16 +1,17 @@
 /**
  * 插画详情容器组件
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-12-4
  */
 
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import IllustDetail from 'components/illust-detail';
-import { addIllust, like, unlike } from 'actions/illust';
+import { redirectTo } from 'actions/router';
 import { follow, unfollow } from 'actions/user';
+import { addIllust, like, unlike, searchByTag } from 'actions/illust';
+import IllustDetail from 'components/illust-detail';
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const illustId: string = ownProps.id;
@@ -35,6 +36,8 @@ function mapDispatchToProps(
     unlike: (illustId: string) => dispatch(unlike(illustId)),
     follow: (userId: string) => dispatch(follow(userId)),
     unfollow: (userId: string) => dispatch(unfollow(userId)),
+    searchByTag: (tag: string) => dispatch(searchByTag(tag)),
+    redirectTo: (path: string) => dispatch(redirectTo(path)),
   };
 }
 

@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-12-3
+ * @since 2018-12-4
  */
 
 import React, { Component } from 'react';
@@ -48,6 +48,14 @@ interface IProps {
    * 取消关注用户
    */
   unfollow: (userId: string) => void;
+  /**
+   * 通过标签搜索插画
+   */
+  searchByTag: (tag: string) => void;
+  /**
+   * 路由重定向
+   */
+  redirectTo: (path: string) => void;
 }
 interface IState {}
 
@@ -99,6 +107,7 @@ export default class IllustDetail extends Component<IProps, IState> {
   }
 
   render() {
+    const { redirectTo, searchByTag } = this.props;
     const { illust, addIllust, like, unlike, follow, unfollow } = this.props;
 
     return (
@@ -111,7 +120,11 @@ export default class IllustDetail extends Component<IProps, IState> {
         >
           <div className="detail-content">
             <ImageList illust={illust} refreshIScroll={this.refreshIScroll} />
-            <DetailInfo illust={illust} />
+            <DetailInfo
+              illust={illust}
+              searchByTag={searchByTag}
+              redirectTo={redirectTo}
+            />
             <ArtistInfo
               artist={illust.user}
               addIllust={addIllust}

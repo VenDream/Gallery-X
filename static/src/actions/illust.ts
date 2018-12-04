@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-11-26
+ * @since 2018-12-4
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -11,6 +11,7 @@ import ACTIONS from 'constants/actions';
 import MESSAGE from 'constants/message';
 import CATEGORY from 'constants/category';
 import Message from 'components/common/message';
+import { defaultSearchFilter } from 'reducers/helpers/filter';
 
 /**
  * 更新排行榜筛选条件
@@ -148,5 +149,19 @@ export function like(illustId: string) {
 export function unlike(illustId: string) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     dispatch({ type: ACTIONS.UNLIKE_ILLUST, data: { illustId } });
+  };
+}
+
+/**
+ * 通过标签搜索插画
+ *
+ * @export
+ * @param {string} tag 标签
+ */
+export function searchByTag(tag: string) {
+  return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
+    // 把标签作为关键词，其他均为默认
+    const patch = { ...defaultSearchFilter, word: tag };
+    dispatch({ type: ACTIONS.UPDATE_SEARCH_FILTER, data: { filter: patch } });
   };
 }

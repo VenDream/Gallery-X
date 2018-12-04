@@ -40,12 +40,18 @@
 
       cursor: pointer;
       user-select: none;
+      transition: all 0.2s ease;
 
       color: #666;
       border-radius: 0.04rem;
       background-color: #ddd;
 
       font-size: 0.12rem;
+
+      &:hover {
+        color: #fff;
+        background-color: @theme-blue;
+      }
     }
   }
 
