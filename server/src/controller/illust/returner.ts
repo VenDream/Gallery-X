@@ -1,12 +1,13 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-11-29
+ * @since 2018-12-5
  */
 
 import Router from 'koa-router';
 import RESPONSE_CODE from '../../constants/response-code';
 import { cleanUserApiCache } from '../../utils/cache';
+import { getProxyImageUrl } from '../../utils/common';
 import { getParsedIllusts, getParsedComments } from '../../utils/illust';
 
 /**
@@ -109,6 +110,46 @@ export function returnLikeResp(
     ctx.body = {
       code: RESPONSE_CODE.FAILED,
       message: resp.message || resp.userMessage || '操作失败',
+    };
+  }
+}
+
+/**
+ * 处理个人资料请求
+ *
+ * @export
+ * @param {Router.IRouterContext} ctx 环境上下文
+ * @param {Record<string, any>} resp 响应数据
+ */
+export function returnProfileResp(
+  ctx: Router.IRouterContext,
+  resp: Record<string, any>
+) {
+  const { user, profile } = resp as UserProfileDetailModel;
+  const { workspace, profilePublicity } = resp as UserProfileDetailModel;
+
+  if (user) {
+    // 处理用户头像
+    const avatar = getProxyImageUrl(user.profileImageUrls.medium);
+    user.avatar = avatar;
+    delete user.profileImageUrls;
+    // 处理图片
+    if (profile.backgroundImageUrl) {
+      profile.backgroundImageUrl = getProxyImageUrl(profile.backgroundImageUrl);
+    }
+    ctx.body = {
+      code: RESPONSE_CODE.SUCCESS,
+      profileDetail: {
+        user,
+        profile,
+        workspace,
+        profilePublicity,
+      },
+    };
+  } else {
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp,
     };
   }
 }

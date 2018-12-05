@@ -7,10 +7,10 @@
 import Router from 'koa-router';
 import * as UserSvr from '../../service/user';
 import { getAccessToken } from '../auth';
-import { getSessionByKey, getProxyImageUrl } from '../../utils/common';
+import { getSessionByKey } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
 import { cleanUserApiCache } from '../../utils/cache';
-import { returnIllustResp } from '../illust/returner';
+import { returnIllustResp, returnProfileResp } from '../illust/returner';
 import RESPONSE_CODE from '../../constants/response-code';
 import { setUserSession, clearUserSession } from './session';
 
@@ -130,33 +130,7 @@ router.get('/profile/detail', async (ctx, next) => {
   const profileResp = await UserSvr.getUserProfileDetail(token, userId);
   const resp = handlePixivResp(profileResp);
 
-  const { user, profile } = resp as UserProfileDetailModel;
-  const { workspace, profilePublicity } = resp as UserProfileDetailModel;
-
-  if (user) {
-    // 处理用户头像
-    const avatar = getProxyImageUrl(user.profileImageUrls.medium);
-    user.avatar = avatar;
-    delete user.profileImageUrls;
-    // 处理图片
-    if (profile.backgroundImageUrl) {
-      profile.backgroundImageUrl = getProxyImageUrl(profile.backgroundImageUrl);
-    }
-    ctx.body = {
-      code: RESPONSE_CODE.SUCCESS,
-      profileDetail: {
-        user,
-        profile,
-        workspace,
-        profilePublicity,
-      },
-    };
-  } else {
-    ctx.body = {
-      code: RESPONSE_CODE.FAILED,
-      message: resp.message || resp,
-    };
-  }
+  returnProfileResp(ctx, resp);
 });
 
 export default router.routes();
