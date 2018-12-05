@@ -1,7 +1,7 @@
 /**
  * 用户相关接口服务
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-12-5
  */
 
 import * as OAuthSvr from '../oauth';
@@ -13,6 +13,7 @@ const apiList = {
   follow: '/v1/user/follow/add',
   unfollow: '/v1/user/follow/delete',
   illusts: '/v1/user/illusts',
+  profileDetail: '/v1/user/detail',
 };
 
 /**
@@ -94,6 +95,27 @@ export function getUserIllusts(accessToken: string, userId: string) {
       type: 'illust',
       filter: 'for_ios',
       user_id: userId,
+    },
+  });
+}
+
+/**
+ * 获取用户个人资料详情
+ *
+ * @export
+ * @param {string} accessToken accessToken
+ * @param {string} userId 用户ID
+ * @returns
+ */
+export function getUserProfileDetail(accessToken: string, userId: string) {
+  const api = apiHost + apiList.profileDetail;
+  const headers = getAuthHeaders(accessToken);
+
+  return ajax.get(api, {
+    headers,
+    data: {
+      user_id: userId,
+      filter: 'for_ios',
     },
   });
 }

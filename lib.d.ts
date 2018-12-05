@@ -57,6 +57,202 @@ interface UserModel {
   [key: string]: any;
 }
 
+// 个人资料隐私策略
+type ProfilePublicity = 'public' | 'mypixiv' | 'private';
+// Pixiv个人资料详情数据模型
+interface UserProfileDetailModel {
+  // 用户信息
+  user: {
+    /**
+     * 用户id
+     */
+    id: string;
+    /**
+     * 昵称
+     */
+    name: string;
+    /**
+     * 账号名
+     */
+    account: string;
+    /**
+     * 头像
+     */
+    avatar: string;
+    /**
+     * 一句话描述
+     */
+    comment: string;
+    /**
+     * 是否已关注
+     */
+    isFollowed: boolean;
+    /**
+     * 扩展属性
+     */
+    [key: string]: any;
+  };
+  // 个人资料
+  profile: {
+    /**
+     * 个人主页
+     */
+    webpage: string;
+    /**
+     * 性别
+     */
+    gender: string;
+    /**
+     * 出生年月日
+     */
+    birth: string;
+    /**
+     * 出生月日
+     */
+    birthDay: string;
+    /**
+     * 出生年份
+     */
+    birthYear: string;
+    /**
+     * 地址
+     */
+    region: string;
+    /**
+     * 国家id
+     */
+    addressId: string;
+    /**
+     * 国家代码
+     */
+    countryCode: string;
+    /**
+     * 职业
+     */
+    job: string;
+    /**
+     * 职业id
+     */
+    jobId: string;
+    /**
+     * 总关注人数
+     */
+    totalFollowUsers: number;
+    /**
+     * 好P友总数
+     */
+    totalMypixivUsers: number;
+    /**
+     * 插画作品总数
+     */
+    totalIllusts: number;
+    /**
+     * 漫画作品总数
+     */
+    totalManga: number;
+    /**
+     * 小说作品总数
+     */
+    totalNovels: number;
+    /**
+     * (公开的)收藏插画总数
+     */
+    totalIllustBookmarksPublic: number;
+    /**
+     * 插画系列作品总数
+     */
+    totalIllustSeries: number;
+    /**
+     * 背景图片
+     */
+    backgroundImageUrl: string;
+    /**
+     * twitter账号
+     */
+    twitterAccount: string;
+    /**
+     * twitter地址
+     */
+    twitterUrl: string;
+    /**
+     * pawoo地址
+     */
+    pawooUrl: string;
+    /**
+     * 是否高级会员
+     */
+    isPremium: boolean;
+    /**
+     * 是否使用自定义背景图片
+     */
+    isUsingCustomProfileImage: boolean;
+  };
+  // 个人资料隐私策略，私人 | 仅好P友可见 | 所有人可见
+  profilePublicity: {
+    gender: ProfilePublicity;
+    region: ProfilePublicity;
+    birthDay: ProfilePublicity;
+    birthYear: ProfilePublicity;
+    job: ProfilePublicity;
+    pawoo: boolean;
+  };
+  // 工作环境
+  workspace: {
+    /**
+     * 电脑
+     */
+    pc: string;
+    /**
+     * 显示器
+     */
+    monitor: number;
+    /**
+     * 软件
+     */
+    tool: string;
+    /**
+     * 扫描仪
+     */
+    scanner: string;
+    /**
+     * 数位板
+     */
+    tablet: string;
+    /**
+     * 鼠标
+     */
+    mouse: string;
+    /**
+     * 打印机
+     */
+    printer: string;
+    /**
+     * 桌子上的东西
+     */
+    desktop: string;
+    /**
+     * 绘画时所听的音乐
+     */
+    music: string;
+    /**
+     * 桌子
+     */
+    desk: string;
+    /**
+     * 椅子
+     */
+    chair: string;
+    /**
+     * 其他
+     */
+    comment: string;
+    /**
+     * 工作环境背景图片
+     */
+    workspaceImageUrl: string | null;
+  };
+}
+
 /**
  * 插画基础数据模型
  */

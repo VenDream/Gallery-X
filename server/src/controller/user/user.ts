@@ -1,13 +1,13 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-11-23
+ * @since 2018-12-5
  */
 
 import Router from 'koa-router';
 import * as UserSvr from '../../service/user';
 import { getAccessToken } from '../auth';
-import { getSessionByKey } from '../../utils/common';
+import { getSessionByKey, getProxyImageUrl } from '../../utils/common';
 import { handlePixivResp } from '../../utils/response';
 import { cleanUserApiCache } from '../../utils/cache';
 import { returnIllustResp } from '../illust/returner';
@@ -122,6 +122,41 @@ router.get('/illusts', async (ctx, next) => {
   const resp = handlePixivResp(illustsResp);
 
   returnIllustResp(ctx, resp);
+});
+
+router.get('/profile/detail', async (ctx, next) => {
+  const { userId } = ctx.request.query as Record<string, any>;
+  const token = await getAccessToken(ctx);
+  const profileResp = await UserSvr.getUserProfileDetail(token, userId);
+  const resp = handlePixivResp(profileResp);
+
+  const { user, profile } = resp as UserProfileDetailModel;
+  const { workspace, profilePublicity } = resp as UserProfileDetailModel;
+
+  if (user) {
+    // 处理用户头像
+    const avatar = getProxyImageUrl(user.profileImageUrls.medium);
+    user.avatar = avatar;
+    delete user.profileImageUrls;
+    // 处理图片
+    if (profile.backgroundImageUrl) {
+      profile.backgroundImageUrl = getProxyImageUrl(profile.backgroundImageUrl);
+    }
+    ctx.body = {
+      code: RESPONSE_CODE.SUCCESS,
+      profileDetail: {
+        user,
+        profile,
+        workspace,
+        profilePublicity,
+      },
+    };
+  } else {
+    ctx.body = {
+      code: RESPONSE_CODE.FAILED,
+      message: resp.message || resp,
+    };
+  }
 });
 
 export default router.routes();
