@@ -69,7 +69,6 @@ export default class IllustDetail extends Component<IProps, IState> {
       top: true,
       bottom: true,
     },
-    bounceTime: 500,
     // 滚动条
     scrollbar: { fade: true },
     // 允许鼠标滚轮控制
