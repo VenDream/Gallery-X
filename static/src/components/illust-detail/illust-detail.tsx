@@ -5,9 +5,8 @@
  */
 
 import React, { Component } from 'react';
-import iScroll from 'iscroll/build/iscroll';
-import ReactIScroll from 'react-iscroll';
 import autobind from 'autobind-decorator';
+import BScroll, { BsOption } from 'better-scroll';
 
 import TitleBar from './title-bar';
 import LikeBtn from './like-btn';
@@ -59,35 +58,40 @@ interface IProps {
 interface IState {}
 
 export default class IllustDetail extends Component<IProps, IState> {
+  // better-scroll实例
+  bScroller: BScroll | null = null;
   // 根节点引用
   rootRef: React.RefObject<HTMLDivElement> = React.createRef();
-  // React-iScroll组件引用
-  reactIScrollRef: React.RefObject<any> = React.createRef();
-  // iScroll配置，参考: https://github.com/cubiq/iscroll#configuring-the-iscroll
-  iScrollOptions: IScorllOptions2 = {
-    // 显示滚动条
-    scrollbars: true,
-    // 自动隐藏滚动条
-    // fadeScrollbars: true,
-    // 鼠标滚轮控制
+  // better-scroll配置，参考: https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/options.html
+  bScrollOption: Partial<BsOption> = {
+    // 回弹效果
+    bounce: {
+      top: true,
+      bottom: true,
+    },
+    bounceTime: 500,
+    // 滚动条
+    scrollbar: { fade: true },
+    // 允许鼠标滚轮控制
     mouseWheel: true,
-    // 滚轮滚动速度
-    mouseWheelSpeed: 1,
-    // 减速因子
-    deceleration: 0.00005,
-    // 回弹时间
-    bounceTime: 600,
-    // 回弹缓动函数
-    bounceEasing: 'quadratic',
   };
 
   componentDidMount() {
-    // See: https://github.com/cubiq/iscroll/issues/1130
     const root = this.rootRef.current;
-    root &&
+    if (root) {
+      // See: https://github.com/cubiq/iscroll/issues/1130
       root.addEventListener('touchstart', this.preventDefault, {
         passive: false,
       });
+
+      // 初始化 better-scroll
+      const wrapper = root.querySelector('.bscroll-wrapper');
+      wrapper &&
+        (this.bScroller = new BScroll(
+          root.querySelector('.bscroll-wrapper'),
+          this.bScrollOption
+        ));
+    }
   }
 
   componentWillUnmount() {
@@ -122,9 +126,8 @@ export default class IllustDetail extends Component<IProps, IState> {
   }
 
   @autobind
-  refreshIScroll() {
-    const iScorller: IScroll = this.reactIScrollRef.current.getIScroll();
-    iScorller && iScorller.refresh();
+  refreshBScroll() {
+    this.bScroller && this.bScroller.refresh();
   }
 
   render() {
@@ -134,37 +137,33 @@ export default class IllustDetail extends Component<IProps, IState> {
     return (
       <div className="illust-detail" ref={this.rootRef}>
         <TitleBar illust={illust} />
-        <ReactIScroll
-          ref={this.reactIScrollRef}
-          iScroll={iScroll}
-          options={this.iScrollOptions}
-        >
+        <div className="bscroll-wrapper">
           <div className="detail-content">
-            <ImageList illust={illust} refreshIScroll={this.refreshIScroll} />
+            <ImageList illust={illust} refreshBScroll={this.refreshBScroll} />
             <DetailInfo
               illust={illust}
-              searchByTag={searchByTag}
               redirectTo={redirectTo}
+              searchByTag={searchByTag}
             />
             <ArtistInfo
-              artist={illust.user}
-              addIllust={addIllust}
               follow={follow}
               unfollow={unfollow}
-              refreshIScroll={this.refreshIScroll}
+              artist={illust.user}
+              addIllust={addIllust}
+              refreshBScroll={this.refreshBScroll}
             />
             <CommentBox
               previewMode={true}
               illustId={illust.id}
-              refreshIScroll={this.refreshIScroll}
+              refreshBScroll={this.refreshBScroll}
             />
           </div>
-        </ReactIScroll>
+        </div>
         <LikeBtn
           illustId={illust.id}
-          hasLiked={illust.isBookmarked}
           like={like}
           unlike={unlike}
+          hasLiked={illust.isBookmarked}
         />
       </div>
     );

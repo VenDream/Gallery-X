@@ -1,7 +1,7 @@
 /**
  * 插画详情-图片列表组件
  * @author VenDream
- * @since 2018-11-28
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
@@ -16,9 +16,9 @@ interface IProps {
    */
   illust: IllustModel;
   /**
-   * 刷新IScroll
+   * 刷新better-scroll
    */
-  refreshIScroll: () => void;
+  refreshBScroll: () => void;
 }
 
 export default class ImageList extends Component<IProps> {
@@ -38,7 +38,7 @@ export default class ImageList extends Component<IProps> {
 
     // 非第一张图片加载完成后，刷新iScroll
     if (image.src === this.props.illust.imageUrls[0].large) return;
-    this.props.refreshIScroll();
+    this.props.refreshBScroll();
   }
 
   render() {

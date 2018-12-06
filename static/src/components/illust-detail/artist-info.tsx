@@ -32,9 +32,9 @@ interface IProps {
    */
   unfollow: (userId: string) => void;
   /**
-   * 刷新IScroll
+   * 刷新better-scroll
    */
-  refreshIScroll: () => void;
+  refreshBScroll: () => void;
 }
 
 interface IState {
@@ -92,7 +92,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
         this.props.addIllust(illusts);
         this.setState({ illusts }, () => {
           setTimeout(() => {
-            illusts.length && this.props.refreshIScroll();
+            illusts.length && this.props.refreshBScroll();
           }, 0);
         });
       } else {

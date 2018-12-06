@@ -25,9 +25,9 @@ interface IProps {
    */
   previewMode?: boolean;
   /**
-   * 刷新IScroll
+   * 刷新better-scroll
    */
-  refreshIScroll?: () => void;
+  refreshBScroll?: () => void;
 }
 
 interface IState {
@@ -59,7 +59,7 @@ export default class CommentBox extends Component<IProps, IState> {
   static defaultProps: IProps = {
     illustId: '',
     previewMode: false,
-    refreshIScroll: () => {},
+    refreshBScroll: () => {},
   };
 
   state: IState = {
@@ -111,7 +111,7 @@ export default class CommentBox extends Component<IProps, IState> {
             },
           }),
           () => {
-            comments.length && this.props.refreshIScroll();
+            comments.length && this.props.refreshBScroll();
           }
         );
       } else {
@@ -144,9 +144,7 @@ export default class CommentBox extends Component<IProps, IState> {
         this.updateCommentReply(
           commentId,
           { isFetching: false, replies: replies.reverse() },
-          () => {
-            replies.length && this.props.refreshIScroll();
-          }
+          () => replies.length && this.props.refreshBScroll()
         );
       } else {
         Message.show({ type: 3, message: '回复获取失败，请重试' });
