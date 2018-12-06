@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-9-24
+ * @since 2018-12-6
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -9,6 +9,7 @@ import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 import classnames from 'classnames';
 
 import { getUniqueId } from 'utils/common';
+import './popup.less';
 
 export interface PopUpProps {
   /**
@@ -155,7 +156,11 @@ export default function popUpFactory<WrappedComponentProps>(
       // 拷贝children
       const clonedElement = cloneElement(childElement, {
         // 注入过渡效果类
-        className: classnames(childElement.props.className, transitionClass),
+        className: classnames(
+          'g-popup',
+          childElement.props.className,
+          transitionClass
+        ),
         // 注入onClose方法
         onClose: () => {
           this.close();

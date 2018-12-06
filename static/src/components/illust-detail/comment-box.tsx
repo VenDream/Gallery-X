@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-3
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
@@ -71,8 +71,9 @@ export default class CommentBox extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    // 组件加载后，获取第一批数据
-    this.fetchCommentData();
+    setTimeout(() => {
+      this.fetchCommentData();
+    }, 200);
   }
 
   /**
@@ -196,7 +197,7 @@ export default class CommentBox extends Component<IProps, IState> {
   @autobind
   showCommentDialog() {
     const { illustId } = this.props;
-    CommentDialog.show({ id: illustId });
+    CommentDialog.show({ id: illustId, transitionClass: 'fade-in-right' });
   }
 
   // 渲染评论列表

@@ -1,7 +1,7 @@
 /**
  * 作品详情弹窗
  * @author VenDream
- * @since 2018-9-30
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
@@ -16,14 +16,18 @@ interface IProps {
    * 插画ID
    */
   id: string;
+  /**
+   * 类名
+   */
+  className?: string;
 }
 
 class IllustDetailDialog extends Component<IProps> {
   render() {
-    const { id } = this.props;
+    const { id, className } = this.props;
 
     return id ? (
-      <div className="illust-detail-dialog fade-in-right">
+      <div className={`${className} illust-detail-dialog`}>
         <IllustDetail id={this.props.id} store={store} />
       </div>
     ) : null;

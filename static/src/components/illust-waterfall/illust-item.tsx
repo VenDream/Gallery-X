@@ -1,7 +1,7 @@
 /**
  * 插画瀑布流单项组件
  * @author VenDream
- * @since 2018-9-29
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
@@ -29,7 +29,10 @@ interface IllustItemProps {
 export default class IllustItem extends Component<IllustItemProps> {
   @autobind
   showIllustDetail() {
-    IllustDetailDialog.show({ id: this.props.id });
+    IllustDetailDialog.show({
+      id: this.props.id,
+      transitionClass: 'fade-in-right',
+    });
   }
 
   render() {

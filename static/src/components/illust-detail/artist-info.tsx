@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-11-29
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
@@ -73,7 +73,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
 
   // 查看其它插画
   checkIllust(id: string) {
-    IllustDetailDialog.show({ id });
+    IllustDetailDialog.show({ id, transitionClass: 'fade-in-right' });
   }
 
   // 请求画师作品数据

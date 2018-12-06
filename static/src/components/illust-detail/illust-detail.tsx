@@ -1,15 +1,13 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-12-4
+ * @since 2018-12-6
  */
 
 import React, { Component } from 'react';
 import iScroll from 'iscroll/build/iscroll';
 import ReactIScroll from 'react-iscroll';
 import autobind from 'autobind-decorator';
-
-import { isMobile } from 'utils/common';
 
 import TitleBar from './title-bar';
 import LikeBtn from './like-btn';
@@ -72,7 +70,7 @@ export default class IllustDetail extends Component<IProps, IState> {
     // 自动隐藏滚动条
     // fadeScrollbars: true,
     // 鼠标滚轮控制
-    mouseWheel: !isMobile(),
+    mouseWheel: true,
     // 滚轮滚动速度
     mouseWheelSpeed: 1,
     // 减速因子
