@@ -1,11 +1,11 @@
 /**
  * 路由相关ACTION定义
  * @author VenDream
- * @since 2018-6-14
+ * @since 2018-12-7
  */
 
 import { AnyAction, Dispatch } from 'redux';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 /**
  * 切换页面
  *

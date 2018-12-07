@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-9-10
+ * @since 2018-12-7
  */
 
 import '@babel/polyfill';
@@ -9,7 +9,7 @@ import qs from 'qs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import initReactFastclick from 'react-fastclick';
 
 import 'normalize.css';

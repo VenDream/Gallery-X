@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-12-6
+ * @since 2018-12-7
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -85,7 +85,7 @@ export default function popUpFactory<WrappedComponentProps>(
           onClose={onClose}
           ref={instanceRef}
         >
-          <WrappedComponent {...wrappedProps} />
+          <WrappedComponent {...wrappedProps as WrappedComponentProps} />
         </ComponentWithPopUp>,
         overlay
       ) as ComponentWithPopUp;

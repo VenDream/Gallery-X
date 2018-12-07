@@ -85,11 +85,7 @@ export default class IllustDetail extends Component<IProps, IState> {
 
       // 初始化 better-scroll
       const wrapper = root.querySelector('.bscroll-wrapper');
-      wrapper &&
-        (this.bScroller = new BScroll(
-          root.querySelector('.bscroll-wrapper'),
-          this.bScrollOption
-        ));
+      wrapper && (this.bScroller = new BScroll(wrapper, this.bScrollOption));
     }
   }
 
@@ -114,7 +110,7 @@ export default class IllustDetail extends Component<IProps, IState> {
         } else {
           setTimeout(() => {
             newWin.location.href = href;
-          }, 100);
+          }, 0);
         }
       }
       return;

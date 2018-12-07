@@ -1,11 +1,11 @@
 /**
  * 用户相关ACTION定义
  * @author VenDream
- * @since 2018-10-17
+ * @since 2018-12-7
  */
 
 import { AnyAction, Dispatch } from 'redux';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 
 import ACTIONS from 'constants/actions';
 import MESSAGE from 'constants/message';

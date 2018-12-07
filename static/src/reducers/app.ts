@@ -1,7 +1,7 @@
 /**
  * App状态同步
  * @author VenDream
- * @since 2018-6-26
+ * @since 2018-12-7
  */
 
 import { AnyAction } from 'redux';
@@ -31,7 +31,7 @@ export function getTargetRoutePage(pathname: string) {
 export default function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ACTIONS.LOCATION_CHANGE: {
-      const page = getTargetRoutePage(action.payload.pathname);
+      const page = getTargetRoutePage(action.payload.location.pathname);
       const category =
         page === PAGE.RANKING || page === PAGE.SEARCH ? page : '';
       return { ...state, page, category };
