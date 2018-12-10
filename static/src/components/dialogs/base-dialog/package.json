@@ -1,0 +1,7 @@
+{
+  "name": "base-dialog",
+  "version": "1.0.0",
+  "description": "全屏展示基础弹窗",
+  "main": "./base-dialog.tsx",
+  "types": "./base-dialog.tsx"
+}

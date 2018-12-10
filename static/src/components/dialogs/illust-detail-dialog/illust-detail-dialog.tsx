@@ -1,36 +1,31 @@
 /**
  * 作品详情弹窗
  * @author VenDream
- * @since 2018-12-6
+ * @since 2018-12-10
  */
 
-import React, { Component } from 'react';
-import popUpFactory from 'components/hoc/popup';
-
+import React from 'react';
 import store from 'store';
+
+import SelfDialog from '.';
+import popUpFactory from 'components/hoc/popup';
 import IllustDetail from 'containers/illust-detail';
+import { BaseDialog } from 'components/dialogs/base-dialog';
 import './illust-detail-dialog.less';
 
-interface IProps {
-  /**
-   * 插画ID
-   */
-  id: string;
-  /**
-   * 类名
-   */
-  className?: string;
-}
+class IllustDetailDialog extends BaseDialog {
+  componentDidMount() {
+    const { id } = this.props;
+    if (!id) {
+      throw new Error('[Error] paramter [id] is required.');
+    }
 
-class IllustDetailDialog extends Component<IProps> {
-  render() {
-    const { id, className } = this.props;
-
-    return id ? (
-      <div className={`${className} illust-detail-dialog`}>
-        <IllustDetail id={this.props.id} store={store} />
-      </div>
-    ) : null;
+    this.setState({
+      class: 'illust-detail-dialog',
+      title: '',
+      content: <IllustDetail id={id} store={store} />,
+      close: SelfDialog.hide,
+    });
   }
 }
 

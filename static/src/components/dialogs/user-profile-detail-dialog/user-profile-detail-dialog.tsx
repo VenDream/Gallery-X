@@ -4,31 +4,27 @@
  * @since 2018-12-10
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import popUpFactory from 'components/hoc/popup';
 
+import SelfDialog from '.';
+import UserProfileDetail from './user-profile-detail';
+import { BaseDialog } from 'components/dialogs/base-dialog';
 import './user-profile-detail-dialog.less';
 
-interface IProps {
-  /**
-   * 用户ID
-   */
-  userId: string;
-  /**
-   * 类名
-   */
-  className?: string;
-}
+class UserProfileDetailDialog extends BaseDialog {
+  componentDidMount() {
+    const { id } = this.props;
+    if (!id) {
+      throw new Error('[Error] paramter [id] is required.');
+    }
 
-class UserProfileDetailDialog extends Component<IProps> {
-  render() {
-    const { userId, className } = this.props;
-
-    return userId ? (
-      <div className={`${className} user-profile-detail-dialog`}>
-        <div>哈哈</div>
-      </div>
-    ) : null;
+    this.setState({
+      class: 'user-profile-detail-dialog',
+      title: '个人页面',
+      content: <UserProfileDetail userId={id} />,
+      close: SelfDialog.hide,
+    });
   }
 }
 

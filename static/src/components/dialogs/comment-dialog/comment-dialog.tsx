@@ -4,47 +4,27 @@
  * @since 2018-12-10
  */
 
-import React, { Component } from 'react';
-import autobind from 'autobind-decorator';
+import React from 'react';
 import popUpFactory from 'components/hoc/popup';
 
+import SelfDialog from '.';
+import { BaseDialog } from 'components/dialogs/base-dialog';
 import CommentBox from 'components/illust-detail/comment-box';
-import CommentDialogPopup from 'components/dialogs/comment-dialog';
 import './comment-dialog.less';
 
-interface IProps {
-  /**
-   * 插画ID
-   */
-  id: string;
-  /**
-   * 类名
-   */
-  className?: string;
-}
+class CommentDialog extends BaseDialog {
+  componentDidMount() {
+    const { id } = this.props;
+    if (!id) {
+      throw new Error('[Error] paramter [id] is required.');
+    }
 
-class CommentDialog extends Component<IProps> {
-  @autobind
-  hide() {
-    CommentDialogPopup.hide();
-  }
-
-  render() {
-    const { id, className } = this.props;
-
-    return id ? (
-      <div className={`${className} comment-dialog`}>
-        <div className="dialog-title">
-          <h3>所有评论</h3>
-          <span className="close-btn" onClick={this.hide}>
-            <i className="g-icon icon-close" />
-          </span>
-        </div>
-        <div className="dialog-body">
-          <CommentBox illustId={id} previewMode={false} />
-        </div>
-      </div>
-    ) : null;
+    this.setState({
+      class: 'comment-dialog',
+      title: '全部评论',
+      content: <CommentBox illustId={id} previewMode={false} />,
+      close: SelfDialog.hide,
+    });
   }
 }
 
