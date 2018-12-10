@@ -1,7 +1,7 @@
 /**
  * 插画详情-详细信息组件
  * @author VenDream
- * @since 2018-12-4
+ * @since 2018-12-10
  */
 
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import autobind from 'autobind-decorator';
 
 import PAGE from 'constants/page';
 import RouterMap from 'constants/routers';
-import IllustDetailDialog from 'components/common/illust-detail-dialog';
+import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
 import './detail-info.less';
 
 interface IProps {

@@ -1,15 +1,15 @@
 /**
  * 插画评论列表弹窗
  * @author VenDream
- * @since 2018-12-6
+ * @since 2018-12-10
  */
 
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
 import popUpFactory from 'components/hoc/popup';
 
-import CommentDialog from 'components/common/comment-dialog';
 import CommentBox from 'components/illust-detail/comment-box';
+import CommentDialogPopup from 'components/dialogs/comment-dialog';
 import './comment-dialog.less';
 
 interface IProps {
@@ -23,10 +23,10 @@ interface IProps {
   className?: string;
 }
 
-class IllustDetailDialog extends Component<IProps> {
+class CommentDialog extends Component<IProps> {
   @autobind
   hide() {
-    CommentDialog.hide();
+    CommentDialogPopup.hide();
   }
 
   render() {
@@ -48,4 +48,4 @@ class IllustDetailDialog extends Component<IProps> {
   }
 }
 
-export default popUpFactory(IllustDetailDialog);
+export default popUpFactory(CommentDialog);

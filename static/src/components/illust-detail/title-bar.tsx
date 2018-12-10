@@ -1,14 +1,14 @@
 /**
  * 插画详情-标题栏组件
  * @author VenDream
- * @since 2018-9-29
+ * @since 2018-12-10
  */
 
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
 
 import Image from 'components/common/image';
-import IllustDetailDialog from 'components/common/illust-detail-dialog';
+import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
 import './title-bar.less';
 
 interface IProps {

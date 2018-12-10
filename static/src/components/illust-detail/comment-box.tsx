@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-6
+ * @since 2018-12-10
  */
 
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import autobind from 'autobind-decorator';
 
 import Image from 'components/common/image';
 import Message from 'components/common/message';
-import CommentDialog from 'components/common/comment-dialog';
+import CommentDialog from 'components/dialogs/comment-dialog';
 import { getComments, getCommentReplies } from 'api/illust';
 import { parseCommentStr } from 'components/helpers/comment';
 import './comment-box.less';

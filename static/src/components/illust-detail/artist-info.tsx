@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-12-6
+ * @since 2018-12-10
  */
 
 import React, { Component } from 'react';
@@ -11,7 +11,7 @@ import autobind from 'autobind-decorator';
 import { getUserIllusts, follow, unfollow } from 'api/user';
 import Image from 'components/common/image';
 import Message from 'components/common/message';
-import IllustDetailDialog from 'components/common/illust-detail-dialog';
+import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
 import './artist-info.less';
 
 interface IProps {

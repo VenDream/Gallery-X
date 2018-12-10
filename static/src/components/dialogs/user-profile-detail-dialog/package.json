@@ -1,0 +1,7 @@
+{
+  "name": "user-profile-detail-dialog",
+  "version": "1.0.0",
+  "description": "用户个人资料详情弹窗",
+  "main": "./user-profile-detail-dialog.tsx",
+  "types": "./user-profile-detail-dialog.tsx"
+}
