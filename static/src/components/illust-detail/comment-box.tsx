@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-18
  */
 
 import React, { Component } from 'react';
@@ -13,6 +13,7 @@ import Message from 'components/common/message';
 import CommentDialog from 'components/dialogs/comment-dialog';
 import { getComments, getCommentReplies } from 'api/illust';
 import { parseCommentStr } from 'components/helpers/comment';
+import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
 import './comment-box.less';
 
 interface IProps {
@@ -294,6 +295,18 @@ export default class CommentBox extends Component<IProps, IState> {
 }
 
 /**
+ * 查看用户个人页面
+ *
+ * @param {string} userId 用户ID
+ */
+function checkUser(userId: string) {
+  UserProfileDetailDialog.show({
+    id: userId,
+    transitionClass: 'fade-in-right',
+  });
+}
+
+/**
  * 单条评论详情组件
  *
  * @param {{
@@ -312,7 +325,11 @@ function CommentItem(props: {
   return (
     <div className="comment-item fade-in" key={id}>
       <div className="left-block">
-        <Image src={user.avatar} className="user-avatar" />
+        <Image
+          src={user.avatar}
+          className="user-avatar"
+          onClick={() => checkUser(user.id)}
+        />
       </div>
       <div className="right-block">
         <span className="user-name">{user.name}</span>

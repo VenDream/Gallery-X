@@ -1,7 +1,7 @@
 /**
  * 插画详情-详细信息组件
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-18
  */
 
 import React, { Component } from 'react';
@@ -10,6 +10,7 @@ import autobind from 'autobind-decorator';
 
 import PAGE from 'constants/page';
 import RouterMap from 'constants/routers';
+import { parseCommentStr } from 'components/helpers/comment';
 import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
 import './detail-info.less';
 
@@ -82,12 +83,7 @@ export default class DetailInfo extends Component<IProps> {
   // 渲染插画说明
   renderCaption() {
     const illust = this.props.illust;
-    return (
-      <div
-        className="caption"
-        dangerouslySetInnerHTML={{ __html: illust.caption }}
-      />
-    );
+    return <div className="caption">{parseCommentStr(illust.caption)}</div>;
   }
 
   render() {

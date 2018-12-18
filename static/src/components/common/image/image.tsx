@@ -1,7 +1,7 @@
 /**
  * 增强图片组件，支持图片预加载
  * @author VenDream
- * @since 2018-11-28
+ * @since 2018-12-18
  */
 
 import React, { Component } from 'react';
@@ -38,6 +38,10 @@ interface ImageProps {
    * 自定义样式
    */
   style?: Record<string, any>;
+  /**
+   * 图片点击回调
+   */
+  onClick?: (...args: any[]) => void;
   /**
    * 图片加载失败回调
    */
@@ -76,6 +80,11 @@ export default class Image extends Component<ImageProps, ImageState> {
   };
 
   @autobind
+  handleClick() {
+    this.props.onClick && this.props.onClick();
+  }
+
+  @autobind
   handleImageLoaded() {
     const { transitionClass } = this.props;
     this.setState({ loaded: true, transitionClass });
@@ -100,7 +109,7 @@ export default class Image extends Component<ImageProps, ImageState> {
     if (!src) return null;
 
     return (
-      <div className={containerClass} style={style}>
+      <div className={containerClass} style={style} onClick={this.handleClick}>
         <img
           src={src}
           alt={alt}

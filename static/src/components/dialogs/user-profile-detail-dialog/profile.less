@@ -1,0 +1,74 @@
+@import '~assets/styles/variable.less';
+
+.profile-detail {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 0.1rem;
+
+  font-size: 0.12rem;
+
+  .profile-url {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+
+      text-decoration: none;
+
+      color: #888;
+
+      .g-icon {
+        margin-right: 0.04rem;
+      }
+
+      .icon-twitter {
+        position: relative;
+        top: 0.01rem;
+      }
+
+      .home-url {
+        overflow: hidden;
+
+        max-width: 1.5rem;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &:first-child {
+        margin-right: 0.1rem;
+      }
+    }
+  }
+
+  .profile-statistic {
+    margin: 0.1rem 0;
+
+    .total-follow-users, .total-pixiv-friends {
+      margin: 0 0.05rem;
+      .total-num {
+        margin-right: 0.05rem;
+
+        color: @theme-blue;
+
+        font-weight: bold;
+      }
+    }
+  }
+
+  .self-comment {
+    text-align: center;
+
+    line-height: 1.5;
+  }
+
+  .basic-info {
+    margin: 0.1rem 0;
+  }
+}

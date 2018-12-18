@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-18
  */
 
 import React, { Component } from 'react';
@@ -12,6 +12,7 @@ import { getUserIllusts, follow, unfollow } from 'api/user';
 import Image from 'components/common/image';
 import Message from 'components/common/message';
 import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
+import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
 import './artist-info.less';
 
 interface IProps {
@@ -132,6 +133,12 @@ export default class ArtistInfo extends Component<IProps, IState> {
     }
   }
 
+  @autobind
+  checkArtist() {
+    const { id } = this.props.artist;
+    UserProfileDetailDialog.show({ id, transitionClass: 'fade-in-right' });
+  }
+
   // 渲染关注按钮
   renderFollowBtn() {
     const { isFollowed } = this.props.artist;
@@ -188,7 +195,11 @@ export default class ArtistInfo extends Component<IProps, IState> {
       <div className="artist-info">
         <div className="info">
           <div className="left-block">
-            <Image src={avatar} className="artist-avatar" />
+            <Image
+              src={avatar}
+              className="artist-avatar"
+              onClick={this.checkArtist}
+            />
             <p className="artist-name">{name}</p>
           </div>
           <div className="right-block">{this.renderFollowBtn()}</div>

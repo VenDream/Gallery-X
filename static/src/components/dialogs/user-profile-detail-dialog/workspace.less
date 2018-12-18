@@ -1,0 +1,43 @@
+.profile-workspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.12rem;
+
+  .more {
+    cursor: pointer;
+    user-select: none;
+
+    color: #999;
+  }
+
+  .workspace-list {
+    width: 100%;
+    padding: 0 15%;
+
+    .workspace-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      list-style: none;
+
+      .item-key {
+        flex-basis: 40%;
+
+        color: #888;
+      }
+      .item-value {
+        overflow: hidden;
+        flex-basis: 60%;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    li + li {
+      margin-top: 0.05rem;
+    }
+  }
+}

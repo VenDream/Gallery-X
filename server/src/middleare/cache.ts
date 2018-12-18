@@ -2,7 +2,7 @@
  * 缓存中间件，用于缓存更新频率低且请求耗时长的接口
  *
  * @author VenDream
- * @since 2018-12-5
+ * @since 2018-12-18
  * @note 假设默认的响应格式都为application/json
  */
 
@@ -29,12 +29,7 @@ export const cacheConfig = {
   // redis配置
   redis: { host: process.env.REDIS_HOST || '127.0.0.1', port: 6379 },
   // 需要匹配的路由
-  routes: [
-    RANKING_API,
-    '/api/user/illusts',
-    '/api/illust/search',
-    '/api/user/profile/detail',
-  ],
+  routes: [RANKING_API, '/api/user/illusts', '/api/illust/search'],
 };
 
 // 创建redis客户端实例
@@ -104,6 +99,7 @@ export default function cache() {
     shouldHaveCache = isTargetRoute(path);
     // 请求远程服务得到结果时，缓存结果
     if (
+      !bypass &&
       shouldHaveCache &&
       method === 'GET' &&
       body.code === RESPONSE_CODE.SUCCESS

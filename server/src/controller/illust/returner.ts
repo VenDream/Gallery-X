@@ -1,7 +1,7 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-12-5
+ * @since 2018-12-11
  */
 
 import Router from 'koa-router';
@@ -139,11 +139,13 @@ export function returnProfileResp(
     }
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
-      profileDetail: {
-        user,
-        profile,
-        workspace,
-        profilePublicity,
+      data: {
+        profileDetail: {
+          user,
+          profile,
+          workspace,
+          profilePublicity,
+        },
       },
     };
   } else {

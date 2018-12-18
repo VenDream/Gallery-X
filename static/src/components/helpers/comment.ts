@@ -1,7 +1,7 @@
 /**
  * 插画评论相关辅助函数
  * @author VenDream
- * @since 2018-11-30
+ * @since 2018-12-18
  */
 
 import ReactHtmlParser from 'react-html-parser';
@@ -14,7 +14,7 @@ import { getEmojiImageUrl } from 'utils/emoji';
  * @param {string} commentStr 评论文本
  */
 export function parseCommentStr(commentStr: string): JSX.Element {
-  let htmlStr = commentStr.replace(/\n/g, '<br/>');
+  let htmlStr = commentStr.replace(/(\r)?\n/g, '<br/>');
   // 解析emoji的key
   htmlStr = htmlStr.replace(/(\([a-zA-Z0-9]+\))/g, ($0, key) => {
     const emojiKey = key.replace(/[\(|\)]/g, '');

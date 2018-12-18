@@ -15,6 +15,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-home:before {
+  content: '\e612';
+}
+
+.icon-twitter:before {
+  content: '\e6aa';
+}
+
 .icon-fail:before {
   content: '\e6da';
 }
@@ -25,10 +33,6 @@
 
 .icon-search:before {
   content: '\e64a';
-}
-
-.icon-home:before {
-  content: '\e609';
 }
 
 .icon-filter:before {
