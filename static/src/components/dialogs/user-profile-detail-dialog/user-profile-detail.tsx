@@ -1,13 +1,14 @@
 /**
  * 用户个人资料详情
  * @author VenDream
- * @since 2018-12-18
+ * @since 2018-12-19
  */
 
 import React, { Component } from 'react';
 
 import { getUserProfileDetail } from 'api/user';
 import Message from 'components/common/message';
+import UserProfileDetailDialog from './user-profile-detail-dialog';
 import Avatar from './avatar';
 import Profile from './profile';
 import Workspace from './workspace';
@@ -36,7 +37,9 @@ export default class UserProfileDetail extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    this.fetchProfileDetail();
+    setTimeout(() => {
+      this.fetchProfileDetail();
+    }, 200);
   }
 
   // 获取个人资料
@@ -48,7 +51,15 @@ export default class UserProfileDetail extends Component<IProps, IState> {
       const resp = await getUserProfileDetail(userId);
       if (resp) {
         const profileDetail: UserProfileDetailModel = resp.profileDetail;
-        this.setState({ profileDetail });
+        if (profileDetail) {
+          this.setState({ profileDetail });
+        } else {
+          Message.show({
+            type: 3,
+            message: '无法查看该用户资料',
+            onClose: UserProfileDetailDialog.hide,
+          });
+        }
       } else {
         Message.show({ type: 3, message: '获取用户个人资料失败，请重试' });
       }
@@ -66,12 +77,12 @@ export default class UserProfileDetail extends Component<IProps, IState> {
         {isLoading ? (
           <div className="loading-mask">
             <span className="loading-icon rotate">
-              <i className="g-icon icon-rotate" />
+              <i className="g-icon icon-loading" />
             </span>
             <span className="loading-text">加载中...</span>
           </div>
         ) : profileDetail ? (
-          <div className="profile-data">
+          <div className="profile-data fade-in">
             <Avatar profileDetail={profileDetail} />
             <Profile profileDetail={profileDetail} />
             <Workspace profileDetail={profileDetail} />
