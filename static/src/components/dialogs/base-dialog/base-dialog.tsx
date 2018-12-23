@@ -1,7 +1,7 @@
 /**
  * 全屏展示弹窗基础类
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-23
  */
 
 import React, { Component } from 'react';
@@ -13,6 +13,10 @@ import SelfDialog from '.';
 import './base-dialog.less';
 
 interface IProps {
+  /**
+   * 唯一标识ID
+   */
+  id: string;
   /**
    * 类名
    */

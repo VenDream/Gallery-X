@@ -1,7 +1,7 @@
 /**
  * 插画数据处理工具函数
  * @author VenDream
- * @since 2018-9-13
+ * @since 2018-12-23
  */
 
 import { getProxyImageUrl } from './common';
@@ -73,6 +73,7 @@ export function getParsedIllusts(
         metaSinglePage, // 原图图片(只有一张图片时)
         metaPages, // 原图图片集(有多张图片时)
         totalView, // 总浏览量
+        totalComments, // 总评论数
         totalBookmarks, // 总收藏数
         isBookmarked, // 是否收藏
       } = illust;
@@ -120,6 +121,7 @@ export function getParsedIllusts(
         height,
         pageCount,
         totalView,
+        totalComments,
         totalBookmarks,
         isBookmarked,
       });

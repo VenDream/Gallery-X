@@ -1,7 +1,7 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-12-11
+ * @since 2018-12-23
  */
 
 import Router from 'koa-router';
@@ -10,19 +10,31 @@ import { cleanUserApiCache } from '../../utils/cache';
 import { getProxyImageUrl } from '../../utils/common';
 import { getParsedIllusts, getParsedComments } from '../../utils/illust';
 
+interface IllustRespOption {
+  /**
+   * 返回的记录数
+   */
+  step?: number;
+  /**
+   * 数据载体的key
+   */
+  respKey?: string;
+}
+
 /**
  * 插画类请求的统一返回结果处理
  *
  * @param {Router.IRouterContext} ctx 请求上下文
  * @param {Record<string, any>} resp 响应数据
- * @param {number} [step=30] 返回的记录数量
+ * @param {IllustRespOption} [option={}] 其他选项
  */
 export function returnIllustResp(
   ctx: Router.IRouterContext,
   resp: Record<string, any>,
-  step: number = 30
+  option: IllustRespOption = {}
 ) {
   const { illusts, nextUrl } = resp;
+  const { step = 30, respKey = 'illusts' } = option;
   if (illusts) {
     // 取值范围[1, 30]
     let taken = step;
@@ -32,7 +44,7 @@ export function returnIllustResp(
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
       data: {
-        illusts: getParsedIllusts(illusts).slice(0, taken),
+        [respKey]: getParsedIllusts(illusts).slice(0, taken),
         isEnd: !!!nextUrl,
       },
     };
@@ -58,16 +70,16 @@ interface CommentRespOption {
  * @export
  * @param {Router.IRouterContext} ctx 请求上下文
  * @param {Record<string, any>} resp 响应数据
- * @param {CommentRespOption} option 其他选项
+ * @param {CommentRespOption} [option={}] 其他选项
  */
 export function returnCommentsResp(
   ctx: Router.IRouterContext,
   resp: Record<string, any>,
-  option: CommentRespOption
+  option: CommentRespOption = {}
 ) {
   const { comments, nextUrl } = resp;
   if (comments) {
-    const { respKey } = option;
+    const { respKey = 'comments' } = option;
     const commentData: CommentModel[] = comments;
     const totalLen = commentData.length;
     const parsedComments = getParsedComments(commentData);

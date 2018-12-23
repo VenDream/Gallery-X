@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-18
+ * @since 2018-12-23
  */
 
 import React, { Component } from 'react';
@@ -17,6 +17,10 @@ import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dial
 import './comment-box.less';
 
 interface IProps {
+  /**
+   * 评论总数
+   */
+  total?: number;
   /**
    * 插画ID
    */
@@ -284,9 +288,13 @@ export default class CommentBox extends Component<IProps, IState> {
   }
 
   render() {
+    const { total } = this.props;
+
     return (
       <div className="comment-box">
-        {this.props.previewMode && <h3>评论</h3>}
+        {this.props.previewMode && (
+          <h3>评论{typeof total === 'number' ? `(${total})` : ''}</h3>
+        )}
         {this.renderCommentList()}
         {this.renderLoadMoreBtn()}
       </div>

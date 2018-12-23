@@ -1,7 +1,7 @@
 /**
  * 应用全局类型声明
  * @author VenDream
- * @since 2018-9-12
+ * @since 2018-12-23
  */
 
 // Pixiv用户数据模型
@@ -297,6 +297,10 @@ interface IllustBaseModel {
    * 插画总预览数
    */
   totalView: number;
+  /**
+   * 评论总数
+   */
+  totalComments?: number;
   /**
    * 插画总收藏数
    */
