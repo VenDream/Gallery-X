@@ -1,21 +1,50 @@
 /**
  * 用户相关接口
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-24
  */
 
 import API from './index';
 import * as ajax from 'utils/ajax';
 
 /**
- * 获取该用户的近期作品
+ * 获取用户插画作品
  *
  * @export
  * @param {string} userId 用户ID
+ * @param {number} [start=0] 偏移值
+ * @param {number} [step=30] 获取记录数
+ * @returns
  */
-export function getUserIllusts(userId: string) {
+export function getUserIllusts(userId: string, start = 0, step = 30) {
   const api = API.get('USER_ILLUSTS');
-  return ajax.get(api, { body: { userId }, isCancelable: true });
+  return ajax.get(api, { body: { start, step, userId }, isCancelable: true });
+}
+
+/**
+ * 获取用户漫画作品
+ *
+ * @export
+ * @param {string} userId 用户ID
+ * @param {number} [start=0] 偏移值
+ * @param {number} [step=30] 获取记录数
+ * @returns
+ */
+export function getUserMangas(userId: string, start = 0, step = 30) {
+  const api = API.get('USER_MANGAS');
+  return ajax.get(api, { body: { start, step, userId } });
+}
+
+/**
+ * 获取用户收藏插画
+ *
+ * @export
+ * @param {string} userId 用户ID
+ * @returns
+ */
+export function getUserBookmarkIllusts(userId: string) {
+  const api = API.get('USER_BOOKMARK_ILLUSTS');
+  return ajax.get(api, { body: { userId } });
 }
 
 /**

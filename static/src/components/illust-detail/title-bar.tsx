@@ -14,6 +14,10 @@ import './title-bar.less';
 
 interface IProps {
   /**
+   * 弹窗实例ID
+   */
+  popupInstanceId?: string;
+  /**
    * 插画详细数据
    */
   illust: IllustModel;

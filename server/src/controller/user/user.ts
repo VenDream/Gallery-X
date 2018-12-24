@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-12-23
+ * @since 2018-12-24
  */
 
 import Router from 'koa-router';
@@ -116,24 +116,30 @@ router.post('/unfollow', async (ctx, next) => {
 });
 
 router.get('/illusts', async (ctx, next) => {
-  const { userId } = ctx.request.query as Record<string, any>;
+  const { start = 0, step = 30, userId } = ctx.request.query as Record<
+    string,
+    any
+  >;
   const token = await getAccessToken(ctx);
-  const illustsResp = await UserSvr.getUserIllusts(token, userId);
+  const illustsResp = await UserSvr.getUserIllusts(token, userId, start);
   const resp = handlePixivResp(illustsResp);
 
-  returnIllustResp(ctx, resp);
+  returnIllustResp(ctx, resp, { step });
 });
 
 router.get('/mangas', async (ctx, next) => {
-  const { userId } = ctx.request.query as Record<string, any>;
+  const { start = 0, step = 30, userId } = ctx.request.query as Record<
+    string,
+    any
+  >;
   const token = await getAccessToken(ctx);
-  const illustsResp = await UserSvr.getUserMangas(token, userId);
+  const illustsResp = await UserSvr.getUserMangas(token, userId, start);
   const resp = handlePixivResp(illustsResp);
 
-  returnIllustResp(ctx, resp, { respKey: 'mangas' });
+  returnIllustResp(ctx, resp, { step, respKey: 'mangas' });
 });
 
-router.get('/bookmarks/illust', async (ctx, next) => {
+router.get('/bookmark/illusts', async (ctx, next) => {
   const { userId } = ctx.request.query as Record<string, any>;
   const token = await getAccessToken(ctx);
   const illustsResp = await UserSvr.getUserBookmarkIllusts(token, userId);

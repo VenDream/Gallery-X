@@ -1,5 +1,5 @@
 /**
- * 用户个人资料详情弹窗
+ * 用户插画作品弹窗
  * @author VenDream
  * @since 2018-12-24
  */
@@ -8,11 +8,11 @@ import React from 'react';
 import popUpFactory from 'components/hoc/popup';
 
 import SelfDialog from '.';
-import UserProfileDetail from './user-profile-detail';
 import { BaseDialog } from 'components/dialogs/base-dialog';
-import './user-profile-detail-dialog.less';
+import IllustWorks from 'components/dialogs/user-profile-detail-dialog/illust-works';
+import './illust-works-dialog.less';
 
-class UserProfileDetailDialog extends BaseDialog {
+class IllustWorksDialog extends BaseDialog {
   componentDidMount() {
     const { id } = this.props;
     if (!id) {
@@ -20,12 +20,12 @@ class UserProfileDetailDialog extends BaseDialog {
     }
 
     this.setState({
-      class: 'user-profile-detail-dialog',
-      title: '个人页面',
-      content: <UserProfileDetail userId={id} />,
+      class: 'illust-works-dialog',
+      title: '所有插画作品',
+      content: <IllustWorks userId={id} previewMode={false} />,
       close: SelfDialog.hide,
     });
   }
 }
 
-export default popUpFactory(UserProfileDetailDialog, false);
+export default popUpFactory(IllustWorksDialog, false);

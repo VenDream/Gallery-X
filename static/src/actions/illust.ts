@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-12-4
+ * @since 2018-12-24
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -124,6 +124,17 @@ export function addIllust(illusts: IllustModel[]) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
     dispatch({ type: ACTIONS.ADD_ILLUST, data: { illusts } });
   };
+}
+
+/**
+ * 同步添加插画，store可以直接dispatch
+ *
+ * @export
+ * @param {IllustModel[]} illusts 插画
+ * @returns
+ */
+export function addIllustSync(illusts: IllustModel[]) {
+  return { type: ACTIONS.ADD_ILLUST, data: { illusts } };
 }
 
 /**

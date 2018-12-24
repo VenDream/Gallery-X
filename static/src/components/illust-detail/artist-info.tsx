@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-12-18
+ * @since 2018-12-24
  */
 
 import React, { Component } from 'react';
@@ -84,7 +84,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
     try {
       this.setState({ isLoadingIllusts: true });
       // 获取数据并取前3个进行展示
-      const userIllustsCP = getUserIllusts(id) as CancelablePromise;
+      const userIllustsCP = getUserIllusts(id, 0, 3) as CancelablePromise;
       this.cancelablePromises.push(userIllustsCP);
 
       const data = await userIllustsCP.promise;

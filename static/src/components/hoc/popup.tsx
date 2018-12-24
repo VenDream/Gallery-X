@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-12-7
+ * @since 2018-12-24
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -70,7 +70,7 @@ export default function popUpFactory<WrappedComponentProps>(
       singleton && ComponentWithPopUp.hide();
 
       // 生成新的实例
-      const instanceId = getUniqueId(16);
+      const instanceId = getUniqueId(8);
       const overlay = document.createElement('div');
       const instanceRef: React.RefObject<
         ComponentWithPopUp
@@ -85,7 +85,10 @@ export default function popUpFactory<WrappedComponentProps>(
           onClose={onClose}
           ref={instanceRef}
         >
-          <WrappedComponent {...wrappedProps as WrappedComponentProps} />
+          <WrappedComponent
+            popupInstanceId={instanceId}
+            {...wrappedProps as WrappedComponentProps}
+          />
         </ComponentWithPopUp>,
         overlay
       ) as ComponentWithPopUp;

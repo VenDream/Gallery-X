@@ -1,7 +1,7 @@
 /**
  * 用户相关接口服务
  * @author VenDream
- * @since 2018-12-23
+ * @since 2018-12-24
  */
 
 import * as OAuthSvr from '../oauth';
@@ -47,6 +47,7 @@ export function getUserInfo(token: string) {
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
  * @param {boolean} [isPrivate=false] 是否私人关注
+ * @returns
  */
 export function follow(
   accessToken: string,
@@ -68,6 +69,7 @@ export function follow(
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @returns
  */
 export function unfollow(accessToken: string, userId: string) {
   const api = apiHost + apiList.unfollow;
@@ -85,14 +87,21 @@ export function unfollow(accessToken: string, userId: string) {
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @param {number} offset 偏移值
+ * @returns
  */
-export function getUserIllusts(accessToken: string, userId: string) {
+export function getUserIllusts(
+  accessToken: string,
+  userId: string,
+  offset: number
+) {
   const api = apiHost + apiList.illusts;
   const headers = getAuthHeaders(accessToken);
 
   return ajax.get(api, {
     headers,
     data: {
+      offset,
       type: 'illust',
       filter: 'for_ios',
       user_id: userId,
@@ -106,14 +115,21 @@ export function getUserIllusts(accessToken: string, userId: string) {
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @param {number} offset 偏移值
+ * @returns
  */
-export function getUserMangas(accessToken: string, userId: string) {
+export function getUserMangas(
+  accessToken: string,
+  userId: string,
+  offset: number
+) {
   const api = apiHost + apiList.illusts;
   const headers = getAuthHeaders(accessToken);
 
   return ajax.get(api, {
     headers,
     data: {
+      offset,
       type: 'manga',
       filter: 'for_ios',
       user_id: userId,
@@ -127,6 +143,7 @@ export function getUserMangas(accessToken: string, userId: string) {
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @returns
  */
 export function getUserBookmarkIllusts(accessToken: string, userId: string) {
   const api = apiHost + apiList.bookmarkIllusts;

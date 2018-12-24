@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-12-23
+ * @since 2018-12-24
  */
 
 import React, { Component } from 'react';
@@ -26,6 +26,10 @@ interface IProps {
    * 插画具体数据
    */
   illust: IllustModel;
+  /**
+   * 父弹窗实例ID
+   */
+  popupInstanceId?: string;
   /**
    * 添加插画
    */
@@ -126,12 +130,12 @@ export default class IllustDetail extends Component<IProps, IState> {
   }
 
   render() {
-    const { redirectTo, searchByTag } = this.props;
+    const { redirectTo, searchByTag, popupInstanceId } = this.props;
     const { illust, addIllust, like, unlike, follow, unfollow } = this.props;
 
     return (
       <div className="illust-detail" ref={this.rootRef}>
-        <TitleBar illust={illust} />
+        <TitleBar illust={illust} popupInstanceId={popupInstanceId} />
         <div className="bscroll-wrapper">
           <div className="detail-content">
             <ImageList illust={illust} refreshBScroll={this.refreshBScroll} />

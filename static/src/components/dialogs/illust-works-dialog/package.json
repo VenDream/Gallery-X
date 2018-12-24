@@ -1,0 +1,7 @@
+{
+  "name": "illust-works-dialog",
+  "version": "1.0.0",
+  "description": "用户插画作品弹窗",
+  "main": "./illust-works-dialog.tsx",
+  "types": "./illust-works-dialog.tsx"
+}

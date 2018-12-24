@@ -1,7 +1,7 @@
 /**
  * 作品详情弹窗
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-24
  */
 
 import React from 'react';
@@ -15,7 +15,7 @@ import './illust-detail-dialog.less';
 
 class IllustDetailDialog extends BaseDialog {
   componentDidMount() {
-    const { id } = this.props;
+    const { id, popupInstanceId } = this.props;
     if (!id) {
       throw new Error('[Error] paramter [id] is required.');
     }
@@ -23,10 +23,12 @@ class IllustDetailDialog extends BaseDialog {
     this.setState({
       class: 'illust-detail-dialog',
       title: '',
-      content: <IllustDetail id={id} store={store} />,
+      content: (
+        <IllustDetail id={id} store={store} popupInstanceId={popupInstanceId} />
+      ),
       close: SelfDialog.hide,
     });
   }
 }
 
-export default popUpFactory(IllustDetailDialog);
+export default popUpFactory(IllustDetailDialog, false);

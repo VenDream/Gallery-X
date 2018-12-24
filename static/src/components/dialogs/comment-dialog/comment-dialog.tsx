@@ -1,7 +1,7 @@
 /**
  * 插画评论列表弹窗
  * @author VenDream
- * @since 2018-12-10
+ * @since 2018-12-24
  */
 
 import React from 'react';
@@ -28,4 +28,4 @@ class CommentDialog extends BaseDialog {
   }
 }
 
-export default popUpFactory(CommentDialog);
+export default popUpFactory(CommentDialog, false);

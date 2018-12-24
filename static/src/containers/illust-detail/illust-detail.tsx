@@ -1,7 +1,7 @@
 /**
  * 插画详情容器组件
  * @author VenDream
- * @since 2018-12-4
+ * @since 2018-12-24
  */
 
 import { AnyAction } from 'redux';
@@ -15,6 +15,7 @@ import IllustDetail from 'components/illust-detail';
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
   const illustId: string = ownProps.id;
+  const popupInstanceId: string = ownProps.popupInstanceId;
   const illusts = state.illust;
   const artists = state.artist;
   const basicIllust = illusts.byId[illustId];
@@ -24,7 +25,7 @@ function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
     user: artists.byId[basicIllust.user],
   };
 
-  return { id: illustId, illust };
+  return { id: illustId, illust, popupInstanceId };
 }
 
 function mapDispatchToProps(

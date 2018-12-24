@@ -1,7 +1,7 @@
 /**
  * 用户个人资料详情
  * @author VenDream
- * @since 2018-12-19
+ * @since 2018-12-23
  */
 
 import React, { Component } from 'react';
@@ -12,6 +12,7 @@ import UserProfileDetailDialog from './user-profile-detail-dialog';
 import Avatar from './avatar';
 import Profile from './profile';
 import Workspace from './workspace';
+import IllustWorks from './illust-works';
 import './user-profile-detail.less';
 
 interface IProps {
@@ -39,7 +40,7 @@ export default class UserProfileDetail extends Component<IProps, IState> {
   componentDidMount() {
     setTimeout(() => {
       this.fetchProfileDetail();
-    }, 200);
+    }, 250);
   }
 
   // 获取个人资料
@@ -70,7 +71,14 @@ export default class UserProfileDetail extends Component<IProps, IState> {
   }
 
   render() {
+    let userId: string;
+    let totalIllusts: number;
     const { isLoading, profileDetail } = this.state;
+
+    if (profileDetail) {
+      userId = profileDetail.user.id;
+      totalIllusts = profileDetail.profile.totalIllusts;
+    }
 
     return (
       <div className="user-profile-detail">
@@ -86,6 +94,13 @@ export default class UserProfileDetail extends Component<IProps, IState> {
             <Avatar profileDetail={profileDetail} />
             <Profile profileDetail={profileDetail} />
             <Workspace profileDetail={profileDetail} />
+            {totalIllusts ? (
+              <IllustWorks
+                userId={userId}
+                total={totalIllusts}
+                previewMode={true}
+              />
+            ) : null}
           </div>
         ) : null}
       </div>
