@@ -5,13 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import autobind from 'autobind-decorator';
 
 import { addIllust } from 'utils/action';
 import { getUserIllusts } from 'api/user';
 import { checkIllustDetail, checkUserIllusts } from 'components/helpers/common';
 import Image from 'components/common/image';
 import Message from 'components/common/message';
+import './user-works.less';
 import './illust-works.less';
 
 interface IProps {
@@ -47,26 +47,32 @@ interface IState {
   /**
    * 作品列表
    */
-  illusts: IllustModel[];
+  works: IllustModel[];
 }
 
 export default class IllustWorks extends Component<IProps, IState> {
+  // 标题说明
+  caption: string = '插画作品';
+  // 类名
+  className: string = 'illust-works';
+  // 查看更多弹窗
+  checkMore: (userId: string) => void = checkUserIllusts;
+
   state: IState = {
     isEnd: false,
     reqOption: { start: 0, step: 30 },
     isLoading: false,
-    illusts: [],
+    works: [],
   };
 
   componentDidMount() {
     setTimeout(() => {
-      this.fetchUserIllusts();
+      this.fetchUserWorks();
     }, 250);
   }
 
   // 获取用户插画作品列表
-  @autobind
-  async fetchUserIllusts() {
+  async fetchUserWorks() {
     const { start, step } = this.state.reqOption;
     const { userId, previewMode } = this.props;
     // 预览模式下只取前6条数据进行展示
@@ -82,12 +88,12 @@ export default class IllustWorks extends Component<IProps, IState> {
       ) as CancelablePromise).promise;
       if (resp) {
         const illusts = resp.illusts as IllustModel[];
-        const newIllusts = this.state.illusts.concat(illusts);
+        const newWorks = this.state.works.concat(illusts);
         this.setState(prevState => ({
           ...prevState,
           isEnd: !!resp.isEnd,
-          reqOption: { ...prevState.reqOption, start: newIllusts.length },
-          illusts: newIllusts,
+          reqOption: { ...prevState.reqOption, start: newWorks.length },
+          works: newWorks,
         }));
         addIllust(illusts);
       } else {
@@ -99,14 +105,14 @@ export default class IllustWorks extends Component<IProps, IState> {
     }
   }
 
-  // 获取插画图片列表
+  // 获取作品图片列表
   getWorksList() {
     const worksList = [];
-    const { illusts } = this.state;
+    const { works: illusts } = this.state;
 
     illusts.forEach((illust, idx) => {
       const style: React.CSSProperties = {
-        marginLeft: idx % 3 === 0 ? 0 : '0.1rem',
+        marginLeft: idx % 3 === 0 ? 0 : '0.08rem',
       };
       worksList.push(
         <li
@@ -129,8 +135,8 @@ export default class IllustWorks extends Component<IProps, IState> {
 
     return (
       <div className="iw-header">
-        <h4>插画作品</h4>
-        <span className="total" onClick={() => checkUserIllusts(userId)}>
+        <h4>{this.caption}</h4>
+        <span className="total" onClick={() => this.checkMore(userId)}>
           {total || 0}件作品<span className="linker">&gt;</span>
         </span>
       </div>
@@ -147,7 +153,7 @@ export default class IllustWorks extends Component<IProps, IState> {
     }
   }
 
-  // 渲染插画作品列表
+  // 渲染作品列表
   renderWorksList() {
     return this.getWorksList();
   }
@@ -165,7 +171,7 @@ export default class IllustWorks extends Component<IProps, IState> {
         正在加载...
       </button>
     ) : (
-      <button className="load-more" onClick={this.fetchUserIllusts}>
+      <button className="load-more" onClick={() => this.fetchUserWorks()}>
         查看更多
       </button>
     );
@@ -176,7 +182,7 @@ export default class IllustWorks extends Component<IProps, IState> {
     const { previewMode } = this.props;
 
     return (
-      <div className="illust-works">
+      <div className={`user-works ${this.className}`}>
         {previewMode ? (
           <div className="preview">
             {this.renderPreviewHeader()}

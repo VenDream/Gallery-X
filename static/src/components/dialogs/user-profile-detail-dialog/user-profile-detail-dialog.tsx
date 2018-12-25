@@ -8,7 +8,7 @@ import React from 'react';
 import popUpFactory from 'components/hoc/popup';
 
 import SelfDialog from '.';
-import UserProfileDetail from './user-profile-detail';
+import UserProfileDetail from 'components/user-profile-detail';
 import { BaseDialog } from 'components/dialogs/base-dialog';
 import './user-profile-detail-dialog.less';
 

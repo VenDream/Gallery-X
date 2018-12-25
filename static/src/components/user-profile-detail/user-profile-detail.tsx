@@ -1,18 +1,19 @@
 /**
  * 用户个人资料详情
  * @author VenDream
- * @since 2018-12-23
+ * @since 2018-12-25
  */
 
 import React, { Component } from 'react';
 
 import { getUserProfileDetail } from 'api/user';
 import Message from 'components/common/message';
-import UserProfileDetailDialog from './user-profile-detail-dialog';
+import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
 import Avatar from './avatar';
 import Profile from './profile';
 import Workspace from './workspace';
 import IllustWorks from './illust-works';
+import MangaWorks from './manga-works';
 import './user-profile-detail.less';
 
 interface IProps {
@@ -72,11 +73,13 @@ export default class UserProfileDetail extends Component<IProps, IState> {
 
   render() {
     let userId: string;
+    let totalMangas: number;
     let totalIllusts: number;
     const { isLoading, profileDetail } = this.state;
 
     if (profileDetail) {
       userId = profileDetail.user.id;
+      totalMangas = profileDetail.profile.totalManga;
       totalIllusts = profileDetail.profile.totalIllusts;
     }
 
@@ -98,6 +101,13 @@ export default class UserProfileDetail extends Component<IProps, IState> {
               <IllustWorks
                 userId={userId}
                 total={totalIllusts}
+                previewMode={true}
+              />
+            ) : null}
+            {totalMangas ? (
+              <MangaWorks
+                userId={userId}
+                total={totalMangas}
                 previewMode={true}
               />
             ) : null}

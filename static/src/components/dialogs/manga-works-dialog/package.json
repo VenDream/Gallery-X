@@ -1,0 +1,7 @@
+{
+  "name": "manga-works-dialog",
+  "version": "1.0.0",
+  "description": "用户漫画作品弹窗",
+  "main": "./manga-works-dialog.tsx",
+  "types": "./manga-works-dialog.tsx"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "cmp-user-profile-detail",
+  "version": "1.0.0",
+  "description": "用户个人资料详情",
+  "main": "./user-profile-detail.tsx",
+  "types": "./user-profile-detail.tsx"
+}
