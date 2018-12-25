@@ -1,7 +1,7 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React, { Component } from 'react';
@@ -11,6 +11,7 @@ import autobind from 'autobind-decorator';
 import { getUserIllusts, follow, unfollow } from 'api/user';
 import Image from 'components/common/image';
 import Message from 'components/common/message';
+import { checkUserDetail } from 'components/helpers/common';
 import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
 import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
 import './artist-info.less';
@@ -133,12 +134,6 @@ export default class ArtistInfo extends Component<IProps, IState> {
     }
   }
 
-  @autobind
-  checkArtist() {
-    const { id } = this.props.artist;
-    UserProfileDetailDialog.show({ id, transitionClass: 'fade-in-right' });
-  }
-
   // 渲染关注按钮
   renderFollowBtn() {
     const { isFollowed } = this.props.artist;
@@ -172,17 +167,18 @@ export default class ArtistInfo extends Component<IProps, IState> {
     return isLoadingIllusts ? (
       <p className="loading-tips">正在获取近期作品...</p>
     ) : hasWorks ? (
-      <div className="works-list">
-        {illusts.map(illust => (
-          <span
+      <ul className="works-list">
+        {illusts.map((illust, idx) => (
+          <li
             className="work-item"
             key={illust.id}
             onClick={() => this.checkIllust(illust.id)}
+            style={{ marginLeft: idx === 0 ? 0 : '0.08rem' }}
           >
             <Image src={illust.imageUrls[0].medium} />
-          </span>
+          </li>
         ))}
-      </div>
+      </ul>
     ) : (
       <p className="empty-tips">暂无作品</p>
     );
@@ -198,7 +194,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
             <Image
               src={avatar}
               className="artist-avatar"
-              onClick={this.checkArtist}
+              onClick={() => checkUserDetail(id)}
             />
             <p className="artist-name">{name}</p>
           </div>

@@ -84,21 +84,27 @@
       }
     }
   }
+
   .recent-works {
-    margin: 0.1rem 0;
-    padding: 0.1rem;
+    margin: 0.2rem 0 0 0;
+    padding: 0 0.1rem;
 
     .works-list {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       width: 100%;
-      padding: 0.1rem 0;
+      margin: 0;
+      padding: 0;
 
       .work-item {
-        flex: 0 0 32%;
+        flex: 0 0 31.6%;
 
         height: 100%;
+        margin-bottom: 0.08rem;
+
+        list-style: none;
 
         border-radius: 0.04rem;
         box-shadow: 0 0 0.01rem #666;
@@ -119,17 +125,14 @@
           }
         }
       }
-      .work-item + .work-item {
-        margin-left: 0.08rem;
+
+      .loading-tips, .empty-tips {
+        margin: 0;
+
+        color: #999;
+
+        font-size: 0.14rem;
       }
-    }
-
-    .loading-tips, .empty-tips {
-      margin: 0;
-
-      color: #999;
-
-      font-size: 0.14rem;
     }
   }
 }

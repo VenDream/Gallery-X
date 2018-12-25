@@ -1,7 +1,7 @@
 /**
  * 用户插画作品
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React, { Component } from 'react';
@@ -110,7 +110,7 @@ export default class IllustWorks extends Component<IProps, IState> {
       };
       worksList.push(
         <li
-          className="work-item"
+          className="work-item fade-in"
           key={illust.id}
           style={style}
           onClick={() => checkIllustDetail(illust.id)}
