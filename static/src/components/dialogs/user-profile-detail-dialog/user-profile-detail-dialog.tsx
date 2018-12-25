@@ -1,7 +1,7 @@
 /**
  * 用户个人资料详情弹窗
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React from 'react';
@@ -14,6 +14,8 @@ import './user-profile-detail-dialog.less';
 
 class UserProfileDetailDialog extends BaseDialog {
   componentDidMount() {
+    super.componentDidMount();
+
     const { id } = this.props;
     if (!id) {
       throw new Error('[Error] paramter [id] is required.');

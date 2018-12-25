@@ -1,7 +1,7 @@
 /**
  * 作品详情弹窗
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React from 'react';
@@ -15,6 +15,8 @@ import './illust-detail-dialog.less';
 
 class IllustDetailDialog extends BaseDialog {
   componentDidMount() {
+    super.componentDidMount();
+
     const { id, popupInstanceId } = this.props;
     if (!id) {
       throw new Error('[Error] paramter [id] is required.');

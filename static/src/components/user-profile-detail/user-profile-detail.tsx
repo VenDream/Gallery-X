@@ -39,9 +39,7 @@ export default class UserProfileDetail extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      this.fetchProfileDetail();
-    }, 250);
+    this.fetchProfileDetail();
   }
 
   // 获取个人资料

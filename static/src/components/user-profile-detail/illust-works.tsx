@@ -66,9 +66,7 @@ export default class IllustWorks extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      this.fetchUserWorks();
-    }, 250);
+    this.fetchUserWorks();
   }
 
   // 获取用户插画作品列表

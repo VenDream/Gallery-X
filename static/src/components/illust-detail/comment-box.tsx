@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React, { Component } from 'react';
@@ -76,9 +76,7 @@ export default class CommentBox extends Component<IProps, IState> {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      this.fetchCommentData();
-    }, 250);
+    this.fetchCommentData();
   }
 
   /**

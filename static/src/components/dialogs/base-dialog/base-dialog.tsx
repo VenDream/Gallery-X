@@ -1,7 +1,7 @@
 /**
  * 全屏展示弹窗基础类
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-25
  */
 
 import React, { Component } from 'react';
@@ -32,6 +32,10 @@ interface IProps {
 }
 interface IState {
   /**
+   * 是否可以渲染内容
+   */
+  shouldRenderContent: boolean;
+  /**
    * 弹窗类名
    */
   class: string;
@@ -50,9 +54,13 @@ interface IState {
 }
 
 export class BaseDialog extends Component<IProps, IState> {
+  // 根节点引用
+  rootRef: React.RefObject<HTMLDivElement> = React.createRef();
+
   state: IState = {
+    shouldRenderContent: false,
     class: 'base-dialog',
-    title: 'dialog',
+    title: '',
     content: '',
     close: SelfDialog.hide,
   };
@@ -63,20 +71,46 @@ export class BaseDialog extends Component<IProps, IState> {
     this.state.close && this.state.close();
   }
 
+  componentDidMount() {
+    const root = this.rootRef.current;
+    if (root) {
+      root.addEventListener('animationend', this.renderContent);
+      root.addEventListener('webkitAnimationEnd', this.renderContent);
+    }
+  }
+
+  componentWillUnmount() {
+    const root = this.rootRef.current;
+    if (root) {
+      root.removeEventListener('animationend', this.renderContent);
+      root.removeEventListener('webkitAnimationEnd', this.renderContent);
+    }
+  }
+
+  // 渲染内容
+  @autobind
+  renderContent(evt: AnimationEvent) {
+    if (evt.target !== evt.currentTarget) return;
+    this.setState({ shouldRenderContent: true });
+  }
+
   render() {
-    const { className, popupInstanceId } = this.props;
+    const { className } = this.props;
     const { class: dialogClass, title, content } = this.state;
     const dialogCls = classnames('g-dialog', className, dialogClass);
+    const shouldRenderContent = this.state.shouldRenderContent;
 
     return (
-      <div className={dialogCls} data-popup-instance-id={popupInstanceId}>
+      <div className={dialogCls} ref={this.rootRef}>
         <div className="dialog-title">
           <h3>{title}</h3>
           <span className="close-btn" onClick={this.hide}>
             <i className="g-icon icon-close" />
           </span>
         </div>
-        <div className="dialog-body">{content}</div>
+        <div className="dialog-body">
+          {shouldRenderContent ? content : null}
+        </div>
       </div>
     );
   }
