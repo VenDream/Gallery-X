@@ -14,6 +14,8 @@ import './manga-works-dialog.less';
 
 class MangaWorksDialog extends BaseDialog {
   componentDidMount() {
+    super.componentDidMount();
+
     const { id } = this.props;
     if (!id) {
       throw new Error('[Error] paramter [id] is required.');
