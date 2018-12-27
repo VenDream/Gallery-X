@@ -1,7 +1,7 @@
 /**
  * 用户相关路由
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-26
  */
 
 import Router from 'koa-router';
@@ -140,12 +140,19 @@ router.get('/mangas', async (ctx, next) => {
 });
 
 router.get('/bookmark/illusts', async (ctx, next) => {
-  const { userId } = ctx.request.query as Record<string, any>;
+  const { step = 30, userId, maxBookmarkId } = ctx.request.query as Record<
+    string,
+    any
+  >;
   const token = await getAccessToken(ctx);
-  const illustsResp = await UserSvr.getUserBookmarkIllusts(token, userId);
+  const illustsResp = await UserSvr.getUserBookmarkIllusts(
+    token,
+    userId,
+    maxBookmarkId
+  );
   const resp = handlePixivResp(illustsResp);
 
-  returnIllustResp(ctx, resp);
+  returnIllustResp(ctx, resp, { step });
 });
 
 router.get('/profile/detail', async (ctx, next) => {

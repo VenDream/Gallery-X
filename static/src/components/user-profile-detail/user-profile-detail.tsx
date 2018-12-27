@@ -1,7 +1,7 @@
 /**
  * 用户个人资料详情
  * @author VenDream
- * @since 2018-12-25
+ * @since 2018-12-27
  */
 
 import React, { Component } from 'react';
@@ -14,6 +14,7 @@ import Profile from './profile';
 import Workspace from './workspace';
 import IllustWorks from './illust-works';
 import MangaWorks from './manga-works';
+import BookmarkIllusts from './bookmark-illusts';
 import './user-profile-detail.less';
 
 interface IProps {
@@ -73,12 +74,14 @@ export default class UserProfileDetail extends Component<IProps, IState> {
     let userId: string;
     let totalMangas: number;
     let totalIllusts: number;
+    let totalBookmarks: number;
     const { isLoading, profileDetail } = this.state;
 
     if (profileDetail) {
       userId = profileDetail.user.id;
       totalMangas = profileDetail.profile.totalManga;
       totalIllusts = profileDetail.profile.totalIllusts;
+      totalBookmarks = profileDetail.profile.totalIllustBookmarksPublic;
     }
 
     return (
@@ -106,6 +109,13 @@ export default class UserProfileDetail extends Component<IProps, IState> {
               <MangaWorks
                 userId={userId}
                 total={totalMangas}
+                previewMode={true}
+              />
+            ) : null}
+            {totalBookmarks ? (
+              <BookmarkIllusts
+                userId={userId}
+                total={totalBookmarks}
                 previewMode={true}
               />
             ) : null}

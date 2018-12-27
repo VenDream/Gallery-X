@@ -1,7 +1,7 @@
 /**
  * 用户相关接口
  * @author VenDream
- * @since 2018-12-24
+ * @since 2018-12-27
  */
 
 import API from './index';
@@ -16,7 +16,11 @@ import * as ajax from 'utils/ajax';
  * @param {number} [step=30] 获取记录数
  * @returns
  */
-export function getUserIllusts(userId: string, start = 0, step = 30) {
+export function getUserIllusts(
+  userId: string,
+  start: number = 0,
+  step: number = 30
+) {
   const api = API.get('USER_ILLUSTS');
   return ajax.get(api, { body: { start, step, userId }, isCancelable: true });
 }
@@ -30,7 +34,11 @@ export function getUserIllusts(userId: string, start = 0, step = 30) {
  * @param {number} [step=30] 获取记录数
  * @returns
  */
-export function getUserMangas(userId: string, start = 0, step = 30) {
+export function getUserMangas(
+  userId: string,
+  start: number = 0,
+  step: number = 30
+) {
   const api = API.get('USER_MANGAS');
   return ajax.get(api, { body: { start, step, userId } });
 }
@@ -40,11 +48,20 @@ export function getUserMangas(userId: string, start = 0, step = 30) {
  *
  * @export
  * @param {string} userId 用户ID
+ * @param {number} [step=30] 获取记录数
+ * @param {string} [maxBookmarkId] 下一页分页参数
  * @returns
  */
-export function getUserBookmarkIllusts(userId: string) {
+export function getUserBookmarkIllusts(
+  userId: string,
+  step: number = 30,
+  maxBookmarkId: string = ''
+) {
   const api = API.get('USER_BOOKMARK_ILLUSTS');
-  return ajax.get(api, { body: { userId } });
+  const body = { step, userId };
+  maxBookmarkId && (body['maxBookmarkId'] = maxBookmarkId);
+
+  return ajax.get(api, { body });
 }
 
 /**

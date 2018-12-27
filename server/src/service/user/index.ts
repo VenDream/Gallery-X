@@ -143,19 +143,26 @@ export function getUserMangas(
  * @export
  * @param {string} accessToken accessToken
  * @param {string} userId 用户ID
+ * @param {string} [maxBookmarkId] 下一页数据最后一条数据的ID
  * @returns
  */
-export function getUserBookmarkIllusts(accessToken: string, userId: string) {
+export function getUserBookmarkIllusts(
+  accessToken: string,
+  userId: string,
+  maxBookmarkId?: string
+) {
   const api = apiHost + apiList.bookmarkIllusts;
   const headers = getAuthHeaders(accessToken);
+  const bookmarkParams = {
+    filter: 'for_ios',
+    restrict: 'public',
+    user_id: userId,
+  };
+  maxBookmarkId && (bookmarkParams['max_bookmark_id'] = maxBookmarkId);
 
   return ajax.get(api, {
     headers,
-    data: {
-      filter: 'for_ios',
-      restrict: 'public',
-      user_id: userId,
-    },
+    data: bookmarkParams,
   });
 }
 

@@ -1,0 +1,7 @@
+{
+  "name": "bookmark-illusts-dialog",
+  "version": "1.0.0",
+  "description": "用户收藏作品弹窗",
+  "main": "./bookmark-illusts-dialog.tsx",
+  "types": "./bookmark-illusts-dialog.tsx"
+}

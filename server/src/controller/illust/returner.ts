@@ -1,7 +1,7 @@
 /**
  * 插画相关接口统一返回处理工具函数
  * @author VenDream
- * @since 2018-12-23
+ * @since 2018-12-27
  */
 
 import Router from 'koa-router';
@@ -33,7 +33,8 @@ export function returnIllustResp(
   resp: Record<string, any>,
   option: IllustRespOption = {}
 ) {
-  const { illusts, nextUrl } = resp;
+  let maxBookmarkId;
+  const { illusts, nextUrl = '' } = resp;
   const { step = 30, respKey = 'illusts' } = option;
   if (illusts) {
     // 取值范围[1, 30]
@@ -41,12 +42,20 @@ export function returnIllustResp(
     taken = Math.min(30, taken);
     taken = Math.max(1, taken);
 
+    // 组装返回数据
+    const data = {
+      [respKey]: getParsedIllusts(illusts).slice(0, taken),
+      isEnd: !!!nextUrl,
+    };
+
+    // 解析收藏请求中的[max_bookmark_id]参数
+    const result = (nextUrl || '').match(/max_bookmark_id=(\d+)/);
+    maxBookmarkId = (result && result[1]) || '';
+    maxBookmarkId && (data['maxBookmarkId'] = maxBookmarkId);
+
     ctx.body = {
       code: RESPONSE_CODE.SUCCESS,
-      data: {
-        [respKey]: getParsedIllusts(illusts).slice(0, taken),
-        isEnd: !!!nextUrl,
-      },
+      data,
     };
   } else {
     ctx.body = {

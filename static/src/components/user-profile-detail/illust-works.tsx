@@ -1,7 +1,7 @@
 /**
  * 用户插画作品
  * @author VenDream
- * @since 2018-12-25
+ * @since 2018-12-27
  */
 
 import React, { Component } from 'react';
@@ -39,6 +39,7 @@ interface IState {
   reqOption: {
     start: number;
     step: number;
+    maxBookmarkId?: string;
   };
   /**
    * 是否正在请求
@@ -60,7 +61,7 @@ export default class IllustWorks extends Component<IProps, IState> {
 
   state: IState = {
     isEnd: false,
-    reqOption: { start: 0, step: 30 },
+    reqOption: { start: 0, step: 30, maxBookmarkId: '' },
     isLoading: false,
     works: [],
   };
@@ -115,8 +116,8 @@ export default class IllustWorks extends Component<IProps, IState> {
       worksList.push(
         <li
           className="work-item fade-in"
-          key={illust.id}
           style={style}
+          key={+illust.id ? illust.id : `IMAGE_${idx}`}
           onClick={() => checkIllustDetail(illust.id)}
         >
           <Image src={illust.imageUrls[0].medium} />

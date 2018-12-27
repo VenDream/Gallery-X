@@ -1,7 +1,7 @@
 /**
  * 插画相关接口服务
  * @author VenDream
- * @since 2018-8-21
+ * @since 2018-12-26
  */
 
 import * as ajax from '../../utils/request';
@@ -113,7 +113,10 @@ export function like(
 
   return ajax.post(api, {
     headers,
-    data: { illust_id: illustId, restrict: isPrivate ? 'private' : 'public' },
+    data: {
+      illust_id: illustId,
+      restrict: +isPrivate === 1 ? 'private' : 'public',
+    },
   });
 }
 
