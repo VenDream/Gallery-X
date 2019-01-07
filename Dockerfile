@@ -1,4 +1,6 @@
-FROM node:8
+# https://github.com/tarampampam/node-docker
+# 此版本的node镜像保持了体积小的同时支持了git，npm
+FROM tarampampam/node:11-alpine
 
 LABEL version="1.0.0" description="Gallery-X"
 

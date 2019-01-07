@@ -6,7 +6,8 @@
     },
     "jsx": "react",
     "allowJs": true,
-    "target": "esnext",
+    "target": "es5",
+    "module": "commonjs",
     "sourceMap": true,
     "pretty": true,
     "moduleResolution": "node",
@@ -17,6 +18,6 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "es2015", "es2016", "es2017", "esnext"]
   },
-  "include": ["src/**/*", "build/**/*", "./webpack.config.ts"],
+  "include": ["src/**/*", "build/**/*", "webpack.config.ts"],
   "exlucde": ["node_modules/**/*"]
 }
