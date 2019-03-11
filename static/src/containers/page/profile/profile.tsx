@@ -1,15 +1,15 @@
 /**
  * profile容器组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import Profile from 'components/page/profile';
 import { logout } from 'actions/user';
+import { getConnectedCmp } from 'utils/connect';
 
 function mapStateToProps(state: StoreState) {
   return {
@@ -25,7 +25,4 @@ function mapDispatchToProps(
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default getConnectedCmp(Profile, mapStateToProps, mapDispatchToProps);

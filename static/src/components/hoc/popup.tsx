@@ -1,7 +1,7 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2018-12-24
+ * @since 2019-2-15
  */
 
 import React, { Component, Children, cloneElement } from 'react';
@@ -77,7 +77,7 @@ export default function popUpFactory<WrappedComponentProps>(
       > = React.createRef();
 
       // 执行渲染操作
-      const popupCmp = ReactDOM.render(
+      ReactDOM.render(
         <ComponentWithPopUp
           container={container}
           transitionClass={transitionClass}
@@ -91,7 +91,7 @@ export default function popUpFactory<WrappedComponentProps>(
           />
         </ComponentWithPopUp>,
         overlay
-      ) as ComponentWithPopUp;
+      );
 
       // 加入实例映射表
       setTimeout(() => {
@@ -154,7 +154,7 @@ export default function popUpFactory<WrappedComponentProps>(
         children,
         transitionClass,
       } = this.props;
-      const childElement = Children.only(children);
+      const childElement = Children.only(children) as React.ReactElement;
 
       // 拷贝children
       const clonedElement = cloneElement(childElement, {

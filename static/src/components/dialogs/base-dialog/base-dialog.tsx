@@ -4,6 +4,8 @@
  * @since 2018-12-25
  */
 
+import store, { MyContext } from 'store';
+import { Provider } from 'react-redux';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import autobind from 'autobind-decorator';
@@ -109,7 +111,11 @@ export class BaseDialog extends Component<IProps, IState> {
           </span>
         </div>
         <div className="dialog-body">
-          {shouldRenderContent ? content : null}
+          {shouldRenderContent ? (
+            <Provider store={store} context={MyContext}>
+              {content}
+            </Provider>
+          ) : null}
         </div>
       </div>
     );

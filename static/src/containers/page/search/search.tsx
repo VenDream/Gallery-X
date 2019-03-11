@@ -1,14 +1,14 @@
 /**
  * search容器组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import Search from 'components/page/search';
+import { getConnectedCmp } from 'utils/connect';
 
 function mapStateToProps(state: StoreState) {
   return {};
@@ -20,7 +20,4 @@ function mapDispatchToProps(
   return {};
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search);
+export default getConnectedCmp(Search, mapStateToProps, mapDispatchToProps);

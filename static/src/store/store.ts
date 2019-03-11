@@ -1,12 +1,13 @@
 /**
  * 应用redux store
  * @author VenDream
- * @since 2018-12-7
+ * @since 2019-2-15
  *
  * @note 这里需要注入connected-react-router的一些必要东西，
  *       参考官方example：https://github.com/supasate/connected-react-router#usage
  */
 
+import React from 'react';
 import {
   compose,
   combineReducers,
@@ -48,4 +49,5 @@ const enhancer = compose<StoreEnhancerStoreCreator<AllStoreState>>(
   devTool
 );
 
+export const MyContext = React.createContext(null);
 export default createStore(reducer, enhancer);

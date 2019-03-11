@@ -1,15 +1,15 @@
 /**
  * 底部导航栏组件
  * @author VenDream
- * @since 2018-12-7
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import BottomBar from 'components/bottom-bar';
 import { redirectTo } from 'actions/router';
+import { getConnectedCmp } from 'utils/connect';
 import { RouterState } from 'connected-react-router';
 
 function mapStateToProps(state: StoreState & { router: RouterState }) {
@@ -27,7 +27,4 @@ function mapDispatchToProps(
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BottomBar);
+export default getConnectedCmp(BottomBar, mapStateToProps, mapDispatchToProps);

@@ -1,23 +1,23 @@
 /**
  * 插画详情容器组件
  * @author VenDream
- * @since 2018-12-24
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import { redirectTo } from 'actions/router';
 import { follow, unfollow } from 'actions/user';
+import { getConnectedCmp } from 'utils/connect';
 import { addIllust, like, unlike, searchByTag } from 'actions/illust';
 import IllustDetail from 'components/illust-detail';
 
 function mapStateToProps(state: StoreState, ownProps: Record<string, any>) {
-  const illustId: string = ownProps.id;
-  const popupInstanceId: string = ownProps.popupInstanceId;
   const illusts = state.illust;
   const artists = state.artist;
+  const illustId: string = ownProps.id;
+  const popupInstanceId: string = ownProps.popupInstanceId;
   const basicIllust = illusts.byId[illustId];
   // 从illust状态和artist状态中取出实际的数据
   const illust: IllustModel = {
@@ -42,7 +42,8 @@ function mapDispatchToProps(
   };
 }
 
-export default connect(
+export default getConnectedCmp(
+  IllustDetail,
   mapStateToProps,
   mapDispatchToProps
-)(IllustDetail);
+);

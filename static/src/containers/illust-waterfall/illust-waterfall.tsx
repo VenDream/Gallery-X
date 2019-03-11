@@ -1,14 +1,14 @@
 /**
  * 插画瀑布流组件
  * @author VenDream
- * @since 2018-10-11
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import CATEGORY from 'constants/category';
+import { getConnectedCmp } from 'utils/connect';
 import IllustWaterfall from 'components/illust-waterfall';
 import { getRankingIllusts, getSearchIllusts } from 'actions/illust';
 
@@ -60,7 +60,8 @@ function mapDispatchToProps(
   };
 }
 
-export default connect(
+export default getConnectedCmp(
+  IllustWaterfall,
   mapStateToProps,
   mapDispatchToProps
-)(IllustWaterfall);
+);

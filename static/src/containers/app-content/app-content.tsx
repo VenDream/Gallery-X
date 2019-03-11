@@ -1,16 +1,16 @@
 /**
  * 应用内容容器组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2019-2-15
  */
 
 import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { withRouter } from 'react-router-dom';
 
 import { getUserInfo } from 'actions/user';
 import { setInitLoadingVisible } from 'actions/layout';
+import { getConnectedCmp } from 'utils/connect';
 import AppContent from 'components/app-content';
 
 interface OwnProps {}
@@ -37,8 +37,5 @@ function mapDispatchToProps(
 
 // withRouter传递路由状态
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AppContent)
+  getConnectedCmp(AppContent, mapStateToProps, mapDispatchToProps)
 );

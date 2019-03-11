@@ -1,20 +1,18 @@
 /**
  * 布局容器组件
  * @author VenDream
- * @since 2018-6-14
+ * @since 2019-2-15
  */
 
-import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import Layout from 'components/layout';
+import { getConnectedCmp } from 'utils/connect';
 
 interface OwnProps {}
 
 function mapStateToProps(state: StoreState, ownProps: OwnProps) {
-  const layout = state.layout as LayoutState;
-
   return state.layout as LayoutState;
 }
 
@@ -24,8 +22,5 @@ function mapDispatchToProps(dispatch: Dispatch<any>) {
 
 // withRouter传递路由状态
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Layout)
+  getConnectedCmp(Layout, mapStateToProps, mapDispatchToProps)
 );

@@ -1,11 +1,10 @@
 /**
  * 作品详情弹窗
  * @author VenDream
- * @since 2018-12-25
+ * @since 2019-2-15
  */
 
 import React from 'react';
-import store from 'store';
 
 import SelfDialog from '.';
 import popUpFactory from 'components/hoc/popup';
@@ -25,9 +24,7 @@ class IllustDetailDialog extends BaseDialog {
     this.setState({
       class: 'illust-detail-dialog',
       title: '',
-      content: (
-        <IllustDetail id={id} store={store} popupInstanceId={popupInstanceId} />
-      ),
+      content: <IllustDetail id={id} popupInstanceId={popupInstanceId} />,
       close: SelfDialog.hide,
     });
   }

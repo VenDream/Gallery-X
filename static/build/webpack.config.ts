@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2018-11-27
+ * @since 2019-3-11
  */
 
 import path from 'path';
@@ -161,9 +161,9 @@ export default (
       ]
         .concat([
           // 构建前清除distDir
-          new CleanWebpackPlugin([configs.distDir], {
-            root: configs.context,
-            allowExternal: true,
+          new CleanWebpackPlugin({
+            dry: true,
+            verbose: true,
           }),
           // 注入全局配置
           new DefinePlugin({

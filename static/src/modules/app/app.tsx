@@ -1,7 +1,7 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2018-12-7
+ * @since 2019-2-15
  */
 
 import '@babel/polyfill';
@@ -18,7 +18,7 @@ import 'assets/styles/scrollbar.less';
 import './app.less';
 
 import App from 'containers/app';
-import store, { history } from 'store';
+import store, { history, MyContext } from 'store';
 
 // query对象
 const QUERY = qs.parse(window.location.search.substr(1));
@@ -35,8 +35,8 @@ if (+QUERY['debug'] === 1 || QUERY['debug'] === 'true') {
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
+  <Provider store={store} context={MyContext}>
+    <ConnectedRouter history={history} context={MyContext}>
       <App />
     </ConnectedRouter>
   </Provider>,
