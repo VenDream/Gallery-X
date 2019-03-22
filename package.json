@@ -34,8 +34,8 @@
   "homepage": "https://github.com/VenDream/Gallery-X#readme",
   "devDependencies": {
     "@types/ali-oss": "^6.0.3",
-    "@types/camelcase-keys": "^4.0.0",
-    "@types/node": "^11.11.0",
+    "@types/camelcase-keys": "^4.1.0",
+    "@types/node": "^11.11.5",
     "@types/qs": "^6.5.2",
     "@types/url-parse": "^1.4.3",
     "ali-oss": "^6.1.0",
@@ -44,17 +44,18 @@
     "lint-staged": "^8.1.5",
     "prettier": "^1.16.4",
     "qiniu": "^7.2.1",
-    "tslint": "^5.13.1",
+    "tslint": "^5.14.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "tslint-react": "^3.6.0",
     "url-parse": "^1.4.4"
   },
   "dependencies": {
+    "babel": "^6.23.0",
     "camelcase-keys": "^5.0.0",
     "cross-env": "^5.2.0",
     "qs": "^6.6.0",
     "ts-node": "^8.0.3",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.4000"
   }
 }

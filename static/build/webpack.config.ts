@@ -6,8 +6,9 @@
 
 import path from 'path';
 import 'webpack-dev-server';
-import webpack, { DefinePlugin } from 'webpack';
 import generateDefaultRules from './loaders';
+import webpack, { DefinePlugin } from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -128,6 +129,12 @@ export default (
        */
       optimization: {
         minimize: !isDev,
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+          }),
+        ],
         splitChunks: {
           cacheGroups: {
             vendor: {
@@ -162,7 +169,6 @@ export default (
         .concat([
           // 构建前清除distDir
           new CleanWebpackPlugin({
-            dry: true,
             verbose: true,
           }),
           // 注入全局配置
