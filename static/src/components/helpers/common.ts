@@ -1,9 +1,10 @@
 /**
  * 公共辅助函数
  * @author VenDream
- * @since 2018-12-27
+ * @since 2019-3-25
  */
 
+import { setActiveIllust } from 'utils/action';
 import Message from 'components/common/message';
 import MangaWorksDialog from 'components/dialogs/manga-works-dialog';
 import IllustWorksDialog from 'components/dialogs/illust-works-dialog';
@@ -76,8 +77,19 @@ export function checkIllustDetail(illustId: string) {
     Message.show({ type: 3, message: '无权限查看该作品' });
   }
 
+  setActiveIllust(illustId);
   IllustDetailDialog.show({
     id: illustId,
     transitionClass: DIALOG_TRANSITION_CLASS,
   });
+}
+
+/**
+ * 关闭插画详情弹窗
+ *
+ * @export
+ */
+export function closeIllustDetail() {
+  setActiveIllust('');
+  IllustDetailDialog.hide();
 }

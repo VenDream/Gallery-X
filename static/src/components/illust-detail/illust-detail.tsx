@@ -1,7 +1,7 @@
 /**
  * 插画详情组件
  * @author VenDream
- * @since 2018-12-24
+ * @since 2019-3-25
  */
 
 import React, { Component } from 'react';
@@ -154,6 +154,7 @@ export default class IllustDetail extends Component<IProps, IState> {
             <CommentBox
               previewMode={true}
               illustId={illust.id}
+              authorId={illust.user.id}
               // total={illust.totalComments}
               refreshBScroll={this.refreshBScroll}
             />

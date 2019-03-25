@@ -1,19 +1,17 @@
 /**
  * 插画详情-画师信息组件
  * @author VenDream
- * @since 2018-12-25
+ * @since 2019-3-25
  */
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import autobind from 'autobind-decorator';
 
-import { getUserIllusts, follow, unfollow } from 'api/user';
 import Image from 'components/common/image';
 import Message from 'components/common/message';
-import { checkUserDetail } from 'components/helpers/common';
-import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
-import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
+import { getUserIllusts, follow, unfollow } from 'api/user';
+import { checkUserDetail, checkIllustDetail } from 'components/helpers/common';
 import './artist-info.less';
 
 interface IProps {
@@ -71,11 +69,6 @@ export default class ArtistInfo extends Component<IProps, IState> {
   // 组件卸载时，取消正在进行的promise
   componentWillUnmount() {
     this.cancelablePromises.forEach(cp => cp.cancel());
-  }
-
-  // 查看其它插画
-  checkIllust(id: string) {
-    IllustDetailDialog.show({ id, transitionClass: 'fade-in-right' });
   }
 
   // 请求画师作品数据
@@ -172,7 +165,7 @@ export default class ArtistInfo extends Component<IProps, IState> {
           <li
             className="work-item"
             key={illust.id}
-            onClick={() => this.checkIllust(illust.id)}
+            onClick={() => checkIllustDetail(illust.id)}
             style={{ marginLeft: idx === 0 ? 0 : '0.08rem' }}
           >
             <Image src={illust.imageUrls[0].medium} />

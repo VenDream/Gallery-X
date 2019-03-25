@@ -1,7 +1,7 @@
 /**
  * 插画评论组件
  * @author VenDream
- * @since 2018-12-25
+ * @since 2019-3-25
  */
 
 import React, { Component } from 'react';
@@ -25,6 +25,10 @@ interface IProps {
    * 插画ID
    */
   illustId: string;
+  /**
+   * 插画作品ID
+   */
+  authorId: string;
   /**
    * 预览模式
    */
@@ -63,6 +67,7 @@ interface IState {
 export default class CommentBox extends Component<IProps, IState> {
   static defaultProps: IProps = {
     illustId: '',
+    authorId: '',
     previewMode: false,
     refreshBScroll: () => {},
   };
@@ -203,7 +208,7 @@ export default class CommentBox extends Component<IProps, IState> {
 
   // 渲染评论列表
   renderCommentList() {
-    const { previewMode } = this.props;
+    const { authorId, previewMode } = this.props;
     const { isEnd, comments } = this.state;
 
     // 没有评论数据
@@ -214,6 +219,7 @@ export default class CommentBox extends Component<IProps, IState> {
         <CommentItem
           key={comment.id}
           comment={comment}
+          authorId={authorId}
           renderReplies={this.renderReplies}
         />
       )
@@ -232,6 +238,7 @@ export default class CommentBox extends Component<IProps, IState> {
   renderReplies(comment: CommentModel) {
     const { id, hasReplies } = comment;
     const { replies } = this.state;
+    const { authorId } = this.props;
 
     // 没有评论回复
     if (!hasReplies || !replies[id]) return null;
@@ -245,7 +252,9 @@ export default class CommentBox extends Component<IProps, IState> {
         </span>
       </button>
     ) : hasFetchedReplies ? (
-      repliesData.map(reply => <CommentItem key={reply.id} comment={reply} />)
+      repliesData.map(reply => (
+        <CommentItem key={reply.id} comment={reply} authorId={authorId} />
+      ))
     ) : (
       <button onClick={this.fetchRepliesData.bind(this, id)}>查看回复</button>
     );
@@ -317,17 +326,26 @@ function checkUser(userId: string) {
  *
  * @param {{
  *   comment: CommentModel;
+ *   authorId: string;
  *   renderReplies?: (comment: CommentModel) => JSX.Element;
  * }} props props
  * @returns
  */
 function CommentItem(props: {
   comment: CommentModel;
+  authorId: string;
   renderReplies?: (comment: CommentModel) => JSX.Element;
 }) {
   const { comment, renderReplies } = props;
   const { id, comment: content, date, user } = comment;
   const dateStr = moment(date).format('YYYY-MM-DD HH:mm');
+  const authorLabel =
+    user.id === props.authorId ? (
+      <span className="author-label">作者</span>
+    ) : (
+      ''
+    );
+
   return (
     <div className="comment-item fade-in" key={id}>
       <div className="left-block">
@@ -338,7 +356,10 @@ function CommentItem(props: {
         />
       </div>
       <div className="right-block">
-        <span className="user-name">{user.name}</span>
+        <span className="user-name">
+          {<span className="comment-user">{user.name}</span>}
+          {authorLabel}
+        </span>
         <div className="content">{parseCommentStr(content)}</div>
         <span className="date">{dateStr}</span>
         {renderReplies && renderReplies(comment)}

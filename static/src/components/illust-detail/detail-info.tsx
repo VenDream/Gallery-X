@@ -1,7 +1,7 @@
 /**
  * 插画详情-详细信息组件
  * @author VenDream
- * @since 2018-12-19
+ * @since 2019-3-25
  */
 
 import React, { Component } from 'react';
@@ -10,7 +10,7 @@ import autobind from 'autobind-decorator';
 
 import PAGE from 'constants/page';
 import RouterMap from 'constants/routers';
-import IllustDetailDialog from 'components/dialogs/illust-detail-dialog';
+import { closeIllustDetail } from 'components/helpers/common';
 import './detail-info.less';
 
 interface IProps {
@@ -33,7 +33,7 @@ export default class DetailInfo extends Component<IProps> {
   handleClickTag(tag: string) {
     const searchPagePath = RouterMap[PAGE.SEARCH].path;
     // 关闭作品详情弹窗
-    IllustDetailDialog.hide();
+    closeIllustDetail();
     // 重定向到搜索页
     this.props.redirectTo(searchPagePath);
     // 设定标签为关键词，开始搜索

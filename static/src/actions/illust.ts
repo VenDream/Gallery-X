@@ -1,7 +1,7 @@
 /**
  * 插画相关ACTION定义
  * @author VenDream
- * @since 2018-12-24
+ * @since 2019-3-25
  */
 
 import { AnyAction, Dispatch } from 'redux';
@@ -18,7 +18,6 @@ import { defaultSearchFilter } from 'reducers/helpers/filter';
  *
  * @export
  * @param {Partial<RankingFilter>} patch 更新补丁
- * @returns
  */
 export function updateRankingFilter(patch: Partial<RankingFilter>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
@@ -67,7 +66,6 @@ export function getRankingIllusts(opts?: RankingFilter) {
  *
  * @export
  * @param {Partial<SearchFilter>} patch 更新补丁
- * @returns
  */
 export function updateSearchFilter(patch: Partial<SearchFilter>) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
@@ -82,7 +80,6 @@ export function updateSearchFilter(patch: Partial<SearchFilter>) {
  *
  * @export
  * @param {SearchFilter} opts 查询参数
- * @returns
  */
 export function getSearchIllusts(opts: SearchFilter) {
   return async (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
@@ -118,7 +115,6 @@ export function getSearchIllusts(opts: SearchFilter) {
  *
  * @export
  * @param {IllustModel[]} illusts 插画
- * @returns
  */
 export function addIllust(illusts: IllustModel[]) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
@@ -131,10 +127,20 @@ export function addIllust(illusts: IllustModel[]) {
  *
  * @export
  * @param {IllustModel[]} illusts 插画
- * @returns
  */
 export function addIllustSync(illusts: IllustModel[]) {
   return { type: ACTIONS.ADD_ILLUST, data: { illusts } };
+}
+
+/**
+ * 同步设置当前正在查看的插画
+ *
+ * @export
+ * @param {string} illustId 插画ID
+ * @returns
+ */
+export function setActiveIllustSync(illustId: string) {
+  return { type: ACTIONS.SET_ACTIVE_ILLUST, data: { illustId } };
 }
 
 /**
@@ -142,7 +148,6 @@ export function addIllustSync(illusts: IllustModel[]) {
  *
  * @export
  * @param {string} illustId 插画ID
- * @returns
  */
 export function like(illustId: string) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {
@@ -155,7 +160,6 @@ export function like(illustId: string) {
  *
  * @export
  * @param {string} illustId 插画ID
- * @returns
  */
 export function unlike(illustId: string) {
   return (dispatch: Dispatch<AnyAction>, getState: () => StoreState) => {

@@ -1,7 +1,7 @@
 /**
  * ACTION常量定义
  * @author VenDream
- * @since 2018-11-26
+ * @since 2019-3-25
  */
 
 export default {
@@ -15,6 +15,8 @@ export default {
 
   // 添加插画
   ADD_ILLUST: 'ADD_ILLUST',
+  // 设置当前正在查看的插画
+  SET_ACTIVE_ILLUST: 'SET_ACTIVE_ILLUST',
   // 收藏/取消收藏插画
   LIKE_ILLUST: 'LIKE_ILLUST',
   UNLIKE_ILLUST: 'UNLIKE_ILLUST',

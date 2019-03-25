@@ -1,7 +1,7 @@
 /**
  * 插画状态同步
  * @author VenDream
- * @since 2018-11-26
+ * @since 2019-3-25
  */
 
 import { AnyAction } from 'redux';
@@ -59,6 +59,14 @@ export default function reducer(state = initState, action: AnyAction) {
     case ACTIONS.UNLIKE_ILLUST: {
       const { illustId } = action.data;
       return getLikeToggleState(illustId, state, false);
+    }
+    // 设置当前正在查看的插画
+    case ACTIONS.SET_ACTIVE_ILLUST: {
+      const { illustId } = action.data;
+      return {
+        ...state,
+        activeId: illustId,
+      };
     }
     default:
       return state;

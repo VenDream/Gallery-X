@@ -1,3 +1,5 @@
+@import '~assets/styles/variable.less';
+
 .comment-box {
   padding: 0.1rem;
 
@@ -50,8 +52,29 @@
         flex-direction: column;
 
         .user-name {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+
+          height: 0.16rem;
+
           font-size: 0.14rem;
           font-weight: bold;
+
+          .author-label {
+            display: inline-block;
+
+            height: 100%;
+            margin-left: 0.08rem;
+            padding: 0 0.08rem;
+
+            color: #fff;
+            border-radius: 0.02rem;
+            background-color: @theme-blue;
+
+            font-size: 0.12rem;
+            line-height: 0.16rem;
+          }
         }
 
         .content {
