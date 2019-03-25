@@ -10,10 +10,10 @@ import autobind from 'autobind-decorator';
 
 import Image from 'components/common/image';
 import Message from 'components/common/message';
-import CommentDialog from 'components/dialogs/comment-dialog';
 import { getComments, getCommentReplies } from 'api/illust';
+import { checkUserDetail } from 'components/helpers/common';
 import { parseCommentStr } from 'components/helpers/comment';
-import UserProfileDetailDialog from 'components/dialogs/user-profile-detail-dialog';
+import CommentDialog from 'components/dialogs/comment-dialog';
 import './comment-box.less';
 
 interface IProps {
@@ -310,18 +310,6 @@ export default class CommentBox extends Component<IProps, IState> {
 }
 
 /**
- * 查看用户个人页面
- *
- * @param {string} userId 用户ID
- */
-function checkUser(userId: string) {
-  UserProfileDetailDialog.show({
-    id: userId,
-    transitionClass: 'fade-in-right',
-  });
-}
-
-/**
  * 单条评论详情组件
  *
  * @param {{
@@ -352,7 +340,7 @@ function CommentItem(props: {
         <Image
           src={user.avatar}
           className="user-avatar"
-          onClick={() => checkUser(user.id)}
+          onClick={() => checkUserDetail(user.id)}
         />
       </div>
       <div className="right-block">
