@@ -53,7 +53,7 @@ print_info "Done, name=$img, tag=$tag"
 
 # 上传前端静态文件到CDN
 print_info 'Upload files to CDN...'
-sh upload_static_files.sh
+node upload-to-aliyun.js
 
 # 打印总耗时
 print_info "Execution time: $SECONDS secs"
