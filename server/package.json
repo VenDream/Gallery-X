@@ -22,16 +22,16 @@
     "@types/koa-router": "^7.0.40",
     "@types/koa-session": "^5.10.0",
     "@types/koa-views": "^2.0.3",
-    "@types/node-fetch": "^2.1.7",
+    "@types/node-fetch": "^2.3.2",
     "@types/path-to-regexp": "^1.7.0",
-    "@types/qs": "^6.5.2"
+    "@types/qs": "^6.5.3"
   },
   "dependencies": {
-    "camelcase-keys": "^5.0.0",
+    "camelcase-keys": "^5.1.0",
     "crypto-js": "^3.1.9-1",
     "deep-extend": "^0.6.0",
     "ejs": "^2.6.1",
-    "ioredis": "^4.6.2",
+    "ioredis": "^4.9.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-combine-routers": "^4.0.2",
@@ -39,10 +39,10 @@
     "koa-log4": "^2.3.2",
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.1",
-    "koa-views": "^6.1.5",
+    "koa-views": "^6.2.0",
     "node-fetch": "^2.3.0",
-    "nodemon": "^1.18.10",
+    "nodemon": "^1.18.11",
     "path-to-regexp": "^3.0.0",
-    "qs": "^6.6.0"
+    "qs": "^6.7.0"
   }
 }
