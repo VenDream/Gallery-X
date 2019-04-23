@@ -10,10 +10,11 @@ export default function loader(isDev: boolean) {
     test: /\.(woff|svg|eot|ttf)\??.*$/,
     use: [
       {
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
           name: `[name]${isDev ? '' : '.[hash:10]'}.[ext]`,
           outputPath: 'fonts/',
+          limit: 10 * 1024,
         },
       },
     ],

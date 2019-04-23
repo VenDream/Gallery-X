@@ -16,10 +16,15 @@ export default function loader(isDev: boolean) {
       {
         loader: 'cache-loader',
         options: {
-          cacheDirectory: '.cache',
+          cacheDirectory: 'node_modules/.cache/cache-loader',
         },
       },
-      'babel-loader',
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+        },
+      },
       {
         loader: 'ts-loader',
         options: {

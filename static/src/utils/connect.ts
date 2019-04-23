@@ -1,10 +1,9 @@
 /**
  * connect辅助函数
  * @author VenDream
- * @since 2019-3-11
+ * @since 2019-4-23
  */
 
-import { MyContext } from 'store';
 import {
   connect,
   MapStateToPropsParam,
@@ -12,7 +11,8 @@ import {
 } from 'react-redux';
 
 /**
- * 获取connect后的组件，默认会连接全局context
+ * 获取connect后的组件
+ * @TODO 支持传入context
  *
  * @export
  * @param {*} Cmp 视图组件
@@ -28,9 +28,6 @@ export function getConnectedCmp(
   return connect(
     mapStateToProps || null,
     mapDispatchToProps || null,
-    null,
-    {
-      context: MyContext,
-    }
+    null
   )(Cmp);
 }

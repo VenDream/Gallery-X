@@ -1,7 +1,7 @@
 /**
  * 基础webpack配置
  * @author VenDream
- * @since 2019-3-11
+ * @since 2019-4-23
  */
 
 import path from 'path';
@@ -80,6 +80,7 @@ export default (
             hot: true,
             compress: true,
             progress: true,
+            disableHostCheck: true,
             historyApiFallback: true,
             publicPath: configs.publicPath,
             headers: {
@@ -133,14 +134,17 @@ export default (
           new TerserPlugin({
             cache: true,
             parallel: true,
+            terserOptions: { output: { comments: false } },
           }),
         ],
         splitChunks: {
           cacheGroups: {
             vendor: {
               name: 'vendor',
+              chunks: 'initial',
               test: /[\\/]node_modules[\\/]/,
-              chunks: 'all',
+              enforce: true,
+              reuseExistingChunk: true,
             },
           },
         },

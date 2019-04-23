@@ -1,10 +1,9 @@
 /**
  * 应用入口模块
  * @author VenDream
- * @since 2019-2-15
+ * @since 2019-4-23
  */
 
-import '@babel/polyfill';
 import qs from 'qs';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -18,7 +17,7 @@ import 'assets/styles/scrollbar.less';
 import './app.less';
 
 import App from 'containers/app';
-import store, { history, MyContext } from 'store';
+import store, { history } from 'store';
 
 // query对象
 const QUERY = qs.parse(window.location.search.substr(1));
@@ -28,21 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initReactFastclick();
 });
 
-// 调试模式下引入vConsole便于移动端调试
+// 调试模式下动态引入移动端调试工具
 if (+QUERY['debug'] === 1 || QUERY['debug'] === 'true') {
-  const vConsole = require('vconsole');
-  const v = new vConsole();
+  import('eruda').then(({ default: eruda }) => eruda.init());
 }
 
 ReactDOM.render(
-  <Provider store={store} context={MyContext}>
-    <ConnectedRouter history={history} context={MyContext}>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
       <App />
     </ConnectedRouter>
   </Provider>,
   document.querySelector('.gallery-x')
 );
 
-if (module['hot']) {
-  module['hot'].accept();
+// Enable HMR
+if (process.env.NODE_ENV === 'development') {
+  const HMR = (module as any).hot;
+  HMR && HMR.accept && HMR.accept();
 }

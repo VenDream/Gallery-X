@@ -1,10 +1,10 @@
 /**
  * 全屏展示弹窗基础类
  * @author VenDream
- * @since 2018-12-25
+ * @since 2019-4-23
  */
 
-import store, { MyContext } from 'store';
+import store from 'store';
 import { Provider } from 'react-redux';
 import React, { Component } from 'react';
 import classnames from 'classnames';
@@ -112,9 +112,7 @@ export class BaseDialog extends Component<IProps, IState> {
         </div>
         <div className="dialog-body">
           {shouldRenderContent ? (
-            <Provider store={store} context={MyContext}>
-              {content}
-            </Provider>
+            <Provider store={store}>{content}</Provider>
           ) : null}
         </div>
       </div>

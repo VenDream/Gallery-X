@@ -7,8 +7,21 @@
  */
 export default function loader(isDev: boolean) {
   return {
-    test: /\.jsx?$/,
+    test: /^(?!.*\.min\.jsx?$).*\.jsx?$/,
     exclude: /node_modules/,
-    use: ['babel-loader'],
+    use: [
+      {
+        loader: 'cache-loader',
+        options: {
+          cacheDirectory: 'node_modules/.cache/cache-loader',
+        },
+      },
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+        },
+      },
+    ],
   };
 }
