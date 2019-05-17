@@ -1,10 +1,10 @@
 /**
  * 常用工具函数
  * @author VenDream
- * @since 2018-9-27
+ * @since 2019-5-17
  */
 
-import path, { dirname } from 'path';
+import path from 'path';
 import Router from 'koa-router';
 import headers from '../constants/headers';
 import { loadJSON } from './loader';

@@ -1,0 +1,6 @@
+chrome >= 30
+firefox >= 30
+ie >= 9
+safari >= 7
+ios >= 6
+android >=4

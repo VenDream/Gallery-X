@@ -1,12 +1,12 @@
 /**
  * 弹出层高阶组件，对外提供show和hide方法
  * @author VenDream
- * @since 2019-2-15
+ * @since 2019-5-17
  */
 
-import React, { Component, Children, cloneElement } from 'react';
-import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 import classnames from 'classnames';
+import React, { Component, Children, cloneElement, CSSProperties } from 'react';
+import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 
 import { getUniqueId } from 'utils/common';
 import './popup.less';
@@ -30,6 +30,10 @@ export interface PopUpProps {
   onClose?: () => void;
 }
 
+export interface PopUpState {
+  style: CSSProperties;
+}
+
 /**
  * 返回绑定PopUp能力的组件
  *
@@ -42,7 +46,7 @@ export default function popUpFactory<WrappedComponentProps>(
   WrappedComponent: React.ComponentType<WrappedComponentProps>,
   singleton: boolean = true
 ) {
-  return class ComponentWithPopUp extends Component<PopUpProps> {
+  return class ComponentWithPopUp extends Component<PopUpProps, PopUpState> {
     static defaultProps: PopUpProps = {
       container: document.body,
       transitionClass: 'zoom-in',
@@ -119,34 +123,46 @@ export default function popUpFactory<WrappedComponentProps>(
         instance && instance.close();
       } else {
         // 关闭所有实例
-        for (const [id, instance] of Object.entries(
-          ComponentWithPopUp.instances
-        )) {
+        for (const instance of Object.values(ComponentWithPopUp.instances)) {
           instance.close();
         }
       }
     }
 
+    // 初始state
+    state: PopUpState = { style: {} };
     // 容器节点
-    overlay: Element | null = null;
+    private overlay: Element | null = null;
     // 实例ID
-    instanceId: string | null = null;
+    private instanceId: string | null = null;
+    // 页面根元素
+    private pageRootEl: HTMLElement = document.documentElement;
 
     close() {
       this.overlay && unmountComponentAtNode(this.overlay);
     }
 
     componentDidMount() {
+      this.autofit();
       this.props.onShow && this.props.onShow();
+      window.addEventListener('resize', this.autofit);
     }
 
     componentWillUnmount() {
-      this.props.onClose && this.props.onClose();
       // 卸载时，清除引用
       if (this.instanceId) {
         delete ComponentWithPopUp.instances[this.instanceId];
       }
+      window.removeEventListener('resize', this.autofit);
+      this.props.onClose && this.props.onClose();
     }
+
+    // 从html根节点继承宽度
+    autofit = () => {
+      const pageMaxWidth = parseFloat(this.pageRootEl.style.maxWidth);
+      if (isNaN(pageMaxWidth)) return;
+      this.setState({ style: { maxWidth: pageMaxWidth } });
+    };
 
     render() {
       const {
@@ -154,10 +170,12 @@ export default function popUpFactory<WrappedComponentProps>(
         children,
         transitionClass,
       } = this.props;
-      const childElement = Children.only(children) as React.ReactElement;
+      const childElement = Children.only(children) as React.ReactElement<any>;
 
       // 拷贝children
       const clonedElement = cloneElement(childElement, {
+        // 注入样式
+        style: this.state.style,
         // 注入过渡效果类
         className: classnames(
           'g-popup',

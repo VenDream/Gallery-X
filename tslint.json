@@ -18,6 +18,7 @@
     "no-reference": false,
     "no-submodule-imports": false,
     "curly": [true, "ignore-same-line"],
+    "no-unused-variable": true,
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-var-requires": false,
     "no-empty": [true, "allow-empty-functions"],

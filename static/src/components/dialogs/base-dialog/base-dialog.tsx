@@ -1,12 +1,12 @@
 /**
  * 全屏展示弹窗基础类
  * @author VenDream
- * @since 2019-4-23
+ * @since 2019-5-17
  */
 
 import store from 'store';
 import { Provider } from 'react-redux';
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import classnames from 'classnames';
 import autobind from 'autobind-decorator';
 import popUpFactory from 'components/hoc/popup';
@@ -20,6 +20,10 @@ interface IProps {
    */
   id: string;
   /**
+   * 基础样式
+   */
+  style?: CSSProperties;
+  /**
    * 类名
    */
   className?: string;
@@ -32,6 +36,7 @@ interface IProps {
    */
   [key: string]: any;
 }
+
 interface IState {
   /**
    * 是否可以渲染内容
@@ -97,13 +102,13 @@ export class BaseDialog extends Component<IProps, IState> {
   }
 
   render() {
-    const { className } = this.props;
+    const { style, className } = this.props;
     const { class: dialogClass, title, content } = this.state;
     const dialogCls = classnames('g-dialog', className, dialogClass);
     const shouldRenderContent = this.state.shouldRenderContent;
 
     return (
-      <div className={dialogCls} ref={this.rootRef}>
+      <div className={dialogCls} ref={this.rootRef} style={style}>
         <div className="dialog-title">
           <h3>{title}</h3>
           <span className="close-btn" onClick={this.hide}>

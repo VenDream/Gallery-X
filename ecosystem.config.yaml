@@ -1,9 +1,9 @@
 apps:
   - script: server/dist/bin/www.js
     name: Gallery-X
-    exec_mode: cluster
+    exec_mode: fork
     interpreter: node
-    instances: 0
+    instances: 1
     instance_var: INSTANCE_ID
     error_file: logs/pm2-error.log
     out_file: logs/pm2-out.log

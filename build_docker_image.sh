@@ -48,7 +48,7 @@ print_info 'Build docker image...'
 cd $rootdir
 docker build -t $img . \
 && docker tag $img $img:$tag \
-|| exit 0
+|| exit 1
 print_info "Done, name=$img, tag=$tag"
 
 # 上传前端静态文件到CDN

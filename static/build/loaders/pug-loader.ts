@@ -11,7 +11,7 @@ export default function loader(isDev: boolean) {
     use: [
       {
         loader: 'pug-loader',
-        options: {},
+        options: { pretty: true },
       },
     ],
   };
