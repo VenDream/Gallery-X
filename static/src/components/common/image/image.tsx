@@ -1,7 +1,7 @@
 /**
  * 增强图片组件，支持图片预加载
  * @author VenDream
- * @since 2018-12-18
+ * @since 2019-5-21
  */
 
 import React, { Component } from 'react';
@@ -66,7 +66,7 @@ interface ImageState {
 export default class Image extends Component<ImageProps, ImageState> {
   static defaultProps: ImageProps = {
     src: '',
-    alt: 'IMAGE',
+    alt: '',
     placeholder: DEFAULT_PLACEHOLADER,
     transitionClass: 'fade-in',
   };

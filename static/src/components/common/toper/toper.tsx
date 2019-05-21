@@ -1,16 +1,20 @@
 /**
  * 回到顶部组件
  * @author VenDream
- * @since 2018-7-12
+ * @since 2019-5-21
  */
 
 import classnames from 'classnames';
 import React, { Component } from 'react';
 import autobind from 'autobind-decorator';
-import { throttle } from 'helpful-decorators';
+import { throttle, debounce } from 'helpful-decorators';
 import { scrollTo } from 'utils/scroll';
 
 import './toper.less';
+
+// 右下角偏移
+const BOTTOM_OFFSET = 40;
+const RIGHT_OFFSET = 20;
 
 interface ToperProps {
   /**
@@ -22,19 +26,6 @@ interface ToperProps {
    */
   threshold?: number;
   /**
-   * 自定义样式
-   */
-  style?: {
-    /**
-     * 距底部位置
-     */
-    bottom?: string;
-    /**
-     * 距右边缘位置
-     */
-    right?: string;
-  };
-  /**
    * 过渡效果类
    */
   transitionClass?: string;
@@ -45,21 +36,25 @@ interface ToperState {
    * 当前是否可见
    */
   visible: boolean;
+  /**
+   * 当前位置样式
+   */
+  style: {
+    top: number;
+    left: number;
+  };
 }
 
 export default class Toper extends Component<ToperProps, ToperState> {
   static defaultProps: ToperProps = {
     duration: 800,
     threshold: 300,
-    style: {
-      bottom: '60px',
-      right: '20px',
-    },
     transitionClass: 'fade-in',
   };
 
   state: ToperState = {
     visible: false,
+    style: { top: 0, left: 0 },
   };
 
   // 根节点ref
@@ -77,11 +72,27 @@ export default class Toper extends Component<ToperProps, ToperState> {
 
     // 监听父滚动容器的滚动事件
     this.scroller.addEventListener('scroll', this.handleScroll);
+    // 监听窗口大小变化
+    window.addEventListener('resize', this.handleResize);
+    // 挂载后进行第一次定位
+    this.handleResize();
   }
 
   componentWillUnmount() {
     // 移除滚动监听
     this.scroller.removeEventListener('scroll', this.handleScroll);
+  }
+
+  // 跟随父节点固定位置
+  @autobind
+  @debounce(100)
+  handleResize() {
+    if (!this.scroller) return;
+    const containerRect = this.scroller.getBoundingClientRect();
+    const selfRect = this.rootRef.current.getBoundingClientRect();
+    const top = containerRect.height - selfRect.height - BOTTOM_OFFSET;
+    const left = containerRect.right - selfRect.width - RIGHT_OFFSET;
+    this.setState({ style: { top, left } });
   }
 
   // 滚动处理
@@ -112,7 +123,7 @@ export default class Toper extends Component<ToperProps, ToperState> {
       <div
         className={className}
         ref={this.rootRef}
-        style={this.props.style}
+        style={this.state.style}
         onClick={this.goTop}
         title="回到顶部"
       >
