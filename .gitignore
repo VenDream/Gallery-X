@@ -42,5 +42,4 @@ dist
 .vscode
 
 # npm lock file
-package-lock.json
 var

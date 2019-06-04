@@ -6,6 +6,7 @@ LICENSE
 README.md
 example_config
 node_modules
+package-lock.json
 build_docker_image.sh
 tslint.json
 static
