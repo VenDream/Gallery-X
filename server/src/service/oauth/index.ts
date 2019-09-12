@@ -6,7 +6,7 @@
 
 import deepExtend from 'deep-extend';
 import { post } from '../../utils/request';
-import Headers from '../../constants/headers';
+import { getHeader } from '../../constants/headers';
 
 // 认证接口
 const OAUTH_URL = 'https://oauth.secure.pixiv.net/auth/token';
@@ -15,7 +15,8 @@ const LOGIN_PARAMS: Record<string, any> = {
   client_secret: 'W9JZoJe00qPvJsiyCGT3CCtC6ZUtdpKpzMbNlUGP',
   client_id: 'KzEZED7aC0vird8jWyHM38mXjNTY',
   get_secure_url: true,
-  device_token: 'b05975d061900127ac5a333ad4a14e06',
+  include_policy: true,
+  device_token: '37061db042c3b43a1aae996207d13604',
   grant_type: 'password',
 };
 // 用户信息刷新参数
@@ -35,7 +36,10 @@ export function login(username: string, password: string) {
     username,
     password,
   });
-  return post(OAUTH_URL, { headers: Headers.app, data: loginParams });
+  return post(OAUTH_URL, {
+    headers: getHeader(),
+    data: loginParams,
+  });
 }
 
 /**
@@ -48,5 +52,5 @@ export function refresh(token: string) {
   const refreshParams: Record<string, any> = deepExtend({}, REFRESH_PARAMS, {
     refresh_token: token,
   });
-  return post(OAUTH_URL, { headers: Headers.app, data: refreshParams });
+  return post(OAUTH_URL, { headers: getHeader(), data: refreshParams });
 }

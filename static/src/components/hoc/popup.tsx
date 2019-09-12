@@ -91,7 +91,7 @@ export default function popUpFactory<WrappedComponentProps>(
         >
           <WrappedComponent
             popupInstanceId={instanceId}
-            {...wrappedProps as WrappedComponentProps}
+            {...(wrappedProps as WrappedComponentProps)}
           />
         </ComponentWithPopUp>,
         overlay

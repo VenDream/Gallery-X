@@ -6,7 +6,7 @@
 
 import path from 'path';
 import Router from 'koa-router';
-import headers from '../constants/headers';
+import { getHeader } from '../constants/headers';
 import { loadJSON } from './loader';
 
 const config = loadJSON(
@@ -20,7 +20,7 @@ const config = loadJSON(
  */
 export function getAuthHeaders(accessToken: string) {
   return {
-    ...headers.app,
+    ...getHeader(),
     authorization: `Bearer ${accessToken}`,
   };
 }

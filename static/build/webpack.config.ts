@@ -9,7 +9,7 @@ import 'webpack-dev-server';
 import generateDefaultRules from './loaders';
 import webpack, { DefinePlugin } from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const config = require('../../var/static.config.json');
