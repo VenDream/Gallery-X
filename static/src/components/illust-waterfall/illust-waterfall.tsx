@@ -81,15 +81,15 @@ export default class IllustWaterfall extends Component<
     fetchIllustData(category, filter);
   }
 
-  componentWillReceiveProps(nextProps: IllustWaterfallProps) {
-    const { start: nextStart, ...nextFilter } = nextProps.filter;
+  componentDidUpdate(prevProps: IllustWaterfallProps) {
+    const { start: prevStart, ...prevFilter } = prevProps.filter;
     const { category, filter } = this.props;
     const { start: thisStart, ...thisFilter } = filter;
 
     // 筛选条件变更时，重新请求数据
-    if (!isEqual(nextFilter, thisFilter)) {
+    if (!isEqual(prevFilter, thisFilter)) {
       this.props.fetchIllustData(category, {
-        ...nextFilter,
+        ...thisFilter,
         start: 0,
       });
     }

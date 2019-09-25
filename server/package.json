@@ -14,7 +14,7 @@
   "devDependencies": {
     "@types/crypto-js": "^3.1.43",
     "@types/deep-extend": "^0.4.31",
-    "@types/ioredis": "^4.0.17",
+    "@types/ioredis": "^4.0.18",
     "@types/koa": "^2.0.49",
     "@types/koa-bodyparser": "^5.0.2",
     "@types/koa-favicon": "^2.0.19",
@@ -22,7 +22,7 @@
     "@types/koa-router": "^7.0.42",
     "@types/koa-session": "^5.10.1",
     "@types/koa-views": "^2.0.3",
-    "@types/node-fetch": "^2.5.0",
+    "@types/node-fetch": "^2.5.2",
     "@types/path-to-regexp": "^1.7.0",
     "@types/qs": "^6.5.3"
   },
@@ -31,7 +31,7 @@
     "crypto-js": "^3.1.9-1",
     "deep-extend": "^0.6.0",
     "ejs": "^2.7.1",
-    "ioredis": "^4.14.0",
+    "ioredis": "^4.14.1",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-combine-routers": "^4.0.2",
@@ -43,6 +43,6 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.2",
     "path-to-regexp": "^3.1.0",
-    "qs": "^6.8.0"
+    "qs": "^6.9.0"
   }
 }

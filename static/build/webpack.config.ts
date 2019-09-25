@@ -101,7 +101,6 @@ export default (
         path: configs.distDir,
         filename: `[name]${isDev ? '' : '.[chunkhash:10]'}.js`,
         publicPath: configs.publicPath || '/',
-        sourceMapFilename: '[name].map',
       },
       /**
        * 模块匹配，别名及查找范围
