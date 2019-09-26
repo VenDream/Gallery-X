@@ -79,13 +79,16 @@ export default (
         ? {
             hot: true,
             compress: true,
-            progress: true,
             disableHostCheck: true,
             historyApiFallback: true,
             publicPath: configs.publicPath,
             headers: {
               'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': '*',
+            },
+            stats: {
+              maxModules: 0,
+              children: false,
             },
             ...configs.devServer,
           }
@@ -171,9 +174,7 @@ export default (
       ]
         .concat([
           // 构建前清除distDir
-          new CleanWebpackPlugin({
-            verbose: true,
-          }),
+          new CleanWebpackPlugin({ verbose: false }),
           // 注入全局配置
           new DefinePlugin({
             'window.__GALLERY_X_GLOBAL_CONFIG__': JSON.stringify(config),

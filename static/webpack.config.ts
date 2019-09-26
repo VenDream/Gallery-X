@@ -1,7 +1,7 @@
 /**
  * webpack配置
  * @author VenDream
- * @since 2019-5-17
+ * @since 2019-9-25
  */
 
 import path from 'path';
@@ -9,7 +9,6 @@ import parse from 'url-parse';
 import WebpackConfig from './build/webpack.config';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
-import InlineChunksWebpackPlugin from 'inline-chunks-html-webpack-plugin';
 
 const config: Record<string, any> = require('../var/static.config.json');
 const cdnUrl = parse(config.cdnPath);
@@ -42,10 +41,6 @@ export default WebpackConfig(() => {
         chunks: ['manifest', 'prepare', 'vendor', 'index'],
         xhtml: true,
         alwaysWriteToDisk: true,
-      }),
-      // 注入页内执行模块
-      new InlineChunksWebpackPlugin({
-        inlineChunks: ['manifest'],
       }),
       // 导出html文件
       new HtmlWebpackHarddiskPlugin(),
