@@ -1,7 +1,7 @@
 /**
  * 常用工具函数
  * @author VenDream
- * @since 2019-9-12
+ * @since 2019-10-28
  */
 
 import { MD5 } from 'crypto-js';
@@ -36,7 +36,7 @@ const fixHeader: FixedHeader = {
 };
 
 export function getHeader(): PixivAppRequestHeader {
-  const clientTime = new Date().toISOString();
+  const clientTime = new Date().toISOString().replace(/\.\d+Z$/g, '+00:00');
   const clientHash = MD5(`${clientTime}${MAGIC_HASH_SALT}`).toString();
   return {
     ...fixHeader,
