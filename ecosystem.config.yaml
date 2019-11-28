@@ -8,3 +8,4 @@ apps:
     error_file: logs/pm2-error.log
     out_file: logs/pm2-out.log
     merge_logs: true
+    max_memory_restart: 512M

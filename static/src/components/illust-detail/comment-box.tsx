@@ -214,16 +214,17 @@ export default class CommentBox extends Component<IProps, IState> {
     // 没有评论数据
     if (isEnd && !comments.length) return <p className="empty">暂无评论</p>;
     // 评论列表(预览模式下只展示前两条)
-    const commentList = (previewMode ? comments.slice(0, 2) : comments).map(
-      comment => (
-        <CommentItem
-          key={comment.id}
-          comment={comment}
-          authorId={authorId}
-          renderReplies={this.renderReplies}
-        />
-      )
-    );
+    const commentList = (previewMode
+      ? comments.slice(0, 2)
+      : comments
+    ).map(comment => (
+      <CommentItem
+        key={comment.id}
+        comment={comment}
+        authorId={authorId}
+        renderReplies={this.renderReplies}
+      />
+    ));
 
     return <div className="comment-list">{commentList}</div>;
   }

@@ -76,9 +76,7 @@ export default function popUpFactory<WrappedComponentProps>(
       // 生成新的实例
       const instanceId = getUniqueId(8);
       const overlay = document.createElement('div');
-      const instanceRef: React.RefObject<
-        ComponentWithPopUp
-      > = React.createRef();
+      const instanceRef: React.RefObject<ComponentWithPopUp> = React.createRef();
 
       // 执行渲染操作
       ReactDOM.render(

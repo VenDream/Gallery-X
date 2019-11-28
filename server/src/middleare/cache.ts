@@ -8,7 +8,7 @@
 
 import Router from 'koa-router';
 import Redis, { RedisOptions } from 'ioredis';
-import pathToRegExp from 'path-to-regexp';
+import * as pathToRegExp from 'path-to-regexp';
 
 import { md5 } from '../utils/crypto';
 import { appLogger } from '../utils/logger';
@@ -57,7 +57,9 @@ export const redisClient = (() => {
  * @returns
  */
 function isMatch(route: string, path: string) {
-  return pathToRegExp(route, [], { sensitive: true, strict: true }).test(path);
+  return pathToRegExp
+    .pathToRegexp(route, [], { sensitive: true, strict: true })
+    .test(path);
 }
 
 /**
