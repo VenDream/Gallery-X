@@ -75,7 +75,7 @@
     "helpful-decorators": "^2.0.6",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
